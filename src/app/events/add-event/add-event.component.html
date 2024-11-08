@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <h2>Agregar un evento</h2>
+
+    <label for="name">Nombre</label>
+    <input type="text" id="name" />
+
+    <label for="type">Tipo</label>
+    <select id="type">
+        <option value="" disabled selected>Selecciona una opción</option>
+        <option value="1">Opción 1</option>
+        <option value="2">Opción 2</option>
+    </select>
+
+    <label for="price">Precio de entrada</label>
+    <input type="number" id="price" />
+
+    <div class="checkbox">
+        <input type="checkbox" id="free" />
+        <label for="free">Sin costo</label>
+    </div>
+
+    <label for="description">Descripción</label>
+    <textarea id="description"></textarea>
+
+    <div class="upload-image">
+        <span>+</span>
+    </div>
+
+    <button class="btn-add">Agregar evento</button>
+</div>
