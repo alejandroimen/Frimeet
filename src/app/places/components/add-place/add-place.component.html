@@ -1,0 +1,21 @@
+<form action="" class="add-place-form">
+    <h2>Agrega un lugar</h2>
+    <div>
+        <label for="">Nombre del lugar</label>
+        <input type="text" name="name" [(ngModel)] = 'place.name'>
+    </div>
+    <select name="" id="" name="type" [(ngModel)]="place.type"></select>
+    <div>
+        <label for="">Precio de entrada (opcional)</label>
+        <input type="number" name="price" [(ngModel)]="place.price" id="">
+    </div>
+    <div>
+        <label for="">Descripcion</label>
+        <textarea placeholder="Agrega una breve descripcion" name="description" [(ngModel)]="place.description" id=""></textarea>
+    </div>
+    <div class="file-upload-container">
+        <input type="file" id="file-input" class="file-input" />
+        <label for="file-input" class="file-label">+</label>
+    </div>
+    <button>Agregar</button>
+</form>

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PlacesModule } from './places/places.module';
 import { CheckAvailabilityComponent } from './events/check-availability/check-availability.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { AddEventComponent } from './events/add-event/add-event.component';
@@ -12,8 +12,7 @@ import { WelcomeComponent } from './standalone/welcome/welcome.component';
 @NgModule({
   declarations: [
     AppComponent,
-    CheckAvailabilityComponent,
-    AddEventComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +20,10 @@ import { WelcomeComponent } from './standalone/welcome/welcome.component';
     GoogleMapsModule,
     HeaderComponent,
     NavbarComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    PlacesModule,
+    CheckAvailabilityComponent,
+    AddEventComponent,
   ],
   providers: [],
 })

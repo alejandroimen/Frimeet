@@ -1,9 +1,43 @@
-/* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap');
+
+:root {
+    --yellow: #ffc700;
+    --white: white;
+    --black: black;
+    --black-soft: #2d2b2b;
+    --gray: #ccc;
+    --red: #951604;
+    --orange: #f28c22;
+}
+
+* {
+    font-family: "Geist", sans-serif;
+    margin: 0%;
+    padding: 0%;
+}
 
 body {
-    font-family: "Baloo 2", sans-serif;
-    font-weight: 400;
     margin: 0;
     padding: 0;
+}
+
+.header {
+    padding: 0%;
+    margin: 0%;
+}
+
+app-welcome,
+app-add-place,
+app-info-place {
+    position: relative;
+    left: 15vw;
+    top: 8vh;
+    display: flex;
+    justify-content: center;
+    width: 85vw;
+    min-height: 92vh;
+    box-sizing: border-box; 
+}
+
+::-webkit-scrollbar {
+  scrollbar-width: none
 }
