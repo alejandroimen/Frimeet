@@ -1,1 +1,22 @@
-<p>info-place works!</p>
+<section class="info-place-container">
+    <h1>Información</h1>
+    <div class="banner-place">
+        <img [src]="place.image" alt="">
+        <h2>{{place.name}}</h2>
+    </div>
+    <div class="info-corta">
+        <span>{{place.type}}</span>
+        <div>
+            <span>
+                +10000 opiniones
+            </span>
+
+        </div>
+    </div>
+    <p>
+        {{place.description}}
+    </p>
+    <div class="tags-container">
+        <span *ngFor="let tag of etiquetas"> {{tag}} </span>
+    </div>
+</section>
