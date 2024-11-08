@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --yellow: #ffc100;
+    --white: white;
+    --black: black;
+}
+
+* {
+    font-family: "Geist", sans-serif;
+    margin: 0%;
+    padding: 0%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    padding: 0%;
+    margin: 0%;
+}
+
+app-welcome {
+    position: relative;
+    left: 15vw;
+    top: 8vh;
+    display: flex;
+    width: 85vw;
+    height: 92vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
