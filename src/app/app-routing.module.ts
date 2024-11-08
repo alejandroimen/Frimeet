@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { WelcomeComponent } from './standalone/welcome/welcome.component';
 import { AddPlaceComponent } from './places/components/add-place/add-place.component';
 import { InfoPlaceComponent } from './places/components/info-place/info-place.component';

@@ -1,15 +1,12 @@
-.container {
-    max-width: 80vh;
-    width: 100%;
+.container-add-event {
+    position: relative;
+    width: 90%;
     padding: 20px;
     text-align: center;
     box-sizing: border-box;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    float: right;
-    margin-top: 10vh;
-    transform: translateX(-40vh);
 }
 
 h2 {
@@ -80,7 +77,8 @@ textarea {
 }
 
 .btn-add:hover {
-    background-color: #e6b800;
+    background-color: var(--orange);
+    transition: 0.3s;
 }
 
 @media (max-width: 768) {

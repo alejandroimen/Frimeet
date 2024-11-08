@@ -12,6 +12,10 @@ import { CheckAvailabilityComponent } from './check-availability/check-availabil
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    AddEventComponent,
+    CheckAvailabilityComponent,
   ]
 })
 export class EventsModule { }
