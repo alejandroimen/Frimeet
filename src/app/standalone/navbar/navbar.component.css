@@ -1,0 +1,27 @@
+nav {   
+    width: 15vw;
+    height: 92vh;
+    position: fixed;
+    left: 0%;
+    top: 8vh;
+    background-color: var(--white);
+    border-right: solid 0.8px var(--yellow);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0%;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 15px;
+}
+
+nav ul li a {
+    color: var(--black);
+    text-decoration: none;
+}
