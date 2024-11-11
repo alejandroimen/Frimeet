@@ -13,10 +13,9 @@ export class AddPlaceComponent {
     name: '',
     types: '',
     images: [],
-    price: 0,
     description: '',
     tags: '',
-    address: '',
+    address: 'enmicasa',
   };
 
   selectedFiles: File[] = [];
