@@ -7,7 +7,7 @@ import { AddEventComponent } from './events/add-event/add-event.component';
 import { CheckAvailabilityComponent } from './events/check-availability/check-availability.component';
 
 const routes: Routes = [
-  {path: '', component: WelcomeComponent},
+  {path: '', component: WelcomeComponent},     
   {path: 'add-place', component: AddPlaceComponent},
   {path: 'info-place', component: InfoPlaceComponent},
   { path: "add-event", component: AddEventComponent },
