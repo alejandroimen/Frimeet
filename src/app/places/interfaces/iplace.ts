@@ -1,7 +1,9 @@
 export interface Iplace {
     name: string
-    type: string
+    types: string
     price: number
     description: string
-    image: string
+    images: []
+    address: string
+    tags: string
 }
