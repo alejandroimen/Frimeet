@@ -1,6 +1,7 @@
-.info-place-container {
+.details-place-container {
     position: relative;
-    width: 100%;
+    margin-left: 250px; /* Ajuste para dejar espacio para el navbar */
+    width: calc(100% - 250px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,8 +11,10 @@
     box-sizing: border-box;
 }
 
-.info-place-container h1 {
+.details-place-container h1 {
     font-weight: 500;
+    margin-top: 20px; /* Bajar un poco el título */
+    font-size: 36px; /* Incrementar tamaño de fuente para más dinamismo */
 }
 
 .banner-place, .carousel-item {
@@ -27,31 +30,30 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
-.banner-place h2 {
-    position: absolute;
-    bottom: 5px;
-    left: 20px;
-    font-size: 32px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    color: var(--white);
+.banner-place img:hover, .carousel-item img:hover {
+    transform: scale(1.05);
 }
 
-.info-corta {
+.details-place-container .info-corta {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    font-size: 18px;
+    color: var(--dark-gray);
 }
 
-.info-place-container p {
+.details-place-container p {
     font-size: 18px;
+    line-height: 1.6;
 }
 
 .tags-container {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .tags-container span {
@@ -59,5 +61,13 @@
     border-radius: 5px;
     border: solid 1px var(--red);
     font-size: 16px;
+    background-color: var(--light-red);
+    color: var(--white);
     cursor: default;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.tags-container span:hover {
+    background-color: var(--red);
+    transform: scale(1.1);
 }

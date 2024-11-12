@@ -1,26 +1,28 @@
-import { Iplace } from './../../interfaces/iplace';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PlaceService } from '../../services/place.service';
+import { Iplace } from '../../interfaces/iplace';
 
 @Component({
   selector: 'app-info-place',
   templateUrl: './info-place.component.html',
-  styleUrl: './info-place.component.css'
+  styleUrls: ['./info-place.component.css']
 })
-export class InfoPlaceComponent {
-  etiquetas: string[] = [
-    'Comida rapida',
-    'Entretenimiento',
-    'Helados',
-    'Para ir en pareja'
-  ]
+export class InfoPlaceComponent implements OnInit {
+  places: Iplace[] = [];
 
-  place: Iplace = {
-    name: 'UPChiapas',
-    types: 'Educativo',
-    images: [],
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos aperiam tempora sit sint necessitatibus eum, excepturi obcaecati unde placeat. In atque corrupti voluptas consequatur similique ab alias aliquid aliquam pariatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis sed error qui iste reprehenderit est saepe eveniet itaque illum temporibus, minus illo deserunt, accusamus harum. Voluptate voluptatum culpa distinctio laborum.',
-    tags: '',
-    address: '',
+  constructor(private placeService: PlaceService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.placeService.getPlaces().subscribe((data: Iplace[]) => {
+      this.places = data;
+      console.log('Lugares obtenidos:', this.places);
+    }, error => {
+      console.error('Error al obtener los lugares:', error);
+    });
   }
 
+  goToDetails(placeId: string): void {
+    this.router.navigate(['/places', placeId]);
+  }
 }
