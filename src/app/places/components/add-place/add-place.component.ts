@@ -10,6 +10,7 @@ import { PlaceService } from '../../services/place.service';
 })
 export class AddPlaceComponent {
   place: Iplace = {
+    _id: "",
     name: '',
     types: '',
     images: [],
