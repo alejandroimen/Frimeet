@@ -10,9 +10,10 @@ import { EventService } from '../../services/event.service';
 })
 export class AddEventComponent {
   event: Ievent = {
+    _id:'',
     name: '',
     maxPeoples: 0,
-    idPlace: 0,
+    idPlace: '',
     date: new Date(),
     description: '',
     address: '',
@@ -22,15 +23,25 @@ export class AddEventComponent {
   };
 
   selectedFiles: File[] = [];
+  selectedImagePreview: string | null = null;
 
   constructor(private eventService: EventService) {}
 
   onFileSelected(event: any): void {
     this.selectedFiles = event.target.files;
+    const file = event.target.files[0];
+    console.log(file);
+    
+    if (file) {
+      this.selectedImagePreview = URL.createObjectURL(file);
+    }
   }
   
   onSubmit(form: NgForm): void {
-    if (form.invalid) {
+    if (form.invalid) {   
+      console.log('Form Errors:', form.errors);
+      console.log('Form Controls:', form.controls);
+   
       return;
     }
   
@@ -38,12 +49,12 @@ export class AddEventComponent {
     formData.append('name', this.event.name);
     formData.append('maxPeoples', this.event.maxPeoples.toString());
     formData.append('idPlace', this.event.idPlace.toString());
-    formData.append('date', this.event.date.toISOString());
+    formData.append('date', this.event.date.toString());
     formData.append('description', this.event.description);
     formData.append('address', this.event.address);
     formData.append('price', this.event.price.toString());
     formData.append('willAttend', this.event.willAttend.toString());
-   console.log(this.event.name)
+    console.log(this.event.name)
     for (let i = 0; i < this.selectedFiles.length; i++) {
       formData.append('images', this.selectedFiles[i], this.selectedFiles[i].name);
     }

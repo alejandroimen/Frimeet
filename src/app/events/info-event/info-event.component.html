@@ -1,20 +1,12 @@
-<section class="info-event-container">
-    <h1>Información</h1>
-    <div class="banner-event">
-        <img [src]="event.images" alt="">
-        <h2>{{event.name}}</h2>
+<div class="card-group">
+  <div *ngFor="let ev of events" class="card" (click)="goToDetails(ev._id)">
+    <img [src]="ev.images[0]" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{ev.name}}</h5>
+      <p class="card-text">{{ev.description}}</p>
     </div>
-    <div class="info-corta">
-        <span>{{event.address}}</span>
-        <div>
-            <span>
-                +10000 opiniones
-            </span>
-
-        </div>
+    <div class="card-footer">
+      <small class="text-muted"> {{ev.address}} </small>
     </div>
-    <p>
-        {{event.description}}
-    </p>
-    
-</section>
+  </div>
+</div>
