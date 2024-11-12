@@ -1,7 +1,7 @@
 export interface Ievent {
     name: string
     maxPeoples: number
-    idPlace: number
+    idPlace: string
     date: Date
     description: string
     address: string

@@ -12,7 +12,7 @@ export class InfoEventComponent {
 
     name: " ",
     maxPeoples: 0,
-    idPlace: 0,
+    idPlace: '',
     date: new Date,
     description: " ",
     address: " ",
