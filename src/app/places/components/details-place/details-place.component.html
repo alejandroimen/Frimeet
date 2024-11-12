@@ -32,5 +32,30 @@
     <div *ngIf="place.tags" class="tags-container">
       <span *ngFor="let tag of place.tags.split(',')"> {{tag}} </span>
     </div>
-  </div>
-  
+    <div class="address">
+      <h5>Dirección:</h5>
+      <p>{{ place.address }}</p>
+    </div>
+
+    <!-- Botón para eliminar el lugar -->
+    <button (click)="openModal()" class="btn btn-danger">Eliminar Lugar</button>
+
+    <!-- Modal de confirmación de eliminación -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ¿Estás seguro de que deseas eliminar este lugar?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger" (click)="deletePlace()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

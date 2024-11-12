@@ -50,6 +50,13 @@
     line-height: 1.6;
 }
 
+.address {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .tags-container {
     display: flex;
     gap: 10px;
@@ -70,4 +77,41 @@
 .tags-container span:hover {
     background-color: var(--red);
     transform: scale(1.1);
+}
+
+.modal-content {
+    background-color: #fff; /* Fondo blanco para la modal */
+    border: none;
+    border-radius: 10px;
+    margin-top: 200px;
+}
+
+.modal-header {
+    background-color: var(--light-red);
+    color: var(--white);
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+}
+
+.modal-body {
+    font-size: 18px;
+    padding: 20px;
+    color: var(--dark-gray); /* Color del texto */
+}
+
+.modal-footer {
+    justify-content: space-between;
+    padding: 15px 30px;
+}
+
+.btn-secondary, .btn-danger {
+    background-color: #ffc700;
+    border: none;
+    color: var(--white);
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover, .btn-danger:hover {
+    background-color: #e0b600;
 }
