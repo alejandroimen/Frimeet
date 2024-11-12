@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class PlaceService {
 
-  //private apiUrl = 'https://frimeetapi.integrador.xyz/'
-  private apiUrl = 'http://localhost:3000/'
+  private apiUrl = 'https://frimeetapi.integrador.xyz/'
+  //private apiUrl = 'http://localhost:3000/'
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +25,7 @@ export class PlaceService {
   }
 
   updatePlace(id: string, placeData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}api/places/${id}`, placeData);
+    return this.http.put(`${this.apiUrl}api/places/update/${id}`, placeData);
   }
 
   deletePlace(id: string): Observable<any> {

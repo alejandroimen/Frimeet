@@ -11,6 +11,8 @@ import { Iplace } from '../../interfaces/iplace';
 export class DetailsPlaceComponent implements OnInit {
   place: Iplace | undefined;
   deleteModal: any;
+  updateModal: any;
+  selectedFiles: File[] = [];
 
   constructor(private placeService: PlaceService, private route: ActivatedRoute, private router: Router) {}
 
@@ -25,11 +27,48 @@ export class DetailsPlaceComponent implements OnInit {
     }
   }
 
-  openModal(): void {
+  openDeleteModal(): void {
     const modalElement = document.getElementById('deleteModal');
     if (modalElement) {
       this.deleteModal = new (window as any).bootstrap.Modal(modalElement);
       this.deleteModal.show();
+    }
+  }
+
+  openUpdateModal(): void {
+    const modalElement = document.getElementById('updateModal');
+    if (modalElement) {
+      this.updateModal = new (window as any).bootstrap.Modal(modalElement);
+      this.updateModal.show();
+    }
+  }
+
+  onFileSelected(event: any): void {
+    this.selectedFiles = event.target.files;
+  }
+
+  updatePlace(): void {
+    if (this.place) {
+      const formData = new FormData();
+      formData.append('name', this.place.name);
+      formData.append('types', this.place.types);
+      formData.append('description', this.place.description);
+      formData.append('address', this.place.address);
+      formData.append('tag', this.place.tags);
+
+      for (let i = 0; i < this.selectedFiles.length; i++) {
+        formData.append('images', this.selectedFiles[i], this.selectedFiles[i].name);
+      }
+
+      this.placeService.updatePlace(this.place._id, formData).subscribe(response => {
+        console.log('Lugar actualizado:', response);
+        if (this.updateModal) {
+          this.updateModal.hide();
+        }
+        this.router.navigate(['/info-place']);
+      }, error => {
+        console.error('Error al actualizar el lugar:', error);
+      });
     }
   }
 

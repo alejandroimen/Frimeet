@@ -83,7 +83,6 @@
     background-color: #fff; /* Fondo blanco para la modal */
     border: none;
     border-radius: 10px;
-    margin-top: 200px;
 }
 
 .modal-header {
@@ -104,7 +103,7 @@
     padding: 15px 30px;
 }
 
-.btn-secondary, .btn-danger {
+.btn-secondary, .btn-primary, .btn-danger {
     background-color: #ffc700;
     border: none;
     color: var(--white);
@@ -112,6 +111,6 @@
     transition: background-color 0.3s ease;
 }
 
-.btn-secondary:hover, .btn-danger:hover {
+.btn-secondary:hover, .btn-primary:hover, .btn-danger:hover {
     background-color: #e0b600;
 }
