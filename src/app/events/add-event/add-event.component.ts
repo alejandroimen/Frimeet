@@ -10,6 +10,7 @@ import { EventService } from '../../services/event.service';
 })
 export class AddEventComponent {
   event: Ievent = {
+    _id:'',
     name: '',
     maxPeoples: 0,
     idPlace: '',

@@ -1,0 +1,113 @@
+<div *ngIf="event" class="details-event-container">
+    <h1>{{ event.name }}</h1>
+    <div *ngIf="event.images.length > 1" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div *ngFor="let img of event.images; let i = index" class="carousel-item" [ngClass]="{'active': i === 0}">
+          <img [src]="img" class="d-block w-100" alt="Imagen de {{ event.name }}">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Siguiente</span>
+      </a>
+    </div>
+    <div *ngIf="event.images.length === 1" class="banner-event">
+      <img [src]="event.images[0]" alt="Imagen de {{ event.name }}">
+    </div>
+    <div class="info-corta">
+      <span>{{ event.maxPeoples }}</span>
+      <div>
+        <span>
+          <!-- Aquí podrías poner un componente para mostrar el número de opiniones y estrellas si es necesario -->
+        </span>
+      </div>
+    </div>
+    <p>
+      {{ event.description }}
+    </p>
+    <div class="address">
+      <h5>Dirección:</h5>
+      <p>{{ event.address }}</p>
+    </div>
+
+    <!-- Botón para abrir la modal de actualización -->
+    <button (click)="openUpdateModal()" class="btn btn-primary">Actualizar Lugar</button>
+
+    <!-- Botón para eliminar el lugar -->
+    <button (click)="openDeleteModal()" class="btn btn-danger">Eliminar Lugar</button>
+
+    <!-- Modal de confirmación de eliminación -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ¿Estás seguro de que deseas eliminar este lugar?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger" (click)="deletePlace()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de actualización de lugar -->
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateModalLabel">Actualizar Lugar</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="eventName" class="form-label">Nombre del Lugar</label>
+                <input type="text" class="form-control" id="eventName" [(ngModel)]="event.name" name="name" required>
+              </div>
+              <div class="mb-3">
+                <label for="idPlace">ID del lugar</label>
+                <input type="text" id="idPlace" name="idPlace" [(ngModel)]="event.idPlace" required>
+              </div>
+              <div class="mb-3">
+                <label for="maxPeople" class="form-label">Capacidad máxima</label>
+                <input type="text" class="form-control" id="maxPeople" [(ngModel)]="event.maxPeoples" name="types" required>
+              </div>
+              <div class="mb-3">
+                <label for="eventDescription" class="form-label">Descripción</label>
+                <textarea class="form-control" id="eventDescription" [(ngModel)]="event.description" name="description" required></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="eventAddress" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="eventAddress" [(ngModel)]="event.address" name="address" required>
+              </div>
+              <div class="mb-3">
+                <label for="date" class="form-label">Etiquetas</label>
+                <input type="datetime-local" class="form-control" id="date" [(ngModel)]="event.date" name="tags" required>
+              </div>
+              <div class="mb-3">
+                <label for="willAttend" class="form-label">Subir Nuevas Imágenes</label>
+                <input type="number" class="form-control" id="willAttend" [(ngModel)]="event.willAttend" multiple>
+              </div>
+              <div class="mb-3">
+                <label for="file-input" class="form-label">Subir Nuevas Imágenes</label>
+                <input type="file" class="form-control" id="file-input" (change)="onFileSelected($event)" multiple>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="updatePlace()">Actualizar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
