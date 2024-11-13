@@ -1,0 +1,12 @@
+<div class="card-group">
+  <div *ngFor="let ev of events" class="card" (click)="goToDetails(ev._id)">
+    <img [src]="ev.images[0]" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{ev.name}}</h5>
+      <p class="card-text">{{ev.description}}</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted"> {{ev.address}} </small>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-.info-place-container {
+.info-event-container {
     position: relative;
     width: 100%;
     display: flex;
@@ -10,11 +10,11 @@
     box-sizing: border-box;
 }
 
-.info-place-container h1 {
+.info-event-container h1 {
     font-weight: 500;
 }
 
-.banner-place, .carousel-item {
+.banner-event {
     width: 100%;
     height: 40vh;
     background-color: var(--red);
@@ -23,13 +23,11 @@
     overflow: hidden;
 }
 
-.banner-place img, .carousel-item img {
+.banner-event img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
-.banner-place h2 {
+.banner-event h2 {
     position: absolute;
     bottom: 5px;
     left: 20px;
@@ -45,7 +43,7 @@
     justify-content: space-between;
 }
 
-.info-place-container p {
+.info-event-container p {
     font-size: 18px;
 }
 
@@ -57,7 +55,7 @@
 .tags-container span {
     padding: 10px;
     border-radius: 5px;
-    border: solid 1px var(--red);
+    border: solid 1px  var(--red);
     font-size: 16px;
     cursor: default;
 }
