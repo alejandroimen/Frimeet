@@ -10,7 +10,7 @@
 
 .login-container form {
     position: relative;
-    min-width: 25vw;
+    min-width: 30vw;
     min-height: 60vh;
     background-color: var(--white);
     border-radius: 20px;
@@ -52,9 +52,8 @@
     border-color: var(--orange);
     outline: solid var(--orange);
 }
-
-.login-container form button {
-    height: 45px;
+.login-container form button:not(.link) {
+    min-height: 45px;
     width: 100%;
     font-size: 18px;
     font-weight: 500;
@@ -65,7 +64,16 @@
     transition: 0.3s;
 }
 
-.login-container form button:hover {
+.login-container form button:not(.link):hover {
     background-color: var(--orange);
     transition: 0.3s;
+}
+
+.login-container span button {
+    color: var(--orange);
+    text-decoration: underline;
+    background: none;
+    border: none;
+    font-weight: 500;
+    letter-spacing: 0.8px;
 }

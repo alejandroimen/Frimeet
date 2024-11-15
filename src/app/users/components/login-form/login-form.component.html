@@ -1,4 +1,7 @@
 <section class="login-container">
+    <div class="image">
+        <img src="assets/images/siluetas.jpg" alt="">
+    </div>
     <form class="login" action="">
         <h1>Ingresa a tu cuenta</h1>
         <div class="input">
@@ -9,7 +12,7 @@
             <label for="password">Ingresa tu contraseña</label>
             <input id="password" type="password" placeholder="Contraseña">
         </div>
-        <button>Iniciar sesion</button>
-        <span>¿No tienes una cuenta?  <a routerLink="/register">Registrarme</a></span>
+        <button (click)="login()">Iniciar sesion</button>
+        <span>¿No tienes una cuenta?  <button class="link" (click)="goToRegister()">Registrarme</button> </span>
     </form>
 </section>

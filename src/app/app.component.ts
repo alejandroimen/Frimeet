@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,10 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Frimeet';
-  isLoged: boolean = false
+  show: boolean = false
 
-  ngOnCheck(){
-    const token: string | null = localStorage.getItem('token') 
-    this.isLoged = token ? true : false
+  constructor(private router: Router){
+    this.router.events.subscribe(event => {
+      if(event instanceof NavigationEnd){
+        this.show = !(event.url === '/login' || event.url === '/register')
+      }
+    })
   }
 }
