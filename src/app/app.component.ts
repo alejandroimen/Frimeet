@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Frimeet';
+  isLoged: boolean = false
+
+  ngOnCheck(){
+    const token: string | null = localStorage.getItem('token') 
+    this.isLoged = token ? true : false
+  }
 }
