@@ -85,4 +85,8 @@ export class DetailsPlaceComponent implements OnInit {
       });
     }
   }
+
+  goBack(): void {
+    window.history.back();
+  }
 }
