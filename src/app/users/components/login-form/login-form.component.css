@@ -1,14 +1,5 @@
-.login-container {
-    position: absolute;
-    width: 100%;
-    height: 100vh;
-    backdrop-filter: brightness(0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.login-container form {
+.login-form {
     position: relative;
     min-width: 25vw;
     height: 60vh;
@@ -25,19 +16,19 @@
     gap: 25px;
 }
 
-.login-container form h1 {
+.login-form h1 {
     text-align: center;
-    font-size: 32px;
+    font-size: 28px;
 }
 
-.login-container form div{
+.login-form div{
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
     box-sizing: border-box;
 }
-.login-container input {
+.login-form input {
     width: 100%;
     height: 35px;
     font-size: 16px;
@@ -49,12 +40,12 @@
 }
 
 
-.login-container input:focus {
+.login-form input:focus {
     border-color: var(--orange);
     outline: solid var(--orange);
 }
 
-.login-container form button:not(.link) {
+.login-form button:not(.link) {
     min-height: 45px;
     width: 100%;
     font-size: 18px;
@@ -66,12 +57,12 @@
     transition: 0.3s;
 }
 
-.login-container form button:not(.link):hover {
+.login-form button:not(.link):hover {
     background-color: var(--orange);
     transition: 0.3s;
 }
 
-.login-container span button {
+.login-form span button {
     color: var(--orange);
     text-decoration: underline;
     background: none;
@@ -80,16 +71,3 @@
     letter-spacing: 0.8px;
 }
 
-
-.image {
-    position: relative;
-    height: 60vh;
-    max-width: 50vw;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    overflow: hidden;
-}
-
-.image img {
-    height: 100%;
-}

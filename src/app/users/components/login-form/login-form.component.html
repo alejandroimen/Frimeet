@@ -1,18 +1,13 @@
-<section class="login-container">
-    <div class="image">
-        <img src="assets/images/siluetas.jpg" alt="">
+<form class="login-form" action="">
+    <h1>Ingresa a tu cuenta</h1>
+    <div class="input">
+        <label for="email">Ingresa tu correo</label>
+        <input id="email" type="text" placeholder="Correo" name="email"[(ngModel)]="user.email">
     </div>
-    <form class="login" action="">
-        <h1>Ingresa a tu cuenta</h1>
-        <div class="input">
-            <label for="email">Ingresa tu correo</label>
-            <input id="email" type="password" placeholder="Correo">
-        </div>
-        <div class="input">
-            <label for="password">Ingresa tu contraseña</label>
-            <input id="password" type="password" placeholder="Contraseña">
-        </div>
-        <button (click)="login()">Iniciar sesion</button>
-        <span>¿No tienes una cuenta?  <button class="link" (click)="goToRegister()">Registrarme</button> </span>
-    </form>
-</section>
+    <div class="input">
+        <label for="password">Ingresa tu contraseña</label>
+        <input id="password" type="password" placeholder="Contraseña" name="password" [(ngModel)]="user.password">
+    </div>
+    <button (click)="login()">Iniciar sesion</button>
+    <span>¿No tienes una cuenta?  <button class="link" (click)="goToRegister()">Registrarme</button> </span>
+</form>

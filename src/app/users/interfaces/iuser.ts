@@ -2,5 +2,5 @@ export interface Iuser {
     name: string,
     email: string,
     password: string,
-    createAt: Date
+    rol: number
 }

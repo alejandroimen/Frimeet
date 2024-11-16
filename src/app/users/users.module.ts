@@ -5,17 +5,21 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
+import { FormsModule } from '@angular/forms';
+import { RegisterViewComponent } from './register-view/register-view.component';
 
 @NgModule({
   declarations: [
     LoginFormComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    RegisterViewComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   exports: [
     LoginComponent,

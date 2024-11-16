@@ -8,16 +8,18 @@
     align-items: center;
 }
 
+
 .container-child {
     display: flex;
     background: linear-gradient(to bottom, var(--black-soft), var(--orange));
     border-radius: 20px;
 }
 
+
 .image {
     position: relative;
-    height: 60vh;
-    max-width: 50vw;
+    height: 80vh;
+    max-width: 70vw;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     overflow: hidden;
@@ -29,7 +31,7 @@
 }
 
 .image:hover {
-    transform: rotate(-12deg);
+    transform: rotate(-7deg);
     border-radius: 20px;
     transition: .5s;
 }

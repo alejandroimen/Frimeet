@@ -8,14 +8,13 @@ import { CheckAvailabilityComponent } from './events/check-availability/check-av
 import { InfoEventComponent } from './events/info-event/info-event.component';
 import { DetailsEventComponent } from './events/details-event/details-event.component';
 import { DetailsPlaceComponent } from './places/components/details-place/details-place.component';
-import { LoginFormComponent } from './users/components/login-form/login-form.component';
-import { RegisterComponent } from './users/components/register/register.component';
+import { RegisterViewComponent } from './users/register-view/register-view.component';
 import { LoginComponent } from './users/login/login.component';
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'login', component: LoginFormComponent },   
+  {path: 'register', component: RegisterViewComponent},
+  {path: 'login', component: LoginComponent },   
   {path: 'add-place', component: AddPlaceComponent},
   {path: 'info-place', component: InfoPlaceComponent},
   {path: 'add-event', component: AddEventComponent },
