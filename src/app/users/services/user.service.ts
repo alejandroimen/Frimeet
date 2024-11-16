@@ -12,7 +12,11 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   login(user: Iuser): Observable<any>{
-    return this.http.post(`${this.url}/login`, user)
+    return this.http.post(`${this.url}/login`, {
+      nombre: user.name,
+      email:  user.email,
+      password: user.password
+    })
   }
 
   register(user: Iuser): Observable<any> {
