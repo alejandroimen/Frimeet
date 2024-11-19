@@ -30,7 +30,8 @@ app-add-place,
 app-info-place,
 app-add-event,
 app-info-event,
-app-details-event {
+app-details-event,
+app-payment-view {
     position: relative;
     left: 15vw;
     top: 8vh;
@@ -43,4 +44,9 @@ app-details-event {
 
 ::-webkit-scrollbar {
   scrollbar-width: none
+}
+
+button:active {
+    transform: scale(0.95);
+    transition: 0.2s;
 }

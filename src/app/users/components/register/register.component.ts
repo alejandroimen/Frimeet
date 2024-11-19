@@ -20,7 +20,7 @@ export class  RegisterComponent {
   constructor( private router: Router, private userService: UserService) {}
 
   goToLogin():void {
-    this.router.navigate(['/'])
+    this.router.navigate(['/login'])
   }
 
   register(): void {

@@ -8,6 +8,7 @@ import { CheckAvailabilityComponent } from './events/check-availability/check-av
 import { InfoEventComponent } from './events/info-event/info-event.component';
 import { DetailsEventComponent } from './events/details-event/details-event.component';
 import { DetailsPlaceComponent } from './places/components/details-place/details-place.component';
+import { PaymentViewComponent } from './payments/components/payment-view/payment-view.component';
 import { RegisterViewComponent } from './users/register-view/register-view.component';
 import { LoginComponent } from './users/login/login.component';
 
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'check-availability', component: CheckAvailabilityComponent },
   {path: 'info-event', component: InfoEventComponent},
   {path: 'events/:id', component: DetailsEventComponent},
-  {path: 'places/:id', component: DetailsPlaceComponent}
+  {path: 'places/:id', component: DetailsPlaceComponent},
+  {path: 'payment', component: PaymentViewComponent}
 ];
 
 @NgModule({

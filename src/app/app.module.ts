@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { PlacesModule } from './places/places.module';
 import { EventsModule } from './events/events.module';
 import { UsersModule } from './users/users.module';
+import { PaymentsModule } from './payments/payments.module';
 import { NavbarComponent } from './standalone/navbar/navbar.component';
 import { HeaderComponent } from './standalone/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,6 +24,8 @@ import { FormsModule } from '@angular/forms';
     GoogleMapsModule,
     PlacesModule,
     EventsModule,
+    UsersModule,
+    PaymentsModule,
     HttpClientModule,
     FormsModule
   ],
