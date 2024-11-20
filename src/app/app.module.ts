@@ -8,6 +8,7 @@ import { EventsModule } from './events/events.module';
 import { NavbarComponent } from './standalone/navbar/navbar.component';
 import { HeaderComponent } from './standalone/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     NavbarComponent,
     GoogleMapsModule,
+    FontAwesomeModule,
     PlacesModule,
     EventsModule,
     HttpClientModule

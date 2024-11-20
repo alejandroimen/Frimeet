@@ -15,8 +15,8 @@ const routes: Routes = [
   { path: 'add-place', component: AddPlaceComponent},
   { path: 'info-place', component: InfoPlaceComponent},
   { path: 'add-event', component: AddEventComponent },
-  { path: 'check-availability0', component: CheckAvailabilityComponent },
-  { path: 'info-event0', component: InfoEventComponent},
+  { path: 'check-availability', component: CheckAvailabilityComponent },
+  { path: 'info-event', component: InfoEventComponent},
   { path: 'events/:id', component: DetailsEventComponent},
   { path: 'places/:id', component: DetailsPlaceComponent}
 ];

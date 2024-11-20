@@ -27,66 +27,32 @@ export class DetailsEventComponent {
     }
   }
 
-  openDeleteModal(): void {
-    const modalElement = document.getElementById('deleteModal');
-    if (modalElement) {
-      this.deleteModal = new (window as any).bootstrap.Modal(modalElement);
-      this.deleteModal.show();
+  goBack(): void {
+    window.history.back();
+  }
+
+  openPhotosModal() {
+    const modal = document.getElementById('photosModal');
+    if (modal) {
+      modal.style.display = 'flex';
     }
   }
 
-  openUpdateModal(): void {
-    const modalElement = document.getElementById('updateModal');
-    if (modalElement) {
-      this.updateModal = new (window as any).bootstrap.Modal(modalElement);
-      this.updateModal.show();
+  closePhotosModal() {
+    const modal = document.getElementById('photosModal');
+    if (modal) {
+      modal.style.display = 'none';
     }
   }
 
-  onFileSelected(event: any): void {
-    this.selectedFiles = event.target.files;
+  ngAfterViewInit(): void {
+    this.initMap();
   }
 
-  updatePlace(): void {
-    if (this.event) {
-      const formData = new FormData();
-      formData.append('name', this.event.name);
-      formData.append('maxPeoples', this.event.maxPeoples.toString());
-      formData.append('idPlace', this.event.idPlace.toString());
-      formData.append('date', this.event.date.toString());
-      formData.append('description', this.event.description);
-      formData.append('address', this.event.address);
-      formData.append('price', this.event.price.toString());
-      formData.append('willAttend', this.event.willAttend.toString());
-      console.log(this.event.name)
-      for (let i = 0; i < this.selectedFiles.length; i++) {
-        formData.append('images', this.selectedFiles[i], this.selectedFiles[i].name);
-      }
-
-      this.eventService.updateEvent(this.event._id, formData).subscribe(response => {
-        console.log('Lugar actualizado:', response);
-        if (this.updateModal) {
-          this.updateModal.hide();
-        }
-        this.router.navigate(['/info-event']);
-      }, error => {
-        console.error('Error al actualizar el lugar:', error);
-      });
-    }
+  initMap(): void {
+    const map = new google.maps.Map(document.getElementById('google-map') as HTMLElement, {
+      center: { lat: 37.7749, lng: -122.4194 }, // Coordenadas de ejemplo: San Francisco
+      zoom: 12,
+    });
   }
-
-  deletePlace(): void {
-    if (this.event && this.event._id) {
-      this.eventService.deleteEvent(this.event._id).subscribe(response => {
-        console.log('Lugar eliminado:', response);
-        if (this.deleteModal) {
-          this.deleteModal.hide();
-        }
-        this.router.navigate(['/info-event']);
-      }, error => {
-        console.error('Error al eliminar el lugar:', error);
-      });
-    }
-  }
-
 }

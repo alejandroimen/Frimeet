@@ -20,15 +20,25 @@ export class AddPlaceComponent {
   };
 
   selectedFiles: File[] = [];
+  selectedImagePreview: string | null = null;
 
   constructor(private placeService: PlaceService) {}
 
   onFileSelected(event: any): void {
     this.selectedFiles = event.target.files;
+    const file = event.target.files[0];
+    console.log(file);
+    
+    if (file) {
+      this.selectedImagePreview = URL.createObjectURL(file);
+    }
   }
 
   onSubmit(form: NgForm): void {
     if (form.invalid) {
+      console.log('Form Errors:', form.errors);
+      console.log('Form Controls:', form.controls);
+
       return;
     }
   
@@ -38,7 +48,7 @@ export class AddPlaceComponent {
     formData.append('description', this.place.description);
     formData.append('address', this.place.address);
     formData.append('tag', this.place.tags);
-  
+    console.log(this.place.name)
     for (let i = 0; i < this.selectedFiles.length; i++) {
       formData.append('images', this.selectedFiles[i], this.selectedFiles[i].name);
     }

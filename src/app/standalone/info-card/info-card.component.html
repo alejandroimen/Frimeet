@@ -1,0 +1,32 @@
+<div class="info-card-container" (click)="goToDetails()">
+    <h1>{{ place.name }}</h1>
+
+    <!-- Carousel o imagen única -->
+    <div *ngIf="place.images.length > 1" class="carousel slide">
+        <div class="carousel-inner">
+            <div *ngFor="let img of place.images; let i = index" class="carousel-item" [ngClass]="{'active': i === 0}">
+                <img [src]="img" class="d-block w-100" alt="Imagen de {{ place.name }}">
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="place.images.length === 1" class="banner-place">
+        <img [src]="place.images[0]" alt="Imagen de {{ place.name }}">
+    </div>
+
+    <!-- Información adicional -->
+    <div class="info-corta">
+        <span>{{ place.types }}</span>
+        <div>
+            <span>
+                <!-- Opcional: Información adicional como estrellas -->
+            </span>
+        </div>
+    </div>
+    <p>
+        {{ place.description }}
+    </p>
+    <div *ngIf="place.tags" class="tags-container">
+        <span *ngFor="let tag of place.tags.split(',')"> {{ tag }} </span>
+    </div>
+</div>
