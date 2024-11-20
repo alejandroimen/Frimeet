@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class PlaceService {
 
-  private apiUrl = 'https://frimeetapi.integrador.xyz/'
-  //private apiUrl = 'http://localhost:3000/'
+  //private apiUrl = 'https://frimeetapi.integrador.xyz/'
+  private apiUrl = 'http://localhost:3000/'
 
   constructor(private http: HttpClient) { }
 
