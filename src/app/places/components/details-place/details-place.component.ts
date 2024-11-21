@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PlaceService } from '../../services/place.service';
 import { Iplace } from '../../interfaces/iplace';
 
+
 @Component({
   selector: 'app-details-place',
   templateUrl: './details-place.component.html',
@@ -14,7 +15,7 @@ export class DetailsPlaceComponent implements OnInit {
   updateModal: any;
   selectedFiles: File[] = [];
 
-  constructor(private placeService: PlaceService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private placeService: PlaceService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     const placeId = this.route.snapshot.paramMap.get('id');
@@ -85,4 +86,23 @@ export class DetailsPlaceComponent implements OnInit {
       });
     }
   }
+
+  goBack(): void {
+    window.history.back();
+  }
+
+  openPhotosModal() {
+    const modal = document.getElementById('photosModal');
+    if (modal) {
+      modal.style.display = 'flex';
+    }
+  }
+
+  closePhotosModal() {
+    const modal = document.getElementById('photosModal');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+
 }
