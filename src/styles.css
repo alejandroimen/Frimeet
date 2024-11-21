@@ -28,7 +28,9 @@ body {
 app-welcome,
 app-add-place,
 app-info-place,
-app-add-event {
+app-add-event,
+app-info-event,
+app-details-event {
     position: relative;
     left: 15vw;
     top: 8vh;

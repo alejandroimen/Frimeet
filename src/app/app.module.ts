@@ -5,8 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PlacesModule } from './places/places.module';
 import { EventsModule } from './events/events.module';
+import { UsersModule } from './users/users.module';
 import { NavbarComponent } from './standalone/navbar/navbar.component';
 import { HeaderComponent } from './standalone/header/header.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,8 +22,11 @@ import { HeaderComponent } from './standalone/header/header.component';
     HeaderComponent,
     NavbarComponent,
     GoogleMapsModule,
+    FontAwesomeModule,
     PlacesModule,
-    EventsModule
+    EventsModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

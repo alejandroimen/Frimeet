@@ -1,30 +1,45 @@
-<div class="container-add-event">
+<form (ngSubmit)="onSubmit(f)" #f="ngForm" class="add-event-form">
     <h2>Agregar un evento</h2>
-
-    <label for="name">Nombre</label>
-    <input type="text" id="name" />
-
-    <label for="type">Tipo</label>
-    <select id="type">
-        <option value="" disabled selected>Selecciona una opción</option>
-        <option value="1">Opción 1</option>
-        <option value="2">Opción 2</option>
-    </select>
-
-    <label for="price">Precio de entrada</label>
-    <input type="number" id="price" />
-
-    <div class="checkbox">
-        <input type="checkbox" id="free" />
-        <label for="free">Sin costo</label>
+    <div>
+      <label for="name">Nombre del evento</label>
+      <input type="text" id="name" name="name" [(ngModel)]="event.name" required>
     </div>
-
-    <label for="description">Descripción</label>
-    <textarea id="description"></textarea>
-
-    <div class="upload-image">
-        <span>+</span>
+    <div>
+      <label for="maxPeoples">Capacidad máxima</label>
+      <input type="number" id="maxPeoples" name="maxPeoples" [(ngModel)]="event.maxPeoples" required>
     </div>
-
-    <button class="btn-add">Agregar evento</button>
-</div>
+    <div>
+      <label for="idPlace">ID del lugar</label>
+      <input type="text" id="idPlace" name="idPlace" [(ngModel)]="event.idPlace" required>
+    </div>
+    <div>
+      <label for="date">Fecha del evento</label>
+      <input type="datetime-local" id="date" name="date" [(ngModel)]="event.date" required>
+    </div>
+    <div>
+      <label for="description">Descripción</label>
+      <textarea id="description" name="description" [(ngModel)]="event.description" placeholder="Agrega una breve descripción" required></textarea>
+    </div>
+    <div>
+      <label for="address">Dirección</label>
+      <input type="text" id="address" name="address" [(ngModel)]="event.address" required>
+    </div>
+    <div>
+      <label for="price">Precio de entrada</label>
+      <input type="number" id="price" name="price" [(ngModel)]="event.price">
+    </div>
+    <div>
+      <label for="willAttend">Número de asistentes</label>
+      <input type="number" id="willAttend" name="willAttend" [(ngModel)]="event.willAttend">
+    </div>
+    <div class="file-upload-container">
+      <input type="file" id="file-input" class="file-input" (change)="onFileSelected($event)" multiple>
+      <label for="file-input" class="file-label">
+        <ng-container *ngIf="selectedImagePreview; else plusSign">
+          <img [src]="selectedImagePreview" alt="Imagen seleccionada" class="image-preview">
+        </ng-container>
+        <ng-template #plusSign>+</ng-template>
+      </label>
+    </div>
+    <button type="submit">Agregar</button>
+</form>

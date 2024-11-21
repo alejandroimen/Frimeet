@@ -1,61 +1,151 @@
-.info-place-container {
+app-info-place {
     position: relative;
-    width: 100%;
+    left: 15vw;
+    top: 8vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    gap: 20px;
-    padding: 40px;
+    justify-content: center;
+    width: 85vw;
+    min-height: 92vh;
     box-sizing: border-box;
 }
 
-.info-place-container h1 {
-    font-weight: 500;
+::-webkit-scrollbar {
+    scrollbar-width: none
 }
 
-.banner-place {
-    width: 100%;
-    height: 40vh;
-    background-color: var(--red);
+
+.card-group-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.info-place-container {
     position: relative;
+    width: 220px;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+    color: white;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.info-place-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 15px 25px #F28C22;
+}
+
+.info-place-container h1 {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 10px 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000000;
+}
+
+.banner-place,
+.carousel-item {
+    width: 100%;
+    height: 150px;
     border-radius: 8px;
     overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
 }
 
-.banner-place img {
+.banner-place img,
+.carousel-item img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.banner-place h2 {
-    position: absolute;
-    bottom: 5px;
-    left: 20px;
-    font-size: 32px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    color: var(--white);
-}
-
-.info-corta {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+.info-corta span {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #ffc700;
+    text-transform: uppercase;
 }
 
 .info-place-container p {
-    font-size: 18px;
+    font-size: 0.9rem;
+    color: #000000;
+    text-align: center;
+    margin: 10px 0;
 }
 
 .tags-container {
     display: flex;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
 }
 
 .tags-container span {
-    padding: 10px;
-    border-radius: 5px;
-    border: solid 1px  var(--red);
-    font-size: 16px;
-    cursor: default;
+    background-color: #f532f1;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+}
+
+.card-price-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(#df29ff, #dc0ba5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.add-to-cart-btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    bottom: 15px;
+}
+
+.add-to-cart-btn button {
+    border: none;
+    font-size: 0.8rem;
+    background: linear-gradient(45deg, #f532f1, #a141fb);
+    padding: 8px 15px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-to-cart-btn button:hover {
+    background: linear-gradient(45deg, #a141fb, #f532f1);
+}
+
+@media (max-width: 1024px) {
+    .card-group-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .card-group-container {
+        grid-template-columns: 1fr;
+    }
 }
