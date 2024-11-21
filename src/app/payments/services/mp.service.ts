@@ -29,5 +29,37 @@ export class MpService {
     return this.mp;
   }
 
-  
+  getFormStatic(): any {
+    return {
+      id: "form-checkout",
+      cardNumber: {
+        id: "form-checkout__cardNumber",
+        placeholder: "Numero de tarjeta",
+      },
+      expirationDate: {
+        id: "form-checkout__expirationDate",
+        placeholder: "MM/YY",
+      },
+      securityCode: {
+        id: "form-checkout__securityCode",
+        placeholder: "Código de seguridad",
+      },
+      cardholderName: {
+        id: "form-checkout__cardholderName",
+        placeholder: "Titular de la tarjeta",
+      },
+      issuer: {
+        id: "form-checkout__issuer",
+        placeholder: "Banco emisor",
+      },
+      installments: {
+        id: "form-checkout__installments",
+        placeholder: "Cuotas",
+      },        
+      cardholderEmail: {
+        id: "form-checkout__cardholderEmail",
+        placeholder: "E-mail",
+      },
+    }
+  }
 }
