@@ -22,6 +22,7 @@ const routes: Routes = [
   {path: 'info-event', component: InfoEventComponent},
   {path: 'events/:id', component: DetailsEventComponent},
   {path: 'places/:id', component: DetailsPlaceComponent}
+
 ];
 
 @NgModule({

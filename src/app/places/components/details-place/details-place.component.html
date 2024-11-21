@@ -1,108 +1,179 @@
 <div *ngIf="place" class="details-place-container">
+
+  <div class="details-header">
+    <i class="fas fa-arrow-left icon-style" (click)="goBack()"></i>
     <h1>{{ place.name }}</h1>
-    <div *ngIf="place.images.length > 1" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner">
-        <div *ngFor="let img of place.images; let i = index" class="carousel-item" [ngClass]="{'active': i === 0}">
-          <img [src]="img" class="d-block w-100" alt="Imagen de {{ place.name }}">
+  </div>
+
+  <div *ngIf="place.images.length > 1" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"
+    data-bs-interval="3000">
+    <div class="carousel-inner">
+      <!-- Cada `carousel-item` contendrá 4 imágenes -->
+      <div class="carousel-item active">
+        <div class="image-group">
+          <!-- Reemplaza estas URL de ejemplo con las de tus imágenes -->
+          <img *ngIf="place.images[0]" [src]="place.images[0]" class="d-block" alt="Imagen 1">
+          <img *ngIf="place.images[1]" [src]="place.images[1]" class="d-block" alt="Imagen 2">
+          <img *ngIf="place.images[2]" [src]="place.images[2]" class="d-block" alt="Imagen 3">
         </div>
+
+        <div class="see-all-photos" (click)="openPhotosModal()">
+          Ver {{ place.images.length }} fotos
+        </div>
+
+        <!-- Modal para ver todas las fotos -->
+        <div class="photos-modal" id="photosModal">
+          <div class="modal-content">
+            <button class="close-modal" (click)="closePhotosModal()">✖</button>
+            <h2>Fotos de  {{ place.name }}</h2>
+            <div class="photos-grid">
+              <img *ngFor="let img of place.images" [src]="img" alt="Image of {{ place.name }}">
+            </div>
+          </div>
+        </div>
+
       </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Anterior</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Siguiente</span>
-      </a>
+      <!-- Agrega más `carousel-item` si deseas más conjuntos de imágenes -->
     </div>
-    <div *ngIf="place.images.length === 1" class="banner-place">
-      <img [src]="place.images[0]" alt="Imagen de {{ place.name }}">
-    </div>
-    <div class="info-corta">
-      <span>{{ place.types }}</span>
-      <div>
-        <span>
-          <!-- Aquí podrías poner un componente para mostrar el número de opiniones y estrellas si es necesario -->
-        </span>
+  </div>
+
+  <div *ngIf="place.images.length === 1" class="banner-place">
+    <img [src]="place.images[0]" alt="Imagen de {{ place.name }}">
+  </div>
+
+
+  <div class="info-corta">
+    <div class="types-stars">
+      <span class="types">{{ place.types }}</span>
+      <div class="star-rating">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
       </div>
     </div>
-    <p>
+    <p class="description">
       {{ place.description }}
     </p>
     <div *ngIf="place.tags" class="tags-container">
-      <span *ngFor="let tag of place.tags.split(',')"> {{tag}} </span>
+      <span *ngFor="let tag of place.tags.split(',')">{{ tag }}</span>
     </div>
     <div class="address">
-      <h5>Dirección:</h5>
+      <h5>Direccion:</h5>
       <p>{{ place.address }}</p>
     </div>
-
+  </div>
+  
+  <div class="reviews-container">
+    <h2>Reseñas y opiniones</h2>
+    <div class="review">
+      <div class="review-header">
+        <span class="username">👤 Username</span>
+        <div class="star-rating">
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+        </div>
+      </div>
+      <div class="description">
+        <hr>
+        <hr>
+        <hr>
+      </div>
+    </div>
+    <div class="review">
+      <div class="review-header">
+        <span class="username">👤 Username</span>
+        <div class="star-rating">
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star empty"></div>
+        </div>
+      </div>
+      <div class="description">
+        <hr>
+        <hr>
+        <hr>
+      </div>
+    </div>
+  </div>
+  
+  <div class="button-group">
     <!-- Botón para abrir la modal de actualización -->
     <button (click)="openUpdateModal()" class="btn btn-primary">Actualizar Lugar</button>
 
     <!-- Botón para eliminar el lugar -->
     <button (click)="openDeleteModal()" class="btn btn-danger">Eliminar Lugar</button>
+  </div>
 
-    <!-- Modal de confirmación de eliminación -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            ¿Estás seguro de que deseas eliminar este lugar?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-danger" (click)="deletePlace()">Eliminar</button>
-          </div>
+
+  <!-- Modal de confirmación de eliminación -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h5>
+          <button type="button" class="btn-close btn-delete" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Estás seguro de que deseas eliminar este lugar?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" (click)="deletePlace()">Eliminar</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Modal de actualización de lugar -->
-    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="updateModalLabel">Actualizar Lugar</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="placeName" class="form-label">Nombre del Lugar</label>
-                <input type="text" class="form-control" id="placeName" [(ngModel)]="place.name" name="name" required>
-              </div>
-              <div class="mb-3">
-                <label for="placeTypes" class="form-label">Tipo</label>
-                <input type="text" class="form-control" id="placeTypes" [(ngModel)]="place.types" name="types" required>
-              </div>
-              <div class="mb-3">
-                <label for="placeDescription" class="form-label">Descripción</label>
-                <textarea class="form-control" id="placeDescription" [(ngModel)]="place.description" name="description" required></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="placeAddress" class="form-label">Dirección</label>
-                <input type="text" class="form-control" id="placeAddress" [(ngModel)]="place.address" name="address" required>
-              </div>
-              <div class="mb-3">
-                <label for="placeTags" class="form-label">Etiquetas</label>
-                <input type="text" class="form-control" id="placeTags" [(ngModel)]="place.tags" name="tags" required>
-              </div>
-              <div class="mb-3">
-                <label for="file-input" class="form-label">Subir Nuevas Imágenes</label>
-                <input type="file" class="form-control" id="file-input" (change)="onFileSelected($event)" multiple>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" (click)="updatePlace()">Actualizar</button>
-          </div>
+  <!-- Modal de actualización de lugar -->
+  <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModalLabel">Actualizar Lugar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="placeName" class="form-label">Nombre del Lugar</label>
+              <input type="text" class="form-control" id="placeName" [(ngModel)]="place.name" name="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="placeTypes" class="form-label">Tipo</label>
+              <input type="text" class="form-control" id="placeTypes" [(ngModel)]="place.types" name="types" required>
+            </div>
+            <div class="mb-3">
+              <label for="placeDescription" class="form-label">Descripción</label>
+              <textarea class="form-control" id="placeDescription" [(ngModel)]="place.description" name="description"
+                required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="placeAddress" class="form-label">Dirección</label>
+              <input type="text" class="form-control" id="placeAddress" [(ngModel)]="place.address" name="address"
+                required>
+            </div>
+            <div class="mb-3">
+              <label for="placeTags" class="form-label">Etiquetas</label>
+              <input type="text" class="form-control" id="placeTags" [(ngModel)]="place.tags" name="tags" required>
+            </div>
+            <div class="mb-3">
+              <label for="file-input" class="form-label">Subir Nuevas Imágenes</label>
+              <input type="file" class="form-control" id="file-input" (change)="onFileSelected($event)" multiple>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary-edit" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary-edit" (click)="updatePlace()">Actualizar</button>
         </div>
       </div>
     </div>
+  </div>
 </div>

@@ -9,6 +9,7 @@ import { UsersModule } from './users/users.module';
 import { NavbarComponent } from './standalone/navbar/navbar.component';
 import { HeaderComponent } from './standalone/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     NavbarComponent,
     GoogleMapsModule,
+    FontAwesomeModule,
     PlacesModule,
     EventsModule,
     HttpClientModule,
