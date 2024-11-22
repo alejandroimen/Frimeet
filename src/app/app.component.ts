@@ -7,7 +7,7 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Frimeet';
-  show: boolean = false
+  show: boolean = false;
 
   constructor(private router: Router){
     this.router.events.subscribe(event => {

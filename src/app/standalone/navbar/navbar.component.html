@@ -1,8 +1,16 @@
-<nav>
+<nav [class.collapsed]="isCollapsed">
+    <button class="toggle-button" (click)="toggleMenu()">
+        <i [class]="isCollapsed ? 'bi bi-chevron-right right-btn' : 'bi bi-chevron-left'"></i>
+    </button>
     <ul class="input">
         <li class="value">
             <a routerLink="/">
                 Inicio
+            </a>
+        </li>
+        <li class="value">
+            <a routerLink="/profile">
+                Profile
             </a>
         </li>
         <li class="value">
@@ -32,3 +40,7 @@
         </li>
     </ul>
 </nav>
+
+
+    <!-- Navbar Standalone (Se muestra dinámicamente) -->
+    <app-navbar *ngIf="show"></app-navbar>
