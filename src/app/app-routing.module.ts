@@ -10,11 +10,13 @@ import { DetailsEventComponent } from './events/details-event/details-event.comp
 import { DetailsPlaceComponent } from './places/components/details-place/details-place.component';
 import { RegisterViewComponent } from './users/register-view/register-view.component';
 import { LoginComponent } from './users/login/login.component';
+import { ProfileComponent } from './users/profile/profile.component';
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'register', component: RegisterViewComponent},
-  {path: 'login', component: LoginComponent },   
+  {path: 'login', component: LoginComponent },
+  {path: 'profile', component: ProfileComponent },
   {path: 'add-place', component: AddPlaceComponent},
   {path: 'info-place', component: InfoPlaceComponent},
   {path: 'add-event', component: AddEventComponent },

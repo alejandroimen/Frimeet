@@ -1,41 +1,52 @@
 nav {
-    margin-top: 10px;
     width: 15vw;
     height: 92vh;
     position: fixed;
     left: 0;
     top: 8vh;
     background-color: #ffffff;
-    padding: 5px;
+    padding: 0.5rem;
     box-sizing: border-box;
-    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0.5rem 0.5rem 0 rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    transition: all 0.3s ease-in-out;
 }
 
 .input {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 1rem;
+    width: 100%;
+    padding: 0;
+    list-style-type: none;
 }
 
 .value {
     background-color: transparent;
     border: none;
-    padding: 10px;
+    padding: 0.625rem;
     color: white;
     display: flex;
     align-items: center;
     position: relative;
-    gap: 5px;
+    gap: 0.3125rem;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
 }
 
 .value a {
     color: rgb(0, 0, 0);
     text-decoration: none;
     display: flex;
-    gap: 10px;
+    gap: 0.625rem;
+    width: 100%;
+    font-size: 1rem;
 }
 
 .value:not(:active):hover,
@@ -52,13 +63,14 @@ nav {
 .value::before {
     content: "";
     position: absolute;
-    top: 5px;
-    left: -10px;
-    width: 5px;
+    top: 0.3125rem;
+    left: -0.625rem;
+    width: 0.3125rem;
     height: 80%;
     background-color: #ffc700;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
     opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .value:focus::before,
@@ -66,8 +78,91 @@ nav {
     opacity: 1;
 }
 
-.input:hover> :not(.value:hover) {
+.input:hover > :not(.value:hover) {
     transition: 300ms;
-    filter: blur(1px);
+    filter: blur(0.0625rem);
     transform: scale(0.95, 0.95);
+}
+
+@media (max-width: 1024px) {
+    nav {
+        width: 20vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        margin-top: 0;
+        padding: 1rem;
+    }
+
+    .value {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        width: 30vw;
+        height: auto;
+        top: 0;
+        left: 0;
+        margin-top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+
+    .input {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.625rem;
+        justify-content: center;
+    }
+
+    .value {
+        flex: 1 1 auto;
+        text-align: center;
+    }
+
+    .value a {
+        font-size: 0.875rem;
+    }
+}
+
+nav.collapsed {
+    width: 5vw;
+    transition: width 0.3s ease-in-out;
+}
+
+nav.collapsed .input {
+    display: none;
+}
+
+.toggle-button {
+    position: absolute;
+    top: 40vh;
+    right: -1rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--yellow);
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0.2rem 0.3125rem rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.toggle-button i {
+    display: grid;
+    place-items: center;
+    color: var(--black);
+    font-size: 1.2rem;
+}
+
+.toggle-button:hover {
+    background-color: var(--orange);
 }
