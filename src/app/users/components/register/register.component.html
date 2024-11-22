@@ -1,8 +1,9 @@
 <form class="register-form">
     <h1>Crea tu cuenta</h1>
-    <div class="input">
+    <div class="input" [ngClass]="{'invalid': !nameValid && user.name !== ''}">
         <label for="name">Nombre de usuario</label>
         <input id="name" type="text" placeholder="Nombre de usuario" name="name" [(ngModel)]="user.name">
+        <small *ngIf="!nameValid && user.name !== ''" class="error-text">El usuario no permite caracteres especiales.</small>
     </div>
     <div class="input" [ngClass]="{'invalid': !emailValid && user.email !== ''}">
         <label for="email">Ingresa tu correo</label>
@@ -19,6 +20,6 @@
         <input id="pwdConfirm" type="password" placeholder="Confirmar contraseña" name="pwdConfirm" [(ngModel)]="pwdConfirm">
         <small *ngIf="!passwordsMatch && pwdConfirm !== ''" class="error-text">Las contraseñas no coinciden.</small>
     </div>
-    <button (click)="register()">Registrarme</button>
+    <button [disabled]="isSubmitting" (click)="register()">Registrarme</button>
     <span>¿Ya tienes una cuenta? <button class="link" (click)="goToLogin()">Iniciar sesión</button></span>
 </form>

@@ -17,11 +17,12 @@ export class LoginFormComponent implements DoCheck {
     rol: 0
   }
   emailValid: boolean = true;
+  isSubmitting: boolean = false;
 
   constructor(private router: Router, private userService: UserService, private alertService: AlertService) {}
 
   goToRegister(): void {
-    this.router.navigate(['/register'])
+    this.router.navigate(['/register']);
   }
 
   validateEmail(email: string): boolean {
@@ -34,23 +35,32 @@ export class LoginFormComponent implements DoCheck {
   }
 
   login(): void {
+    this.isSubmitting = true;
+
     if (!this.user.email || !this.user.password) {
       this.alertService.showWarning('Por favor, completa todos los campos.');
+      this.isSubmitting = false;
       return;
     }
 
     if (!this.emailValid) {
       this.alertService.showWarning('Por favor, ingresa un correo válido.');
+      this.isSubmitting = false;
       return;
     }
 
     this.userService.login(this.user).subscribe(
       response => {
         this.alertService.showSuccess('Inicio de sesión exitoso.');
-        this.router.navigate(['/'])
+        
+        // Guardar el token en localStorage
+        localStorage.setItem('jwtToken', response.token);
+
+        this.router.navigate(['/']);
       }, error => {
         this.alertService.showError('Hubo un error al iniciar sesión.');
+        this.isSubmitting = false;
       }
-    )
+    );
   }
 }
