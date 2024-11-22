@@ -29,6 +29,7 @@ export class  RegisterComponent {
         response => {
           console.log('Bienvenido', response);
           this.router.navigate(['/'])  
+          sessionStorage.setItem('token', response.token)
         }, error => {
           console.error('Error', error);
         } 

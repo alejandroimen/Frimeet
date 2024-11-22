@@ -10,7 +10,8 @@ import { DetailsEventComponent } from './events/details-event/details-event.comp
 import { DetailsPlaceComponent } from './places/components/details-place/details-place.component';
 import { PaymentViewComponent } from './payments/components/payment-view/payment-view.component';
 import { RegisterViewComponent } from './users/register-view/register-view.component';
-import { LoginComponent } from './users/login/login.component';
+import { LoginComponent } from './users/components/login/login.component';
+import { RemindersViewsComponent } from './reminders/components/reminders-views/reminders-views.component';
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path: 'info-event', component: InfoEventComponent},
   {path: 'events/:id', component: DetailsEventComponent},
   {path: 'places/:id', component: DetailsPlaceComponent},
-  {path: 'payment', component: PaymentViewComponent}
+  {path: 'payment', component: PaymentViewComponent},
+  {path: 'reminders/:id', component: RemindersViewsComponent}
 ];
 
 @NgModule({

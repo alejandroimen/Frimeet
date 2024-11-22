@@ -9,6 +9,7 @@ import { PaymentsMpService } from '../../services/payments-mp.service';
   styleUrl: './form-mp.component.css'
 })
 export class FormMpComponent implements OnInit {
+  ultimos: string = ''
   mp: any
   data: IdataMP = {
     transaction_amount: 0,
@@ -57,6 +58,12 @@ export class FormMpComponent implements OnInit {
     const cardholderInput = document.getElementById('form-checkout__cardholderName') as HTMLInputElement | null;
     if (cardholderInput) {
       this.name = cardholderInput.value;
+    } else {
+      console.warn("El elemento con ID 'form-checkout__cardholderName' no fue encontrado.");
+    }
+    const numberCardInput = document.getElementById('cardNumber') as HTMLInputElement | null;
+    if (numberCardInput) {
+      this.ultimos = numberCardInput.value.slice(-4);
     } else {
       console.warn("El elemento con ID 'form-checkout__cardholderName' no fue encontrado.");
     }

@@ -5,6 +5,25 @@ app-form-mp {
     align-items: center;
 }
 
-.plan-de-suscripcion-own {
+.payment-view-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
 
+.plan-de-suscripcion-own {
+    border: 1px solid var(--orange);
+    width: 28vw;
+    padding: 40px;
+}
+
+.plan-de-suscripcion-own h2 {
+    background-color: aqua;
+}
+
+
+.form-and-costo {
+    display: flex;
+    padding: 50px;
+    gap: 50px;
 }

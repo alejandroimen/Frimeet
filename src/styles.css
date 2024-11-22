@@ -5,7 +5,7 @@
     --black: black;
     --black-soft: #2d2b2b;
     --gray: #ccc;
-    --red: #951604;
+    --red: #cf100d;
     --orange: #f28c22;
 }
 
@@ -31,7 +31,8 @@ app-info-place,
 app-add-event,
 app-info-event,
 app-details-event,
-app-payment-view {
+app-payment-view,
+app-reminders-views {
     position: relative;
     left: 15vw;
     top: 8vh;
