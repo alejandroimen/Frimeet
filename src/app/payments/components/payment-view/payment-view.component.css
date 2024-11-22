@@ -12,18 +12,57 @@ app-form-mp {
 }
 
 .plan-de-suscripcion-own {
-    border: 1px solid var(--orange);
+    border: 5px solid var(--orange);
     width: 28vw;
-    padding: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background: linear-gradient(var(--yellow), var(--white)); */
 }
 
 .plan-de-suscripcion-own h2 {
-    background-color: aqua;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 20px;
 }
 
+
+.plan-de-suscripcion-own ul {
+    padding: 40px;
+}
+
+.plan-de-suscripcion-own ul li {
+    font-size: 18px;
+    text-align: justify;
+    line-height: 28px;
+} 
 
 .form-and-costo {
     display: flex;
-    padding: 50px;
-    gap: 50px;
+    padding: 20px 100px;
+    gap: 80px;
 }
+
+
+.header-plan-de-suscripcion-own {
+    z-index: 0;
+    position: absolute;
+    background-color: var(--orange);
+    width: 100%;
+    display: grid;
+    place-items: center;
+    height: 35vh;
+    overflow: visible;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 35%, 0% 75%);
+}
+
+.plan-de-suscripcion-own img {
+    background-color: var(--white);
+    border-radius: 50%;
+    border: solid 5px var(--orange);
+    padding: 20px;
+    margin-top: 80px;
+    z-index: 2;
+}
+
