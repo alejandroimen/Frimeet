@@ -1,45 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { Ievent } from '../interfaces/ievent';
 import { EventService } from '../../services/event.service';
+import { Ievent } from '../interfaces/ievent';
+
 @Component({
   selector: 'app-info-event',
   templateUrl: './info-event.component.html',
-  styleUrls: ['./info-event.component.css']
+  styleUrls: ['./info-event.component.css'],
+  encapsulation: ViewEncapsulation.Emulated // Asegura la encapsulación de los estilos.
 })
-export class InfoEventComponent {
-  events: Ievent[] = []
+export class InfoEventComponent implements OnInit {
+  events: Ievent[] = []; // Lista de eventos obtenidos.
   event: Ievent = {
     _id: "",
-    name: " ",
+    name: "",
     maxPeoples: 0,
-    idPlace: '',
-    date: new Date,
-    description: " ",
-    address: " ",
+    idPlace: "",
+    date: new Date(),
+    description: "",
+    address: "",
     price: 0,
     willAttend: 0,
-    images: []
-  }
+    images: [],
+  };
 
-  constructor(private eventService: EventService, private router: Router){}
+  constructor(private eventService: EventService, private router: Router) {}
 
-  ngOnInit(){
+  ngOnInit(): void {
+    // Obtención de los eventos al cargar el componente.
     this.eventService.getEvents().subscribe(
       (data: Ievent[]) => {
-        this.events = data
-        console.log(this.events);
+        this.events = data;
+        console.log('Eventos obtenidos:', this.events);
       },
       error => {
-        console.log('Error al obtener eventos', error);
-        
+        console.error('Error al obtener eventos:', error);
       }
-    )
+    );
   }
 
-  goToDetails(id: string): void {
-    console.log(id);
-    
-    this.router.navigate(['/events', id])
+  // Navega a los detalles del evento seleccionado.
+  goToDetails(eventId: string): void {
+    console.log('ID del evento seleccionado:', eventId);
+    this.router.navigate(['/events', eventId]);
   }
 }

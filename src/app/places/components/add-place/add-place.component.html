@@ -1,35 +1,41 @@
 <form (ngSubmit)="onSubmit(f)" #f="ngForm" class="add-place-form">
-    <h2>Agrega un lugar</h2>
-    <div>
-      <label for="name">Nombre del lugar</label>
-      <input type="text" id="name" name="name" [(ngModel)]="place.name" required>
-    </div>
-    <div>
-      <label for="types">Tipo</label>
-      <select id="types" name="types" [(ngModel)]="place.types" required>
-        <option value="para_parejas">Para Parejas</option>
-        <option value="para_amigos">Para Amigos</option>
-        <!-- Más opciones según necesites -->
-      </select>
-    </div>
-    <div>
-      <label for="tag">Categoría</label>
-      <select id="tag" name="tag" [(ngModel)]="place.tags" required>
-        <option value="restaurante">Restaurante</option>
-        <option value="sala_de_juegos">Sala de Juegos</option>
-        <option value="parques">Parques</option>
-        <!-- Más opciones según necesites -->
-      </select>
-    </div>
-    
-    <div>
-      <label for="description">Descripción</label>
-      <textarea id="description" name="description" [(ngModel)]="place.description" placeholder="Agrega una breve descripción" required></textarea>
-    </div>
-    <div class="file-upload-container">
-      <input type="file" id="file-input" class="file-input" (change)="onFileSelected($event)" multiple>
-      <label for="file-input" class="file-label">+</label>
-    </div>
-    <button type="submit">Agregar</button>
-  </form>
-  
+  <h2>Agrega un lugar</h2>
+  <div class="input" [ngClass]="{'invalid': !nameValid && place.name !== ''}">
+    <label for="name">Nombre del lugar</label>
+    <input type="text" id="name" name="name" [(ngModel)]="place.name" maxlength="50" required>
+    <small *ngIf="!nameValid && place.name !== ''" class="error-text">El nombre debe comenzar con una letra, contener al menos una letra y no más de 50 caracteres (no se permiten caracteres especiales).</small>
+  </div>
+  <div class="input">
+    <label for="types">Tipo</label>
+    <select id="types" name="types" [(ngModel)]="place.types" required>
+      <option value="para_parejas">Para Parejas</option>
+      <option value="para_amigos">Para Amigos</option>
+      <!-- Más opciones según necesites -->
+    </select>
+  </div>
+  <div class="input">
+    <label for="tag">Categoría</label>
+    <select id="tag" name="tag" [(ngModel)]="place.tags" required>
+      <option value="restaurante">Restaurante</option>
+      <option value="sala_de_juegos">Sala de Juegos</option>
+      <option value="parques">Parques</option>
+      <!-- Más opciones según necesites -->
+    </select>
+  </div>
+  <div class="input" [ngClass]="{'invalid': !descriptionValid && place.description !== ''}">
+    <label for="description">Descripción</label>
+    <textarea id="description" name="description" [(ngModel)]="place.description" placeholder="Agrega una breve descripción" maxlength="250" required></textarea>
+    <small *ngIf="!descriptionValid && place.description !== ''" class="error-text">La descripción no puede tener más de 250 caracteres.</small>
+  </div>
+  <div class="file-upload-container">
+    <input type="file" id="file-input" class="file-input" (change)="onFileSelected($event)" multiple required>
+    <label for="file-input" class="file-label">
+      <ng-container *ngIf="selectedImagePreview; else plusSign">
+        <img [src]="selectedImagePreview" alt="Imagen seleccionada" class="image-preview">
+      </ng-container>
+      <ng-template #plusSign>+</ng-template>
+    </label>
+    <small *ngIf="!imageSelected" class="error-text">Por favor, selecciona al menos una imagen.</small>
+  </div>
+  <button type="submit" [disabled]="isSubmitting || !imageSelected">Agregar</button>
+</form>

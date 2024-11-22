@@ -12,11 +12,14 @@ import { PaymentViewComponent } from './payments/components/payment-view/payment
 import { RegisterViewComponent } from './users/register-view/register-view.component';
 import { LoginComponent } from './users/components/login/login.component';
 import { RemindersViewsComponent } from './reminders/components/reminders-views/reminders-views.component';
+import { ProfileComponent } from './users/profile/profile.component';
+
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'register', component: RegisterViewComponent},
-  {path: 'login', component: LoginComponent },   
+  {path: 'login', component: LoginComponent },
+  {path: 'profile', component: ProfileComponent },
   {path: 'add-place', component: AddPlaceComponent},
   {path: 'info-place', component: InfoPlaceComponent},
   {path: 'add-event', component: AddEventComponent },

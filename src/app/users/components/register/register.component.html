@@ -1,21 +1,25 @@
-<form class="register-form" action="">
+<form class="register-form">
     <h1>Crea tu cuenta</h1>
-    <div class="input">
-        <label for="email">Nombre de usuario</label>
-        <input id="email" type="text" placeholder="Nombre de usuario" name="name" [(ngModel)]="user.name">
+    <div class="input" [ngClass]="{'invalid': !nameValid && user.name !== ''}">
+        <label for="name">Nombre de usuario</label>
+        <input id="name" type="text" placeholder="Nombre de usuario" name="name" [(ngModel)]="user.name">
+        <small *ngIf="!nameValid && user.name !== ''" class="error-text">El usuario no permite caracteres especiales.</small>
     </div>
-    <div class="input">
+    <div class="input" [ngClass]="{'invalid': !emailValid && user.email !== ''}">
         <label for="email">Ingresa tu correo</label>
-        <input id="email" type="email" placeholder="Correo" name="email"[(ngModel)]="user.email">
+        <input id="email" type="text" placeholder="Correo" name="email" [(ngModel)]="user.email">
+        <small *ngIf="!emailValid && user.email !== ''" class="error-text">Por favor, ingresa un correo válido.</small>
     </div>
-    <div class="input">
+    <div class="input" [ngClass]="{'invalid': !passwordValid && user.password !== ''}">
         <label for="password">Ingresa tu contraseña</label>
         <input id="password" type="password" placeholder="Contraseña" name="password" [(ngModel)]="user.password">
+        <small *ngIf="!passwordValid && user.password !== ''" class="error-text">La contraseña debe tener al menos 8 caracteres.</small>
     </div>
-    <div class="input">
-        <label for="password">Confirma tu contraseña</label>
-        <input id="password" type="password" placeholder="Contraseña" name="pwdConfirm" [(ngModel)]="pwdConfirm">
+    <div class="input" [ngClass]="{'invalid': !passwordsMatch && pwdConfirm !== ''}">
+        <label for="pwdConfirm">Confirma tu contraseña</label>
+        <input id="pwdConfirm" type="password" placeholder="Confirmar contraseña" name="pwdConfirm" [(ngModel)]="pwdConfirm">
+        <small *ngIf="!passwordsMatch && pwdConfirm !== ''" class="error-text">Las contraseñas no coinciden.</small>
     </div>
-    <button (click)="register()">Registrarme</button>
-    <span>¿Ya tienes una cuenta?  <button class="link" (click)="goToLogin()">Iniciar sesión</button> </span>
+    <button [disabled]="isSubmitting" (click)="register()">Registrarme</button>
+    <span>¿Ya tienes una cuenta? <button class="link" (click)="goToLogin()">Iniciar sesión</button></span>
 </form>

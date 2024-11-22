@@ -1,4 +1,5 @@
-<section *ngFor="let place of places" class="info-place-container" (click)="goToDetails(place._id)">
+<div class="card-group-container">
+  <section *ngFor="let place of places" class="info-place-container" (click)="goToDetails(place._id)">
     <h1>{{ place.name }}</h1>
     <div *ngIf="place.images.length > 1" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
@@ -6,14 +7,6 @@
           <img [src]="img" class="d-block w-100" alt="Imagen de {{ place.name }}">
         </div>
       </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Anterior</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Siguiente</span>
-      </a>
     </div>
     <div *ngIf="place.images.length === 1" class="banner-place">
       <img [src]="place.images[0]" alt="Imagen de {{ place.name }}">
@@ -33,4 +26,4 @@
       <span *ngFor="let tag of place.tags.split(',')"> {{tag}} </span>
     </div>
   </section>
-   
+</div>
