@@ -1,0 +1,21 @@
+.reminder-title-and-event-name {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+}
+
+.reminder-title-and-event-name h4 {
+    font-size: 20px;
+}
+
+.reminder-title-and-event-name h5 {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+
+.content-reminder {
+    width: 100%;
+    text-align: justify;
+    font-size: 16px;
+}

@@ -51,11 +51,11 @@ export class LoginFormComponent implements DoCheck {
 
     this.userService.login(this.user).subscribe(
       response => {
+        console.log('Bienvenido', response);
         this.alertService.showSuccess('Inicio de sesión exitoso.');
-        
+       
         // Guardar el token en localStorage
         localStorage.setItem('jwtToken', response.token);
-
         this.router.navigate(['/']);
       }, error => {
         this.alertService.showError('Hubo un error al iniciar sesión.');

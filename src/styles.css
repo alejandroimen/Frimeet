@@ -5,7 +5,7 @@
     --black: black;
     --black-soft: #2d2b2b;
     --gray: #ccc;
-    --red: #951604;
+    --red: #cf100d;
     --orange: #f28c22;
 }
 
@@ -30,7 +30,9 @@ app-add-place,
 app-info-place,
 app-add-event,
 app-info-event,
-app-details-event {
+app-details-event,
+app-payment-view,
+app-reminders-views {
     position: relative;
     left: 15vw;
     top: 8vh;
@@ -45,6 +47,11 @@ app-details-event {
   scrollbar-width: none
 }
 
+button:active {
+    transform: scale(0.95);
+    transition: 0.2s;
+}
+
 .invalid input {
     outline: solid 1px var(--red);
   }
@@ -53,4 +60,3 @@ app-details-event {
     color: var(--red);
     font-size: 12px;
   }
-  

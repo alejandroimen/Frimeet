@@ -10,26 +10,29 @@
 
 .container-child {
     display: flex;
-    background: linear-gradient(to bottom, var(--black-soft), var(--orange));
+    
+    /* background: linear-gradient(to bottom, var(--black-soft), var(--orange)); */
     border-radius: 20px;
 }
 
 .image {
     position: relative;
+    background-image: url('../../../../../public/assets/images/siluetas.jpg');
+    background-size: contain;
     height: 60vh;
     max-width: 50vw;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-    overflow: hidden;
     transition: .5s;
 }
 
 .image img {
     height: 100%;
+    border-radius: 20px;
+
 }
 
-.image:hover {
+.image:hover img {
     transform: rotate(-12deg);
-    border-radius: 20px;
     transition: .5s;
 }
