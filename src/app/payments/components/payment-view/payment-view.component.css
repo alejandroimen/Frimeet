@@ -9,24 +9,33 @@ app-form-mp {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .plan-de-suscripcion-own {
-    border: 5px solid var(--orange);
+    background-color: var(--black);
+    border: none;
     width: 28vw;
+    height: 88vh;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 20px;
+    overflow: hidden;
     /* background: linear-gradient(var(--yellow), var(--white)); */
 }
 
 .plan-de-suscripcion-own h2 {
-    font-size: 24px;
+    font-size: 284x;
     text-align: center;
     margin-top: 20px;
+    color: var(--white);
 }
 
+.plan-de-suscripcion-own span {
+    color: var(--gray);
+}
 
 .plan-de-suscripcion-own ul {
     padding: 40px;
@@ -36,33 +45,41 @@ app-form-mp {
     font-size: 18px;
     text-align: justify;
     line-height: 28px;
+    color: var(--white);
 } 
 
 .form-and-costo {
     display: flex;
-    padding: 20px 100px;
+    padding: 0px 100px;
     gap: 80px;
 }
 
+.form-and-costo h4 {
+
+}
 
 .header-plan-de-suscripcion-own {
     z-index: 0;
     position: absolute;
-    background-color: var(--orange);
+    background: linear-gradient(var(--orange), var(--yellow));
     width: 100%;
     display: grid;
     place-items: center;
     height: 35vh;
     overflow: visible;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 35%, 0% 75%);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 35%, 0% 100%);
 }
 
 .plan-de-suscripcion-own img {
     background-color: var(--white);
     border-radius: 50%;
-    border: solid 5px var(--orange);
+    border: solid 5px var(--white);
     padding: 20px;
-    margin-top: 80px;
+    margin-top: 50px;
     z-index: 2;
 }
 
+.info-suscripcion input {
+    height: 55px;
+    padding: 10px;
+}

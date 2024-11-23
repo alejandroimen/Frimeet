@@ -1,4 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
+
 import { GoogleMapsModule } from '@angular/google-maps';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,7 +11,6 @@ import { UsersModule } from './users/users.module';
 import { PaymentsModule } from './payments/payments.module';
 import { NavbarComponent } from './standalone/navbar/navbar.component';
 import { HeaderComponent } from './standalone/header/header.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { RemindersModule } from './reminders/reminders.module';
 
@@ -24,7 +24,6 @@ import { RemindersModule } from './reminders/reminders.module';
     AppRoutingModule,
     HttpClientModule,
     GoogleMapsModule,
-    FontAwesomeModule,
     PlacesModule,
     EventsModule,
     UsersModule,
