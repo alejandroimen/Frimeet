@@ -18,6 +18,7 @@ import { RemindersModule } from './reminders/reminders.module';
 @NgModule({
   declarations: [
     AppComponent,
+    //MapDisplayComponent,
    // MapComponent,
   ],
   imports: [

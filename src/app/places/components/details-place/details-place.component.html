@@ -62,6 +62,10 @@
       <h5>Direccion:</h5>
       <p>{{ place.address }}</p>
     </div>
+    <div *ngIf="place.coordinates" class="location"> 
+      <h5>Ubicación:</h5> 
+      <app-map-display [lat]="place.coordinates.lat" [lng]="place.coordinates.lng"></app-map-display> 
+      </div>
   </div>
   
   <div class="reviews-container">
