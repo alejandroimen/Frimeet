@@ -13,10 +13,12 @@ import { HeaderComponent } from './standalone/header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { RemindersModule } from './reminders/reminders.module';
+//import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+   // MapComponent,
   ],
   imports: [
     BrowserModule,

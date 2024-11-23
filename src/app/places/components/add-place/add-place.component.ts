@@ -19,8 +19,11 @@ export class AddPlaceComponent implements DoCheck {
     description: '',
     tags: '',
     address: 'enmicasa',
+    coordinates: {
+      lat: 0,
+      lng: 0,
+    }
   };
-
   selectedFiles: File[] = [];
   selectedImagePreview: string | null = null;
   isSubmitting: boolean = false;
@@ -53,9 +56,12 @@ export class AddPlaceComponent implements DoCheck {
     this.descriptionValid = this.validateDescription(this.place.description);
   }
 
+  onCoordinatesSelected(coords: { lat: number, lng: number }): void {
+    this.place.coordinates = coords;
+  }
+
   onSubmit(form: NgForm): void {
     this.isSubmitting = true;
-
     if (form.invalid || !this.nameValid || !this.descriptionValid || !this.imageSelected) {
       if (form.invalid) {
         this.alertService.showWarning('Por favor, completa todos los campos.');
@@ -76,6 +82,8 @@ export class AddPlaceComponent implements DoCheck {
     formData.append('description', this.place.description);
     formData.append('address', this.place.address);
     formData.append('tag', this.place.tags);
+    formData.append('coordinates[lat]', this.place.coordinates.lat.toString());
+    formData.append('coordinates[lng]', this.place.coordinates.lng.toString());
 
     for (let i = 0; i < this.selectedFiles.length; i++) {
       formData.append('images', this.selectedFiles[i], this.selectedFiles[i].name);

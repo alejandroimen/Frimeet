@@ -13,6 +13,7 @@ import { RegisterViewComponent } from './users/register-view/register-view.compo
 import { LoginComponent } from './users/components/login/login.component';
 import { RemindersViewsComponent } from './reminders/components/reminders-views/reminders-views.component';
 import { ProfileComponent } from './users/profile/profile.component';
+import { MapComponent } from './map/map.component';
 
 
 const routes: Routes = [
@@ -28,7 +29,8 @@ const routes: Routes = [
   {path: 'events/:id', component: DetailsEventComponent},
   {path: 'places/:id', component: DetailsPlaceComponent},
   {path: 'payment', component: PaymentViewComponent},
-  {path: 'reminders/:id', component: RemindersViewsComponent}
+  {path: 'reminders/:id', component: RemindersViewsComponent},
+  { path: 'map', component: MapComponent}
 ];
 
 @NgModule({
