@@ -1,19 +1,46 @@
-<nav>
-    <ul>
-        <li>
-            <a routerLink="/">Inicio</a>
+<nav [class.collapsed]="isCollapsed">
+    <button class="toggle-button" (click)="toggleMenu()">
+        <i [class]="isCollapsed ? 'bi bi-chevron-right right-btn' : 'bi bi-chevron-left'"></i>
+    </button>
+    <ul class="input">
+        <li class="value">
+            <a routerLink="/">
+                Inicio
+            </a>
         </li>
-        <li>
-            <a routerLink="/add-place">Agregar lugar</a>
+        <li class="value">
+            <a routerLink="/profile">
+                Profile
+            </a>
         </li>
-        <li>
-            <a routerLink="/add-event">Agregar evento</a>
+        <li class="value">
+            <a routerLink="/add-place">
+                Agregar lugar
+            </a>
         </li>
-        <li>
-            <a routerLink="/info-place">Info lugar</a>
+        <li class="value">
+            <a routerLink="/add-event">
+                Agregar evento
+            </a>
         </li>
-        <li>
-            <a routerLink="/check-availability">check</a>
+        <li class="value">
+            <a routerLink="/info-place">
+                Info lugar
+            </a>
+        </li>
+        <li class="value">
+            <a routerLink="/info-event">
+                Info Evento
+            </a>
+        </li>
+        <li class="value">
+            <a routerLink="/check-availability">
+                Check
+            </a>
         </li>
     </ul>
 </nav>
+
+
+    <!-- Navbar Standalone (Se muestra dinámicamente) -->
+    <app-navbar *ngIf="show"></app-navbar>

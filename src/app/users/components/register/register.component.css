@@ -1,0 +1,70 @@
+.register-form {
+    position: relative;
+    min-width: 30vw;
+    height: 80vh;
+    background-color: var(--white);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0px 50px 8px var(--gray);
+    box-sizing: border-box;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.register-form h1 {
+    text-align: center;
+    font-size: 32px;
+}
+
+.register-form div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+}
+.register-form input {
+    width: 100%;
+    height: 35px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid var(--black-soft);
+    padding: 10px;
+    transition: 0.3s;
+}
+
+
+.register-form input:focus {
+    border-color: var(--orange);
+    outline: solid var(--orange);
+}
+.register-form button:not(.link) {
+    min-height: 45px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    background-color: var(--yellow);
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.register-form button:not(.link):hover {
+    background-color: var(--orange);
+    transition: 0.3s;
+}
+
+.register-form span button {
+    color: var(--orange);
+    text-decoration: underline;
+    background: none;
+    border: none;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+}

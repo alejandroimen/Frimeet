@@ -1,0 +1,16 @@
+<form class="login-form">
+    <h1>Ingresa a tu cuenta</h1>
+    <div class="input" [ngClass]="{'invalid': !emailValid && user.email !== ''}">
+        <label for="email">Ingresa tu correo</label>
+
+        <input id="email" type="text" placeholder="Correo" name="email" [(ngModel)]="user.email">
+        <small *ngIf="!emailValid && user.email !== ''" class="error-text">Por favor, ingresa un correo válido.</small>
+
+    </div>
+    <div class="input">
+        <label for="password">Ingresa tu contraseña</label>
+        <input id="password" type="password" placeholder="Contraseña" name="password" [(ngModel)]="user.password">
+    </div>
+    <button [disabled]="isSubmitting" (click)="login()">Iniciar sesión</button>
+    <span>¿No tienes una cuenta? <button class="link" (click)="goToRegister()">Registrarme</button></span>
+</form>

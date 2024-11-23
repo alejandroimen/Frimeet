@@ -8,17 +8,27 @@ import { CheckAvailabilityComponent } from './events/check-availability/check-av
 import { InfoEventComponent } from './events/info-event/info-event.component';
 import { DetailsEventComponent } from './events/details-event/details-event.component';
 import { DetailsPlaceComponent } from './places/components/details-place/details-place.component';
+import { PaymentViewComponent } from './payments/components/payment-view/payment-view.component';
+import { RegisterViewComponent } from './users/register-view/register-view.component';
+import { LoginComponent } from './users/components/login/login.component';
+import { RemindersViewsComponent } from './reminders/components/reminders-views/reminders-views.component';
+import { ProfileComponent } from './users/profile/profile.component';
 
 
 const routes: Routes = [
-  {path: '', component: WelcomeComponent},     
+  {path: '', component: WelcomeComponent},
+  {path: 'register', component: RegisterViewComponent},
+  {path: 'login', component: LoginComponent },
+  {path: 'profile', component: ProfileComponent },
   {path: 'add-place', component: AddPlaceComponent},
   {path: 'info-place', component: InfoPlaceComponent},
-  { path: "add-event", component: AddEventComponent },
-  { path: "check-availability", component: CheckAvailabilityComponent },
-  {path: "info-event", component: InfoEventComponent},
-  {path: "events/:id", component: DetailsEventComponent}
-  {path: "places/:id", component: DetailsPlaceComponent}
+  {path: 'add-event', component: AddEventComponent },
+  {path: 'check-availability', component: CheckAvailabilityComponent },
+  {path: 'info-event', component: InfoEventComponent},
+  {path: 'events/:id', component: DetailsEventComponent},
+  {path: 'places/:id', component: DetailsPlaceComponent},
+  {path: 'payment', component: PaymentViewComponent},
+  {path: 'reminders/:id', component: RemindersViewsComponent}
 ];
 
 @NgModule({

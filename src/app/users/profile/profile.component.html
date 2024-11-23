@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 profile-sidebar p-4">
+            <div class="d-flex align-items-center mb-4">
+                <div class="profile-icon"></div>
+                <span class="username">Username</span>
+            </div>
+            <ul class="list-unstyled profile-menu">
+                <li>
+                    <a routerLink="#"><i class="bi bi-list"></i> Home</a>
+                </li>
+                <li>
+                    <a routerLink="#"><i class="bi bi-star"></i> Favoritos</a>
+                </li>
+                <li>
+                    <a routerLink="#"><i class="bi bi-geo-alt"></i> Lugares Visitados</a>
+                </li>
+                <li>
+                    <a routerLink="#"><i class="bi bi-calendar-event"></i> Eventos asistidos</a>
+                </li>
+                <li>
+                    <a routerLink="#"><i class="bi bi-clipboard2-check"></i> Reseñas</a>
+                </li>
+                <li>
+                    <a routerLink="#"><i class="bi bi-credit-card"></i> Tarjetas registradas</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="col-9 p-4 content-img">
+            <div class="arrow text-end">&rarr;</div>
+            <div class="row g-4 d-flex justify-content-start mt-3">
+                <div class="col-md-4" *ngFor="let card of cards">
+                    <div class="card custom-card">
+                        <div class="placeholder-img"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
