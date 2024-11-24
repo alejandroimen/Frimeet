@@ -26,12 +26,14 @@ export class CheckAvailabilityComponent {
       lng: 0,
     }
   };
+  coordinatesSelected: boolean = false; // Nueva propiedad para rastrear el estado de las coordenadas
 
   constructor(private router: Router, private sharedDataService: SharedDataService) {}
 
   onCoordinatesSelected(coords: { lat: number, lng: number }): void {
     this.event.coordinates = coords;
     this.sharedDataService.setCoordinates(coords);
+    this.coordinatesSelected = true; // Actualizar el estado cuando se seleccionen las coordenadas
     console.log('Coordenadas guardadas en el servicio:', this.sharedDataService.getCoordinates());
   }
 
