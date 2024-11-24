@@ -25,7 +25,11 @@
     <textarea id="description" name="description" [(ngModel)]="place.description" placeholder="Agrega una breve descripción" maxlength="250" required></textarea>
     <small *ngIf="!descriptionValid && place.description !== ''" class="error-text">La descripción no puede tener más de 250 caracteres.</small>
   </div>
-  
+  <div class="input" [ngClass]="{'invalid': !addressValid && place.address !== ''}">
+    <label for="address">Dirección</label>
+    <input type="text" id="address" name="address" [(ngModel)]="place.address" maxlength="70" required>
+    <small *ngIf="!addressValid && place.address !== ''" class="error-text">La dirección no puede tener más de 70 caracteres y no puede estar vacía.</small>
+  </div>
   <div class="file-upload-container">
     <input type="file" id="file-input" class="file-input" (change)="onFileSelected($event)" multiple required>
     <label for="file-input" class="file-label">
