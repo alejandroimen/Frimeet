@@ -13,11 +13,13 @@ import { HeaderComponent } from './standalone/header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { RemindersModule } from './reminders/reminders.module';
+//import { MapDisplay2Component } from './map-display2/map-display2.component';
 //import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    //MapDisplay2Component,
     //MapDisplayComponent,
    // MapComponent,
   ],
