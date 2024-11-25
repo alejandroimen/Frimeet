@@ -64,9 +64,7 @@ export class LoginFormComponent implements DoCheck {
         localStorage.setItem('userId', decodedToken.sub);
         localStorage.setItem('userRol:', decodedToken.id_Rol);
         localStorage.setItem('username:', decodedToken.nombre);
-
-    
-        
+ 
         this.router.navigate(['/']);
       },
       error => {

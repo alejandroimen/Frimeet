@@ -14,6 +14,7 @@ export class AlertService {
       text: message,
       confirmButtonText: 'OK',
       customClass: {
+        confirmButton: 'custom-confirm-button',
         popup: 'success-popup',
         icon: 'success-icon',
         title: 'success-message'

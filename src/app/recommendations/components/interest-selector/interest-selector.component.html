@@ -1,0 +1,14 @@
+<button class="button-open-interests" (click)="changeVisibility()">
+    {{interest}}
+        <i class="fa-solid fa-chevron-up"
+            *ngIf="buttonActivate; else open"></i>
+        <ng-template #open>
+            <i class="fa-solid fa-chevron-down"></i>
+        </ng-template>
+</button>
+<div class="container-cards-image-interest" *ngIf="buttonActivate">
+    <div class="card-image-interest" *ngFor="let int of content">
+        <img [src]="int.image" alt="">
+        <p>{{int.name}}</p>
+    </div>
+</div>

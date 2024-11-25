@@ -11,7 +11,7 @@ import { DetailsPlaceComponent } from './places/components/details-place/details
 import { ReviewComponent } from './users/review/review.component';
 import { PlacesReviewComponent } from './users/places-review/places-review.component';
 import { EventsReviewComponent } from './users/events-review/events-review.component';
-import { DesireFormComponent } from './recommendations/desire-form/desire-form.component';
+import { DesireViewComponent } from './recommendations/components/desire-view/desire-view.component';
 import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navbar.component';
 import { PaymentViewComponent } from './payments/components/payment-view/payment-view.component';
 import { RegisterComponent } from './users/components/register/register.component';
@@ -35,7 +35,7 @@ const routes: Routes = [
   {path: 'review', component: ReviewComponent},
   {path: 'places-review', component: PlacesReviewComponent},
   {path: 'events-review', component: EventsReviewComponent},
-  {path: 'desire-form', component: DesireFormComponent},
+  {path: 'desire-form', component: DesireViewComponent},
   {path: 'events/:id', component: DetailsEventComponent},
   {path: 'places/:id', component: DetailsPlaceComponent},
   {path: 'payment', component: PaymentViewComponent},

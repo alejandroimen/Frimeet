@@ -1,0 +1,9 @@
+<div class="content-desire">
+    <app-interest-selector
+        *ngFor="let interest of interestsList"
+        [interest]="interest.name"
+        [content]="interest.content"
+        >
+    </app-interest-selector>
+    <button class="button-send-interests">NO recuerdo el mensaje</button>
+</div>
