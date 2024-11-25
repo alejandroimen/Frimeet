@@ -4,6 +4,7 @@ import { PlaceService } from '../../services/place.service';
 import { Iplace } from '../../interfaces/iplace';
 import { AlertService } from '../../../services/alert.service';
 import { ReviewService } from '../../services/review.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-details-place',
@@ -23,6 +24,7 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
   tagsValid: boolean = true;
   addressValid: boolean = true;
   imageSelected: boolean = true;
+  isOwner: boolean = false; // Nueva propiedad para verificar si el usuario es propietario
 
   constructor(
     private placeService: PlaceService,
@@ -38,6 +40,18 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
       this.placeService.getPlaceById(placeId).subscribe((data: Iplace) => {
         this.place = data;
         this.imageSelected = this.place.images.length > 0;
+
+        const token = localStorage.getItem('jwtToken');
+        if (token) { 
+        const decodedToken: any = jwtDecode(token);
+        const userId = parseInt(decodedToken.sub, 10); 
+        const userOwner = this.place?.userOwner;
+        console.log('User ID:', userId); // Log del ID del usuario 
+        console.log('User Owner:', userOwner); // Log del propietario del lugar 
+        this.isOwner = userId === userOwner; // Verifica si el usuario es el propietario 
+        console.log('Is Owner:', this.isOwner); // Log del resultado de la verificación 
+        }
+
         this.loadReviews(placeId);
       }, error => {
         this.alertService.showError('Error al obtener los detalles del lugar.');

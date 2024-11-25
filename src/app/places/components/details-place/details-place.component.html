@@ -68,7 +68,9 @@
       </div>
       <button class="btn btn-primary" (click)="submitReview()">Agregar Reseña</button>
     </div>
-
+    <div *ngIf="reviews.length === 0"> 
+      <p>No hay reseñas para este lugar.</p> 
+    </div>
     <div *ngFor="let review of reviews" class="review">
       <div class="review-header">
         <span class="username">👤 {{ review.nameUser }}</span>
@@ -85,7 +87,7 @@
 
 
   
-  <div class="button-group">
+  <div class="button-group" *ngIf="isOwner">
     <!-- Botón para abrir la modal de actualización -->
     <button (click)="openUpdateModal()" class="btn btn-primary">Actualizar Lugar</button>
 

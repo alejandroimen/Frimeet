@@ -7,6 +7,7 @@ export interface Iplace {
     address: string
     tag: string
     totalStarts: number
+    userOwner: number
     coordinates: {
         lat: number,
         lng: number,
