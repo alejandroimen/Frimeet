@@ -56,6 +56,7 @@ export class LoginFormComponent implements DoCheck {
        
         // Guardar el token en localStorage
         localStorage.setItem('jwtToken', response.token);
+        
         this.router.navigate(['/']);
       }, error => {
         this.alertService.showError('Hubo un error al iniciar sesión.');

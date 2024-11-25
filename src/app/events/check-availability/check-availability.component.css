@@ -1,164 +1,53 @@
 .main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    margin-top: 25vh;
-    margin-left: 17vh;
-    padding: 10px;
-    box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 60%;
-    max-width: 1200px;
-    height: auto;
-    padding: 40px;
-    box-sizing: border-box;
-    gap: 20px;
-    background-color: #ffffff;
-    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
+  width: 60%;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .header h1 {
-    color: #333;
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
-
-.header p {
-    text-align: center;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .map-container {
-    width: 100%;
-    height: 300px;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin-bottom: 20px;
 }
 
-#map {
-    width: 100%;
-    height: 100%;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+.next-button {
+  text-align: center;
 }
 
-.input-group {
-    width: 100%;
-    max-width: 600px;
-    margin-bottom: 15px;
+.next-btn {
+  padding: 10px;
+  width: 100%;
+  background-color: var(--yellow);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, opacity 0.3s;
 }
 
-label {
-    color: #333;
-    display: block;
-    margin-bottom: 5px;
+.next-btn:hover {
+  background-color: var(--orange);
 }
 
-input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 2px solid #000000;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.check-availability-btn {
-    width: 100%;
-    max-width: 600px;
-    margin-top: 15px;
-    padding: 10px;
-    font-size: 1rem;
-    color: #000000;
-    background-color: #FFC700;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    box-sizing: border-box;
-    box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
-
-.check-availability-btn:hover {
-    background-color: #ffcc00;
-}
-
-@media (max-width: 1024px) {
-    .map-container {
-        height: 250px;
-    }
-
-    .container {
-        padding: 20px;
-        gap: 15px;
-    }
-
-    .header h1 {
-        font-size: 1.8rem;
-    }
-
-    .header p {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .map-container {
-        height: 200px;
-    }
-
-    .container {
-        padding: 15px;
-        gap: 10px;
-    }
-
-    .header h1 {
-        font-size: 1.5rem;
-    }
-
-    .header p {
-        font-size: 0.9rem;
-    }
-
-    input {
-        padding: 8px;
-        font-size: 0.9rem;
-    }
-
-    .check-availability-btn {
-        font-size: 0.9rem;
-        padding: 8px;
-    }
-}
-
-@media (max-width: 480px) {
-    .map-container {
-        height: 150px;
-    }
-
-    .header h1 {
-        font-size: 1.3rem;
-    }
-
-    .header p {
-        font-size: 0.8rem;
-    }
-
-    .check-availability-btn {
-        font-size: 0.8rem;
-        padding: 6px;
-    }
+.next-btn:disabled {
+  background-color: #000;
+  opacity: 0.5;
+  cursor: not-allowed;
 }

@@ -6,4 +6,8 @@ export interface Iplace {
     images: string[]
     address: string
     tags: string
+    coordinates: {
+        lat: number,
+        lng: number,
+      }
 }
