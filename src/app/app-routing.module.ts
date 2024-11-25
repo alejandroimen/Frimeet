@@ -14,17 +14,17 @@ import { EventsReviewComponent } from './users/events-review/events-review.compo
 import { DesireFormComponent } from './recommendations/desire-form/desire-form.component';
 import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navbar.component';
 import { PaymentViewComponent } from './payments/components/payment-view/payment-view.component';
-import { RegisterViewComponent } from './users/register-view/register-view.component';
+import { RegisterComponent } from './users/components/register/register.component';
 import { LoginComponent } from './users/components/login/login.component';
 import { RemindersViewsComponent } from './reminders/components/reminders-views/reminders-views.component';
-import { ProfileComponent } from './users/profile/profile.component';
+
 import { MapComponent } from './map/map.component';
 
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'welcome', component: WelcomeComponent},
-  {path: 'register', component: RegisterViewComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent },
   {path: 'profile-navbar', component: ProfileNavbarComponent },
   {path: 'add-place', component: AddPlaceComponent},

@@ -16,11 +16,16 @@ export class EventsReviewComponent {
     maxPeoples: 0,
     idPlace: "",
     date: new Date(),
+    endDate: new Date(),
     description: "",
     address: "",
     price: 0,
     willAttend: 0,
     images: [],
+    coordinates: {
+      lat: 0,
+      lng: 0,
+    }
   };
 
 
