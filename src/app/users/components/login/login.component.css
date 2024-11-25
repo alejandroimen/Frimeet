@@ -10,13 +10,12 @@
 
 .container-child {
     display: flex;
-    
-    /* background: linear-gradient(to bottom, var(--black-soft), var(--orange)); */
     border-radius: 20px;
 }
 
 .image {
     position: relative;
+
     background-image: url('../../../../../public/assets/images/siluetas.jpg');
     background-size: contain;
     height: 60vh;
@@ -29,7 +28,6 @@
 .image img {
     height: 100%;
     border-radius: 20px;
-
 }
 
 .image:hover img {

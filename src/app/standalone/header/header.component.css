@@ -19,7 +19,10 @@ header img {
     height: 30px;
 }
 
-
+.button-bell {
+  background: none;
+  border: none;
+}
 
 .bell {
     border: 2.7px solid var(--black);

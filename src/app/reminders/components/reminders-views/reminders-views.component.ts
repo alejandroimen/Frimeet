@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ReminderService } from '../../services/reminder.service';
 import { Ireminder } from '../../interfaces/ireminder';
 
 @Component({
@@ -7,22 +8,27 @@ import { Ireminder } from '../../interfaces/ireminder';
   styleUrl: './reminders-views.component.css'
 })
 export class RemindersViewsComponent {
-  reminders: Ireminder[] = [
-    {
-      eventReminder: 'Fiesta',
-      nameReminder: 'La fiesta te espera',
-      contentReminder: 'No olvides ir a la fiesta que habrá hoy en el parque central, ya te habías apuntado'
-    },
-    {
-      eventReminder: 'Boda de Vianey',
-      nameReminder: 'No te olvides de venir',
-      contentReminder: 'Es un dia muy especial para mí y espero tu presencia, no faltes xfi'
-    },
-    {
-      eventReminder: 'Reunión de ex-alumnos',
-      nameReminder: 'Hoy a las 8:30',
-      contentReminder: 'reunión de exalumnos de la secundaria para que platiquemos y pasemos el rato, no faltes'
-    }
-  ]
+  remProof: Ireminder = {
+    nameReminder: 'Holaaaaaaaa',
+    eventReminder: 'oliwi event',
+    contentReminder: 'noshe unuuuuuuuuuuuuuuuuuuuuuuuuu ola q tal chalal shalala haciendo bulto nomas jsjs'
+  }
+  reminders: Ireminder[] = []
 
+  constructor(private remServ: ReminderService){}
+
+  ngOnInit(){
+    if(localStorage.getItem('userId'))
+      this.remServ.getReminders(parseInt(localStorage.getItem('userId') || '')).subscribe(
+        response => {
+          this.reminders = response.recordatorios
+          console.log('Estos sonn los recordatorios: ', this.reminders);
+          
+        },
+        error => {
+          console.log('Error al obtener los recordatorios', error);
+          
+        }
+      )
+  }
 }

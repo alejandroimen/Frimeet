@@ -5,6 +5,8 @@ import { CheckAvailabilityComponent } from './check-availability/check-availabil
 import { InfoEventComponent } from './info-event/info-event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsEventComponent } from './details-event/details-event.component';
+import { RouterModule } from '@angular/router';
+import { MapsComponent } from '../map-display2/map-display2.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +14,7 @@ import { DetailsEventComponent } from './details-event/details-event.component';
     CheckAvailabilityComponent,
     InfoEventComponent,
     DetailsEventComponent,
+    MapsComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +22,7 @@ import { DetailsEventComponent } from './details-event/details-event.component';
     ReactiveFormsModule
   ],
   exports: [
+    RouterModule,
     AddEventComponent,
     CheckAvailabilityComponent,
     InfoEventComponent
