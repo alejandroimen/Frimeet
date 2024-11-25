@@ -12,16 +12,13 @@ import { PaymentsModule } from './payments/payments.module';
 import { NavbarComponent } from './standalone/navbar/navbar.component';
 import { HeaderComponent } from './standalone/header/header.component';
 import { FormsModule } from '@angular/forms';
+import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navbar.component';
 import { RemindersModule } from './reminders/reminders.module';
-//import { MapDisplay2Component } from './map-display2/map-display2.component';
-//import { MapComponent } from './map/map.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    //MapDisplay2Component,
-    //MapDisplayComponent,
-   // MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +28,9 @@ import { RemindersModule } from './reminders/reminders.module';
     GoogleMapsModule,
     PlacesModule,
     EventsModule,
+    HttpClientModule,
+    FormsModule,
+    ProfileNavbarComponent,
     UsersModule,
     PaymentsModule,
     RemindersModule,
