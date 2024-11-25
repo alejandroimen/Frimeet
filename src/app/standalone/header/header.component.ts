@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'header.header',
@@ -13,7 +13,11 @@ import { RouterModule } from '@angular/router';
 export class HeaderComponent {
   idUser: string = ''
 
-  ngOnInit():void {
-    this.idUser=sessionStorage.getItem('idUser') || ''
+  constructor(private router: Router) { }
+
+  goToReminders(){
+    console.log(this.idUser=localStorage.getItem('userId') || '');
+    this.idUser=localStorage.getItem('userId') || ''
+    this.router.navigate(['/reminders', this.idUser])
   }
 }
