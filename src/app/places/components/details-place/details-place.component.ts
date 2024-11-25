@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PlaceService } from '../../services/place.service';
 import { Iplace } from '../../interfaces/iplace';
 import { AlertService } from '../../../services/alert.service';
+import { ReviewService } from '../../services/review.service';
 
 @Component({
   selector: 'app-details-place',

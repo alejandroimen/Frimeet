@@ -10,7 +10,6 @@
     <select id="types" name="types" [(ngModel)]="place.types" required>
       <option value="para_parejas">Para Parejas</option>
       <option value="para_amigos">Para Amigos</option>
-      <!-- Más opciones según necesites -->
     </select>
   </div>
   <div class="input">
@@ -19,13 +18,17 @@
       <option value="restaurante">Restaurante</option>
       <option value="sala_de_juegos">Sala de Juegos</option>
       <option value="parques">Parques</option>
-      <!-- Más opciones según necesites -->
     </select>
   </div>
   <div class="input" [ngClass]="{'invalid': !descriptionValid && place.description !== ''}">
     <label for="description">Descripción</label>
     <textarea id="description" name="description" [(ngModel)]="place.description" placeholder="Agrega una breve descripción" maxlength="250" required></textarea>
     <small *ngIf="!descriptionValid && place.description !== ''" class="error-text">La descripción no puede tener más de 250 caracteres.</small>
+  </div>
+  <div class="input" [ngClass]="{'invalid': !addressValid && place.address !== ''}">
+    <label for="address">Dirección</label>
+    <input type="text" id="address" name="address" [(ngModel)]="place.address" maxlength="70" required>
+    <small *ngIf="!addressValid && place.address !== ''" class="error-text">La dirección no puede tener más de 70 caracteres y no puede estar vacía.</small>
   </div>
   <div class="file-upload-container">
     <input type="file" id="file-input" class="file-input" (change)="onFileSelected($event)" multiple required>
@@ -37,5 +40,10 @@
     </label>
     <small *ngIf="!imageSelected" class="error-text">Por favor, selecciona al menos una imagen.</small>
   </div>
-  <button type="submit" [disabled]="isSubmitting || !imageSelected">Agregar</button>
+  <div class="input">
+    <label for="map">Ubicación en el mapa</label>
+    <app-map (coordinatesSelected)="onCoordinatesSelected($event)"></app-map>
+    <small *ngIf="place.coordinates.lat === 0 && place.coordinates.lng === 0" class="error-text">Por favor, selecciona una ubicación en el mapa.</small>
+  </div>
+  <button type="submit" [disabled]="isSubmitting || !imageSelected || place.coordinates.lat === 0">Agregar</button>
 </form>

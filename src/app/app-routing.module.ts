@@ -8,13 +8,18 @@ import { CheckAvailabilityComponent } from './events/check-availability/check-av
 import { InfoEventComponent } from './events/info-event/info-event.component';
 import { DetailsEventComponent } from './events/details-event/details-event.component';
 import { DetailsPlaceComponent } from './places/components/details-place/details-place.component';
-import { RegisterViewComponent } from './users/components/register-view/register-view.component';
-import { LoginComponent } from './users/components/login/login.component';
 import { ReviewComponent } from './users/review/review.component';
 import { PlacesReviewComponent } from './users/places-review/places-review.component';
 import { EventsReviewComponent } from './users/events-review/events-review.component';
 import { DesireFormComponent } from './recommendations/desire-form/desire-form.component';
 import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navbar.component';
+import { PaymentViewComponent } from './payments/components/payment-view/payment-view.component';
+import { RegisterViewComponent } from './users/register-view/register-view.component';
+import { LoginComponent } from './users/components/login/login.component';
+import { RemindersViewsComponent } from './reminders/components/reminders-views/reminders-views.component';
+import { ProfileComponent } from './users/profile/profile.component';
+import { MapComponent } from './map/map.component';
+
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
@@ -32,8 +37,10 @@ const routes: Routes = [
   {path: 'events-review', component: EventsReviewComponent},
   {path: 'desire-form', component: DesireFormComponent},
   {path: 'events/:id', component: DetailsEventComponent},
-  {path: 'places/:id', component: DetailsPlaceComponent}
-
+  {path: 'places/:id', component: DetailsPlaceComponent},
+  {path: 'payment', component: PaymentViewComponent},
+  {path: 'reminders/:id', component: RemindersViewsComponent},
+  { path: 'map', component: MapComponent}
 ];
 
 @NgModule({
