@@ -1,0 +1,6 @@
+<section class="container-reminders">
+    <div class="reminder-div"[reminder]="remProof"></div>
+    <div class="reminder-div"
+    *ngFor="let rem of reminders"
+    [reminder]="rem"></div>
+</section>

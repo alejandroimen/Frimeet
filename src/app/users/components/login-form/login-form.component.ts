@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Iuser } from '../../interfaces/iuser';
 import { UserService } from '../../services/user.service';
 import { AlertService } from '../../../services/alert.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login-form',
@@ -15,7 +16,7 @@ export class LoginFormComponent implements DoCheck {
     email: '',
     password: '',
     rol: 0
-  }
+  };
   emailValid: boolean = true;
   isSubmitting: boolean = false;
 
@@ -51,13 +52,24 @@ export class LoginFormComponent implements DoCheck {
 
     this.userService.login(this.user).subscribe(
       response => {
+        console.log('Bienvenido', response);
         this.alertService.showSuccess('Inicio de sesión exitoso.');
-        
-        // Guardar el token en localStorage
-        localStorage.setItem('jwtToken', response.token);
 
+        const token = response.token;
+        localStorage.setItem('jwtToken', token);
+
+        const decodedToken: any = jwtDecode(token);
+        console.log('Datos del usuario:', decodedToken);
+
+        localStorage.setItem('userId', decodedToken.sub);
+        localStorage.setItem('userRol:', decodedToken.id_Rol);
+        localStorage.setItem('username:', decodedToken.nombre);
+
+    
+        
         this.router.navigate(['/']);
-      }, error => {
+      },
+      error => {
         this.alertService.showError('Hubo un error al iniciar sesión.');
         this.isSubmitting = false;
       }

@@ -1,0 +1,162 @@
+app-form-mp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.payment-view-container {
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10vh;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.form-and-costo {
+    display: flex;
+    padding: 0px;
+    gap: 60px;
+}
+
+.plan-de-suscripcion-own {
+    background-color: var(--white);
+    border: none;
+    min-width: 25vw;
+    height: 88vh;
+    position: relative;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0px 6px 12px var(--gray);
+    transition: 0.2s;
+    /* background: linear-gradient(var(--yellow), var(--white)); */
+}
+@media (min-width: 1400px) {
+    .plan-de-suscripcion-own {
+        width: 28vw;
+    }
+}
+
+
+@media (min-width: 1100px) and (max-width: 1400px) {
+    .plan-de-suscripcion-own {
+        width: 40vw; /* Ancho más pequeño para pantallas estrechas */
+        margin-right: 50px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .plan-de-suscripcion-own {
+        width: 55vw; /* Ancho más pequeño para pantallas estrechas */
+        margin-right: 50px;
+    }
+}
+
+@media (max-width: 700px) {
+    .plan-de-suscripcion-own {
+        min-width: 80vw; /* Ancho más pequeño para pantallas estrechas */
+    }
+
+    .form-and-costo {
+        width: 80vw;
+        flex-wrap: wrap-reverse;
+        justify-content: center;
+    }
+
+    .info-suscripcion {
+        width: auto;
+    }
+
+    .info-suscripcion input {
+        width: 80vw;
+    }
+}
+
+.plan-de-suscripcion-own:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+.plan-de-suscripcion-own h2 {
+    font-size: 28px;
+    text-align: center;
+    margin-top: 20px;
+    color: var(--black);
+    transition: 0.2s;
+}
+
+.plan-de-suscripcion-own h2:hover {
+    color: var(--orange);
+    font-size: 30px;
+    letter-spacing: 2px;
+    transition: 0.2s;
+}
+
+.plan-de-suscripcion-own span {
+    color: var(--black-soft);
+}
+
+.plan-de-suscripcion-own ul {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 60px;
+    gap: 5px;
+}
+
+.plan-de-suscripcion-own ul li {
+    font-size: 18px;
+    text-align: justify;
+    line-height: 28px;
+    color: var(--black);
+    transition: 0.2s;
+} 
+
+.plan-de-suscripcion-own ul li:hover {
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    font-size: 19px;
+    transition: 0.2s;
+}
+
+.header-plan-de-suscripcion-own {
+    z-index: 0;
+    position: absolute;
+    background: linear-gradient(var(--orange), var(--yellow));
+    width: 100%;
+    display: grid;
+    place-items: center;
+    height: 35vh;
+    overflow: visible;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 35%, 0% 100%);
+    transition: 1s;
+}
+
+.header-plan-de-suscripcion-own:hover {
+    background: linear-gradient(var(--yellow), var(--orange));
+    transition: 1s;
+}
+
+.plan-de-suscripcion-own img {
+    background-color: var(--white);
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border: solid 5px var(--white);
+    padding: 20px;
+    margin-top: 50px;
+    z-index: 2;
+}
+
+.info-suscripcion input {
+    height: 55px;
+    padding: 10px;
+    border: 1px solid var(--black-soft);
+    border-radius: 5px;
+}

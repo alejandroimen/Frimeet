@@ -11,8 +11,16 @@ export class EventService {
   
   constructor(private http: HttpClient) { }
 
+  private createAuthorizationHeader(): HttpHeaders {
+    const token = localStorage.getItem('jwtToken'); 
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
   addEvent(eventData: FormData): Observable<any> {
-    return this.http.post(`${this.apiUrl}api/events`, eventData);
+    const headers = this.createAuthorizationHeader();
+    return this.http.post(`${this.apiUrl}api/events`, eventData, { headers });
   }
 
   getEvents(): Observable<any> {
@@ -24,10 +32,12 @@ export class EventService {
   }
 
   updateEvent(id: string, eventData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}api/events/${id}`, eventData);
+    const headers = this.createAuthorizationHeader();
+    return this.http.put(`${this.apiUrl}api/events/${id}`, eventData, { headers });
   }
 
   deleteEvent(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}api/events/delete/${id}`);
+    const headers = this.createAuthorizationHeader();
+    return this.http.delete(`${this.apiUrl}api/events/delete/${id}`, { headers});
   }
 }
