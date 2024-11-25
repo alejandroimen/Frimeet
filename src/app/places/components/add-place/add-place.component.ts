@@ -17,7 +17,8 @@ export class AddPlaceComponent implements DoCheck {
     types: '',
     images: [],
     description: '',
-    tags: '',
+    tag: '',
+    totalStarts: 0,
     address: '',
     coordinates: {
       lat: 0,
@@ -89,7 +90,7 @@ export class AddPlaceComponent implements DoCheck {
     formData.append('types', this.place.types);
     formData.append('description', this.place.description);
     formData.append('address', this.place.address);
-    formData.append('tag', this.place.tags);
+    formData.append('tag', this.place.tag);
     formData.append('coordinates[lat]', this.place.coordinates.lat.toString());
     formData.append('coordinates[lng]', this.place.coordinates.lng.toString());
 

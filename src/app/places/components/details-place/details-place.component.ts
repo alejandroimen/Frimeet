@@ -12,6 +12,9 @@ import { ReviewService } from '../../services/review.service';
 })
 export class DetailsPlaceComponent implements OnInit, DoCheck {
   place: Iplace | undefined;
+  reviews: any[] = [];
+  newReview: string = '';
+  newReviewStars: number = 0;
   deleteModal: any;
   updateModal: any;
   selectedFiles: File[] = [];
@@ -25,7 +28,8 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
     private placeService: PlaceService,
     private route: ActivatedRoute,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private reviewService: ReviewService
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +38,7 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
       this.placeService.getPlaceById(placeId).subscribe((data: Iplace) => {
         this.place = data;
         this.imageSelected = this.place.images.length > 0;
+        this.loadReviews(placeId);
       }, error => {
         this.alertService.showError('Error al obtener los detalles del lugar.');
         console.error('Error al obtener los detalles del lugar:', error);
@@ -45,7 +50,7 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
     if (this.place) {
       this.nameValid = this.validateName(this.place.name);
       this.descriptionValid = this.validateDescription(this.place.description);
-      this.tagsValid = this.place.tags ? this.place.tags.trim().length > 0 : false;
+      this.tagsValid = this.place.tag ? this.place.tag.trim().length > 0 : false;
       this.addressValid = this.place.address ? this.place.address.trim().length > 0 : false;
     }
   }
@@ -87,7 +92,7 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
       formData.append('types', this.place.types);
       formData.append('description', this.place.description);
       formData.append('address', this.place.address);
-      formData.append('tag', this.place.tags);
+      formData.append('tag', this.place.tag);
 
       if (this.selectedFiles.length > 0) {
         for (let i = 0; i < this.selectedFiles.length; i++) {
@@ -145,5 +150,40 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
     if (modal) {
       modal.style.display = 'none';
     }
+  }
+
+  loadReviews(placeId: string): void {
+    this.reviewService.getReviewByPlace(placeId).subscribe((reviews: any[]) => {
+      this.reviews = reviews;
+      console.log('Reseñas cargadas:', this.reviews);
+    }, error => {
+      //this.alertService.showError('Error al cargar las reseñas.');
+      console.error('Error al cargar las reseñas:', error);
+    });
+  }
+
+  submitReview(): void {
+    if (!this.newReview || this.newReviewStars === 0) {
+      this.alertService.showWarning('Por favor, completa la reseña y selecciona una calificación.');
+      return;
+    }
+
+    const reviewData = {
+      content: this.newReview,
+      starts: this.newReviewStars,
+      idPlace: this.place?._id
+    };
+
+    this.reviewService.addReview(reviewData).subscribe(response => {
+      this.alertService.showSuccess('Reseña agregada exitosamente.');
+      this.newReview = '';
+      this.newReviewStars = 0;
+      if (this.place) {
+        this.loadReviews(this.place._id);
+      }
+    }, error => {
+      this.alertService.showError('Hubo un error al agregar la reseña.');
+      console.error('Error al agregar la reseña:', error);
+    });
   }
 }
