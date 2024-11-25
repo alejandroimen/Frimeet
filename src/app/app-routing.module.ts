@@ -15,6 +15,7 @@ import { PlacesReviewComponent } from './users/places-review/places-review.compo
 import { EventsReviewComponent } from './users/events-review/events-review.component';
 import { DesireFormComponent } from './recommendations/desire-form/desire-form.component';
 import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navbar.component';
+import { WelcomeStartComponent } from './standalone/welcome-start/welcome-start.component';
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path: 'places-review', component: PlacesReviewComponent},
   {path: 'events-review', component: EventsReviewComponent},
   {path: 'desire-form', component: DesireFormComponent},
+  {path: 'welcome-start', component: WelcomeStartComponent},
   {path: 'events/:id', component: DetailsEventComponent},
   {path: 'places/:id', component: DetailsPlaceComponent}
 

@@ -12,10 +12,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navbar.component';
 import { UsersModule } from './users/users.module';
+import { WelcomeStartComponent } from './standalone/welcome-start/welcome-start.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    WelcomeStartComponent,
   ],
   imports: [
     BrowserModule,
