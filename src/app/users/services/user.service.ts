@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Iuser } from '../interfaces/iuser';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Iuser } from '../interfaces/iuser';
 export class UserService {
   url:string = 'http://127.0.0.1:5000'
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(user: Iuser): Observable<any>{
     return this.http.post(`${this.url}/login`, user)
@@ -30,4 +31,10 @@ export class UserService {
   getPremium(id:number): Observable<any> {
     return this.http.post(`${this.url}/users/${id}/premium`, false)
   }
+
+  logout(): 
+  void { 
+    localStorage.removeItem('jwtToken'); // Eliminar el token del localStorage 
+    this.router.navigate(['/login']); // Redirigir al usuario a la página de inicio de sesión 
+    }
 }

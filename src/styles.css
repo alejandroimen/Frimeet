@@ -44,3 +44,13 @@ app-details-event {
 ::-webkit-scrollbar {
   scrollbar-width: none
 }
+
+.invalid input {
+    outline: solid 1px var(--red);
+  }
+  
+  .error-text {
+    color: var(--red);
+    font-size: 12px;
+  }
+  

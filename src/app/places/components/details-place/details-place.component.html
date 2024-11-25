@@ -25,7 +25,7 @@
         <div class="photos-modal" id="photosModal">
           <div class="modal-content">
             <button class="close-modal" (click)="closePhotosModal()">✖</button>
-            <h2>Fotos de  {{ place.name }}</h2>
+            <h2>Fotos de {{ place.name }}</h2>
             <div class="photos-grid">
               <img *ngFor="let img of place.images" [src]="img" alt="Image of {{ place.name }}">
             </div>
@@ -40,7 +40,6 @@
   <div *ngIf="place.images.length === 1" class="banner-place">
     <img [src]="place.images[0]" alt="Imagen de {{ place.name }}">
   </div>
-
 
   <div class="info-corta">
     <div class="types-stars">
@@ -111,7 +110,6 @@
     <button (click)="openDeleteModal()" class="btn btn-danger">Eliminar Lugar</button>
   </div>
 
-
   <!-- Modal de confirmación de eliminación -->
   <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -132,48 +130,59 @@
   </div>
 
   <!-- Modal de actualización de lugar -->
-  <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="updateModalLabel">Actualizar Lugar</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="placeName" class="form-label">Nombre del Lugar</label>
-              <input type="text" class="form-control" id="placeName" [(ngModel)]="place.name" name="name" required>
-            </div>
-            <div class="mb-3">
-              <label for="placeTypes" class="form-label">Tipo</label>
-              <input type="text" class="form-control" id="placeTypes" [(ngModel)]="place.types" name="types" required>
-            </div>
-            <div class="mb-3">
-              <label for="placeDescription" class="form-label">Descripción</label>
-              <textarea class="form-control" id="placeDescription" [(ngModel)]="place.description" name="description"
-                required></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="placeAddress" class="form-label">Dirección</label>
-              <input type="text" class="form-control" id="placeAddress" [(ngModel)]="place.address" name="address"
-                required>
-            </div>
-            <div class="mb-3">
-              <label for="placeTags" class="form-label">Etiquetas</label>
-              <input type="text" class="form-control" id="placeTags" [(ngModel)]="place.tags" name="tags" required>
-            </div>
-            <div class="mb-3">
-              <label for="file-input" class="form-label">Subir Nuevas Imágenes</label>
-              <input type="file" class="form-control" id="file-input" (change)="onFileSelected($event)" multiple>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary-edit" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary-edit" (click)="updatePlace()">Actualizar</button>
-        </div>
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">Actualizar Lugar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3" [ngClass]="{'invalid': !nameValid && place.name !== ''}">
+            <label for="placeName" class="form-label">Nombre del Lugar</label>
+            <input type="text" class="form-control" id="placeName" [(ngModel)]="place.name" name="name" maxlength="50" required>
+            <small *ngIf="!nameValid && place.name !== ''" class="error-text">El nombre debe comenzar con una letra, contener al menos una letra y no más de 50 caracteres.</small>
+          </div>
+          <div class="mb-3">
+            <label for="placeTypes" class="form-label">Tipo</label>
+            <input type="text" class="form-control" id="placeTypes" [(ngModel)]="place.types" name="types" required>
+          </div>
+          <div class="mb-3" [ngClass]="{'invalid': !descriptionValid && place.description !== ''}">
+            <label for="placeDescription" class="form-label">Descripción</label>
+            <textarea class="form-control" id="placeDescription" [(ngModel)]="place.description" name="description" maxlength="250" required></textarea>
+            <small *ngIf="!descriptionValid && place.description !== ''" class="error-text">La descripción no puede tener más de 250 caracteres.</small>
+          </div>
+          <div class="mb-3" [ngClass]="{'invalid': !addressValid && place.address !== ''}">
+            <label for="placeAddress" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="placeAddress" [(ngModel)]="place.address" name="address" required>
+            <small *ngIf="!addressValid && place.address !== ''" class="error-text">La dirección no puede estar vacía.</small>
+          </div>
+          <div class="mb-3" [ngClass]="{'invalid': !tagsValid && place.tags !== ''}">
+            <label for="placeTags" class="form-label">Etiquetas</label>
+            <input type="text" class="form-control" id="placeTags" [(ngModel)]="place.tags" name="tags" required>
+            <small *ngIf="!tagsValid && place.tags !== ''" class="error-text">Las etiquetas no pueden estar vacías.</small>
+          </div>
+          <div class="mb-3">
+            <label for="file-input" class="form-label">Subir Nuevas Imágenes</label>
+            <input type="file" class="form-control" id="file-input" (change)="onFileSelected($event)" multiple>
+            <ng-container *ngIf="place?.images?.length">
+              <div class="image-container">
+                <div *ngFor="let img of place.images.slice(0, 40)"> 
+                  <img [src]="img" alt="Imagen existente" class="existing-image-preview"> 
+                </div> 
+              </div>
+            </ng-container> 
+            <small *ngIf="!imageSelected" class="error-text">Por favor, selecciona al menos una imagen.</small>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary-edit" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary-edit" (click)="updatePlace()">Actualizar</button>
       </div>
     </div>
   </div>
+</div>
+
 </div>
