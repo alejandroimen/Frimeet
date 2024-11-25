@@ -34,13 +34,15 @@ app-details-event,
 app-payment-view,
 app-reminders-views {
     position: relative;
-    left: 15vw;
+    left: 20vw;
     top: 8vh;
     display: flex;
     justify-content: center;
-    width: 85vw;
+    min-width: 80vw;
+    max-width: 80vw;
     min-height: 92vh;
     box-sizing: border-box; 
+    z-index: 0;
 }
 
 ::-webkit-scrollbar {

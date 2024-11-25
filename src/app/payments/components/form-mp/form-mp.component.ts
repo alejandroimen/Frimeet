@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IdataMP } from '../../interfaces/idata-mp';
 import { MpService } from '../../services/mp.service';
 import { PaymentsMpService } from '../../services/payments-mp.service';
+import { AlertService } from '../../../services/alert.service';
+
 
 @Component({
   selector: 'app-form-mp',
@@ -10,6 +12,7 @@ import { PaymentsMpService } from '../../services/payments-mp.service';
 })
 export class FormMpComponent implements OnInit {
   ultimos: string = ''
+  cardholderValid:boolean = true
   mp: any
   data: IdataMP = {
     transaction_amount: 0,
@@ -24,7 +27,9 @@ export class FormMpComponent implements OnInit {
   }
   name: string = ''
 
-  constructor(private mpServ: MpService, private payMpServ: PaymentsMpService) {}
+  constructor(private mpServ: MpService, 
+    private payMpServ: PaymentsMpService,
+    private alertServ: AlertService) {}
 
   async ngOnInit() {
     //Sé que quedó muy sucio pero así lo marcaba la documentación de MercadoPago,  lo tuve que adaptar a angular 
@@ -42,7 +47,10 @@ export class FormMpComponent implements OnInit {
           console.log("Form mounted");
         },
         onSubmit: (event: any) => {
-          this.submit(event, cardForm)
+          console.log('oliwi');
+          
+          this.validateDataCard(cardForm)
+          this.submit(event, cardForm)  
         },
         onFetching: (resource: any) => {
           this.fetching(resource)
@@ -61,16 +69,13 @@ export class FormMpComponent implements OnInit {
     } else {
       console.warn("El elemento con ID 'form-checkout__cardholderName' no fue encontrado.");
     }
-    const numberCardInput = document.getElementById('cardNumber') as HTMLInputElement | null;
-    if (numberCardInput) {
-      this.ultimos = numberCardInput.value.slice(-4);
-    } else {
-      console.warn("El elemento con ID 'form-checkout__cardholderName' no fue encontrado.");
-    }
   }
 
   submit(event: any, cardForm:any):void{
+    console.log('before prevent default');
     event.preventDefault();
+    console.log('after prevent default');
+    
     const {
       paymentMethodId: payment_method_id,
       issuerId: issuer_id,
@@ -81,7 +86,7 @@ export class FormMpComponent implements OnInit {
       identificationNumber,
       identificationType,
     } = cardForm.getCardFormData();
-    
+
     this.data = {
       transaction_amount: amount,
       token: token,
@@ -94,9 +99,11 @@ export class FormMpComponent implements OnInit {
       number: identificationNumber
     }
     console.log('Esto se esta enviando', this.data);
-
     this.payMpServ.pay(this.data).subscribe(
-      response => console.log('Ta bien: ', response),
+      response => {
+        console.log('Ta bien: ', response)
+        this.alertServ.showSuccess('Pago realizado con éxito')
+      },
       error => console.log('errorsito: ', error)
     )
     
@@ -136,5 +143,23 @@ export class FormMpComponent implements OnInit {
       };
     }
     return
+  }
+
+  validateDataCard (cardForm: any){
+    console.log('Si entre');
+
+    console.log('COMO POR QUE CARAJOS NO ENTRAAAAAAAAA');
+    
+    
+    const {
+      paymentMethodId: payment_method_id,
+      cardholderEmail: email,
+    } = cardForm.getCardFormData();
+    if (!payment_method_id ||
+        !email ) {
+      console.log('entre al if');
+          
+      this.alertServ.showError('Completa todos los campos xfi uwu')
+    }
   }
 }

@@ -1,12 +1,12 @@
 <header>
     <img src="logo.svg" alt="">
     
-    <a [routerLink]="('/reminders/'+idUser)">
-        <div class="notification">
+    <button class="button-bell" (click)="goToReminders()">
+        <div clbuttonss="notification">
             <div class="bell-container">
                 <div class="bell"></div>
             </div>
         </div>
-    </a>
+    </button>
 
 </header>
