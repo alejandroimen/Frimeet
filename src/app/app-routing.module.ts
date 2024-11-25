@@ -17,10 +17,10 @@ import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navb
 import { WelcomeStartComponent } from './standalone/welcome-start/welcome-start.component';
 =======
 import { PaymentViewComponent } from './payments/components/payment-view/payment-view.component';
-import { RegisterViewComponent } from './users/register-view/register-view.component';
+import { RegisterComponent } from './users/components/register/register.component';
 import { LoginComponent } from './users/components/login/login.component';
 import { RemindersViewsComponent } from './reminders/components/reminders-views/reminders-views.component';
-import { ProfileComponent } from './users/profile/profile.component';
+
 import { MapComponent } from './map/map.component';
 
 >>>>>>> 821574fae2a0f22680253d649fef34c1f68b5a23
@@ -28,7 +28,7 @@ import { MapComponent } from './map/map.component';
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'welcome', component: WelcomeComponent},
-  {path: 'register', component: RegisterViewComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent },
   {path: 'profile-navbar', component: ProfileNavbarComponent },
   {path: 'add-place', component: AddPlaceComponent},
