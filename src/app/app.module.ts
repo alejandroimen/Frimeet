@@ -5,16 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PlacesModule } from './places/places.module';
 import { EventsModule } from './events/events.module';
-import { UsersModule } from './users/users.module';
 import { NavbarComponent } from './standalone/navbar/navbar.component';
 import { HeaderComponent } from './standalone/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navbar.component';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +27,9 @@ import { FormsModule } from '@angular/forms';
     PlacesModule,
     EventsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ProfileNavbarComponent,
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]
