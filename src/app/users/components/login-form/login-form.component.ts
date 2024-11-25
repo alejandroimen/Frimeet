@@ -55,15 +55,12 @@ export class LoginFormComponent implements DoCheck {
         console.log('Bienvenido', response);
         this.alertService.showSuccess('Inicio de sesión exitoso.');
 
-        // Guardar el token en localStorage
         const token = response.token;
         localStorage.setItem('jwtToken', token);
 
-        // Decodificar el token para obtener los datos del usuario
         const decodedToken: any = jwtDecode(token);
         console.log('Datos del usuario:', decodedToken);
 
-        // Puedes acceder a los datos, por ejemplo:
         localStorage.setItem('userId', decodedToken.sub);
         localStorage.setItem('userRol:', decodedToken.id_Rol);
         localStorage.setItem('username:', decodedToken.nombre);

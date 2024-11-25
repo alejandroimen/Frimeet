@@ -1,24 +1,16 @@
 <div class="main">
-    <div class="container">
-        <div class="header">
-            <h1>Agrega un evento</h1>
-            <p>¿Dónde será?</p>
-        </div>
-
-        <div class="map-container">
-            <div id="map"></div>
-        </div>
-
-        <div class="input-group">
-            <label for="date">¿Qué día?</label>
-            <input type="date" id="date" class="items-icon " />
-        </div>
-
-        <div class="input-group">
-            <label for="time">¿A qué hora?</label>
-            <input type="time" id="time" class="items-icons"/>
-        </div>
-
-        <button class="check-availability-btn">Comprobar disponibilidad</button>
+  <div class="container">
+    <div class="header">
+      <h1>Selecciona la ubicación del evento</h1>
+      <p>Pinnea la ubicación en el mapa</p>
     </div>
+
+    <div class="map-container">
+      <app-map-display2 (coordinatesSelected)="onCoordinatesSelected($event)"></app-map-display2>
+    </div>
+
+    <div class="next-button">
+      <button (click)="onNext()" class="next-btn" [disabled]="!coordinatesSelected">Siguiente</button>
+    </div>
+  </div>
 </div>

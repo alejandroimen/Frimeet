@@ -13,10 +13,15 @@ import { NavbarComponent } from './standalone/navbar/navbar.component';
 import { HeaderComponent } from './standalone/header/header.component';
 import { FormsModule } from '@angular/forms';
 import { RemindersModule } from './reminders/reminders.module';
+//import { MapDisplay2Component } from './map-display2/map-display2.component';
+//import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    //MapDisplay2Component,
+    //MapDisplayComponent,
+   // MapComponent,
   ],
   imports: [
     BrowserModule,
