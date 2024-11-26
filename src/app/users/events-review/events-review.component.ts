@@ -9,7 +9,7 @@ import { Ievent } from '../../events/interfaces/ievent';
   styleUrls: ['./events-review.component.css']
 })
 export class EventsReviewComponent {
-  events: Ievent[] = []; // Lista de eventos obtenidos.
+  events: Ievent[] = [];
   event: Ievent = {
     _id: "",
     name: "",
@@ -22,6 +22,7 @@ export class EventsReviewComponent {
     price: 0,
     willAttend: 0,
     images: [],
+    userOwner: 0,
     coordinates: {
       lat: 0,
       lng: 0,
@@ -32,7 +33,6 @@ export class EventsReviewComponent {
   constructor(private eventService: EventService, private router: Router) {}
 
   ngOnInit(): void {
-    // Obtención de los eventos al cargar el componente.
     this.eventService.getEvents().subscribe(
       (data: Ievent[]) => {
         this.events = data;
@@ -44,7 +44,6 @@ export class EventsReviewComponent {
     );
   }
 
-  // Navega a los detalles del evento seleccionado.
   goToDetails(eventId: string): void {
     console.log('ID del evento seleccionado:', eventId);
     this.router.navigate(['/events', eventId]);

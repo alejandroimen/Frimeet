@@ -1,0 +1,14 @@
+<section>
+    <i id="button-back" class="fa-solid fa-arrow-left" (click)="back()"></i>
+    <div class="image-container-left-interest">
+        <img src="assets/images/friends.webp" alt="Imagen" />
+    </div>
+    <app-desire-form [(isHere)]="isInInterest" *ngIf="isInInterest; else secondPhase"
+        [(interestsSelected)]="selected">
+    </app-desire-form>
+    <ng-template #secondPhase>
+        <app-tell-us
+            [tags]="selected">
+        </app-tell-us>
+    </ng-template>  
+</section>

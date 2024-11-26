@@ -1,0 +1,32 @@
+.content-desire {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 48vw;
+  height: 80vh;
+  box-sizing: border-box;
+  padding: 0px 40px;
+}
+
+.scroll-desire-options {
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.button-send-interests {
+  min-height: 55px;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  background-color: var(--yellow);
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.button-send-interests:hover {
+  background-color: var(--orange);
+  transition: 0.3s;
+}
