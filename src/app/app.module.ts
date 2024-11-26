@@ -12,6 +12,7 @@ import { NavbarComponent } from './standalone/navbar/navbar.component';
 import { HeaderComponent } from './standalone/header/header.component';
 import { FormsModule } from '@angular/forms';
 import { RecommendationsModule } from './recommendations/recommendations.module';
+import { WelcomeStartComponent } from './standalone/welcome-start/welcome-start.component';
 import { RemindersModule } from './reminders/reminders.module';
 import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navbar.component';
 
@@ -19,6 +20,7 @@ import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navb
 @NgModule({
   declarations: [
     AppComponent,
+    WelcomeStartComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,13 +32,12 @@ import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navb
     EventsModule,
     HttpClientModule,
     FormsModule,
-    ProfileNavbarComponent,
     UsersModule,
     PaymentsModule,
     RemindersModule,
     RecommendationsModule,
     NavbarComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

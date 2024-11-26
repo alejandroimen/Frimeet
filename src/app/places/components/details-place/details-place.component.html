@@ -8,10 +8,8 @@
   <div *ngIf="place.images.length > 1" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"
     data-bs-interval="3000">
     <div class="carousel-inner">
-      <!-- Cada `carousel-item` contendrá 4 imágenes -->
       <div class="carousel-item active">
         <div class="image-group">
-          <!-- Reemplaza estas URL de ejemplo con las de tus imágenes -->
           <img *ngIf="place.images[0]" [src]="place.images[0]" class="d-block" alt="Imagen 1">
           <img *ngIf="place.images[1]" [src]="place.images[1]" class="d-block" alt="Imagen 2">
           <img *ngIf="place.images[2]" [src]="place.images[2]" class="d-block" alt="Imagen 3">
@@ -24,8 +22,10 @@
         <!-- Modal para ver todas las fotos -->
         <div class="photos-modal" id="photosModal">
           <div class="modal-content">
-            <button class="close-modal" (click)="closePhotosModal()">✖</button>
-            <h2>Fotos de {{ place.name }}</h2>
+            <header class="modal-header">
+              <h2>Fotos de {{ place.name }}</h2>
+              <button class="close-modal" (click)="closePhotosModal()">✖</button>
+            </header>
             <div class="photos-grid">
               <img *ngFor="let img of place.images" [src]="img" alt="Image of {{ place.name }}">
             </div>

@@ -16,6 +16,11 @@ nav {
     z-index: 1;
 }
 
+.active-link a {
+    color: var(--orange) !important;
+    font-weight: bold;
+}
+
 .input {
     display: flex;
     flex-direction: column;
@@ -85,6 +90,37 @@ nav {
     transform: scale(0.95, 0.95);
 }
 
+.logout-button {
+    margin-top: auto;
+    width: 100%;
+    background-color: #ffc800a4;
+    border: none;
+    padding: 0.625rem;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #ffc800;
+    transform: scale(1.05);
+}
+
+.logout-button.hidden {
+    display: none;
+}
+
+.logout-button i {
+    font-size: 1.2rem;
+}
+
 @media (max-width: 1024px) {
     nav {
         width: 20vw;
@@ -137,6 +173,10 @@ nav.collapsed {
 }
 
 nav.collapsed .input {
+    display: none;
+}
+
+nav.collapsed .logout-button {
     display: none;
 }
 

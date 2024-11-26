@@ -1,115 +1,177 @@
 header {
-    margin: 0%;
-    padding: 0%;
-    position: fixed;
-    top: 0%;
-    left: 0%;
-    background-color: var(--yellow);
-    width: 100vw;
-    height: 8vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 20px;
-    box-sizing: border-box;
-    z-index: 100;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--yellow);
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 100;
 }
 
 header img {
-    height: 30px;
+  height: 30px;
 }
 
+.active-link a {
+  color: var(--orange) !important;
+  font-weight: bold;
+}
+
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.button-profile,
 .button-bell {
   background: none;
   border: none;
+  cursor: pointer;
+}
+
+.profile-icon {
+  font-size: 24px;
 }
 
 .bell {
-    border: 2.7px solid var(--black);
-    border-radius: 10px 10px 0 0;
-    width: 15px;
-    height: 17px;
-    background: transparent;
-    display: block;
-    position: relative;
-    top: -3px;
+  border: 2.7px solid var(--black);
+  border-radius: 10px 10px 0 0;
+  width: 15px;
+  height: 17px;
+  background: transparent;
+  display: block;
+  position: relative;
+  top: -3px;
+}
+
+.bell::before,
+.bell::after {
+  content: "";
+  background: var(--black);
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 2.7px;
+}
+
+.bell::before {
+  top: 100%;
+  width: 20px;
+}
+
+.bell::after {
+  top: calc(100% + 4px);
+  width: 7px;
+}
+
+.notification {
+  background: transparent;
+  border: none;
+  padding: 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 300ms ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification::before {
+  content: "1";
+  color: white;
+  font-size: 10px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--red);
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.notification:hover {
+  background: rgba(170, 170, 170, 0.062);
+}
+
+.notification:hover .bell-container {
+  animation: bell-animation 650ms ease-out;
+}
+
+.dropdown-menu {
+  display: block;
+  position: absolute;
+  top: calc(8vh + 5px);
+  right: 20px;
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 220px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 101;
+}
+
+.dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu li {
+  padding: 10px 15px;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  font-size: 14px;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-menu li a:hover {
+  background-color: var(--yellow);
+  color: var(--black);
+  border-radius: 5px;
+}
+
+@keyframes bell-animation {
+  0%, 100% {
+    transform: rotate(0deg);
   }
-  .bell::before,
-  .bell::after {
-    content: "";
-    background: var(--black);
-    display: block;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 2.7px;
+  20% {
+    transform: rotate(15deg);
   }
-  .bell::before {
-    top: 100%;
-    width: 20px;
+  40% {
+    transform: rotate(-15deg) scale(1.1);
   }
-  .bell::after {
-    top: calc(100% + 4px);
-    width: 7px;
+  60% {
+    transform: rotate(10deg) scale(1.1);
   }
-  /*container main styling*/
-  .notification {
-    background: transparent;
-    border: none;
-    padding: 15px 15px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 300ms;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  80% {
+    transform: rotate(-10deg);
   }
-  /*notifications number with before*/
-  .notification::before {
-    content: "1";
-    color: white;
-    font-size: 10px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: var(--red);
-    position: absolute;
-    right: 8px;
-    top: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  /*container background hover effect*/
-  .notification:hover {
-    background: rgba(170, 170, 170, 0.062);
-  }
-  /*container animations*/
-  .notification:hover > .bell-container {
-    animation: bell-animation 650ms ease-out 0s 1 normal both;
-  }
-  /*bell ring and scale animation*/
-  @keyframes bell-animation {
-    20% {
-      transform: rotate(15deg);
-    }
-  
-    40% {
-      transform: rotate(-15deg);
-      scale: 1.1;
-    }
-    60% {
-      transform: rotate(10deg);
-      scale: 1.1;
-    }
-    80% {
-      transform: rotate(-10deg);
-    }
-    0%,
-    100% {
-      transform: rotate(0deg);
-    }
-  }
-  
+}
