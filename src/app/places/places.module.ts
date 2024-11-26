@@ -13,13 +13,13 @@ import { MapDisplayComponent } from '../map-display/map-display.component';
     AddPlaceComponent,
     InfoPlaceComponent,
     DetailsPlaceComponent,
-    MapComponent,
-    MapDisplayComponent
+    MapComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    InfoCardComponent
+    InfoCardComponent,
+    MapDisplayComponent
 ]
 })
 export class PlacesModule { }

@@ -24,7 +24,7 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
   tagsValid: boolean = true;
   addressValid: boolean = true;
   imageSelected: boolean = true;
-  isOwner: boolean = false; // Nueva propiedad para verificar si el usuario es propietario
+  isOwner: boolean = false;
 
   constructor(
     private placeService: PlaceService,

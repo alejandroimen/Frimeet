@@ -278,7 +278,7 @@
 
 
 .btn {
-    color: #ffffff;
+    color: #000;
     font-weight: bold;
     padding: 8px 16px;
     border: none;
@@ -297,6 +297,7 @@
 
 .btn-danger {
     background-color: #c82333;
+    color: #fff;
 }
 
 .btn-primary:hover {
@@ -325,7 +326,7 @@
 }
 
 .modal-header {
-    background-color: #FFEB55;
+    background-color: var(--yellow);
     color: #000000;
     border-bottom: none;
     padding: 15px;
@@ -574,4 +575,9 @@
     flex-wrap: wrap;
     gap: 19px;
     justify-content: center;
+}
+
+/* no review */
+#no-review p{
+   color: var(--black);
 }

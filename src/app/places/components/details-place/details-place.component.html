@@ -68,7 +68,7 @@
       </div>
       <button class="btn btn-primary" (click)="submitReview()">Agregar Reseña</button>
     </div>
-    <div *ngIf="reviews.length === 0"> 
+    <div *ngIf="reviews.length === 0" id="no-review"> 
       <p>No hay reseñas para este lugar.</p> 
     </div>
     <div *ngFor="let review of reviews" class="review">
@@ -113,7 +113,6 @@
       </div>
     </div>
   </div>
-
   <!-- Modal de actualización de lugar -->
 <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
   <div class="modal-dialog">

@@ -75,7 +75,7 @@ app-info-place {
 .info-corta span {
     font-size: 0.85rem;
     font-weight: bold;
-    color: #ffc700;
+    color: #000;
     text-transform: uppercase;
 }
 
@@ -94,8 +94,8 @@ app-info-place {
 }
 
 .tags-container span {
-    background-color: #f532f1;
-    color: #ffffff;
+    background-color: #ffc700;
+    color: #000;
     padding: 5px 10px;
     border-radius: 12px;
     font-size: 0.75rem;
