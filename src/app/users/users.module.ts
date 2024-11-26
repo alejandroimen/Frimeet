@@ -11,6 +11,7 @@ import { RegisterViewComponent } from './components/register-view/register-view.
 import { ReviewComponent } from './review/review.component';
 import { PlacesReviewComponent } from './places-review/places-review.component';
 import { EventsReviewComponent } from './events-review/events-review.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 //import { ProfileNavbarComponent } from '../standalone/profile-navbar/profile-navbar.component';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { EventsReviewComponent } from './events-review/events-review.component';
     ReviewComponent,
     PlacesReviewComponent,
     EventsReviewComponent,
+    EditProfileComponent,
   ],
   imports: [
     CommonModule,

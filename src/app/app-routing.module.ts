@@ -12,21 +12,20 @@ import { ReviewComponent } from './users/review/review.component';
 import { PlacesReviewComponent } from './users/places-review/places-review.component';
 import { EventsReviewComponent } from './users/events-review/events-review.component';
 import { DesireFormComponent } from './recommendations/desire-form/desire-form.component';
-import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navbar.component';
+import { WelcomeStartComponent } from './standalone/welcome-start/welcome-start.component';
 import { PaymentViewComponent } from './payments/components/payment-view/payment-view.component';
 import { RegisterComponent } from './users/components/register/register.component';
 import { LoginComponent } from './users/components/login/login.component';
 import { RemindersViewsComponent } from './reminders/components/reminders-views/reminders-views.component';
 
 import { MapComponent } from './map/map.component';
-
+import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'welcome', component: WelcomeComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent },
-  {path: 'profile-navbar', component: ProfileNavbarComponent },
   {path: 'add-place', component: AddPlaceComponent},
   {path: 'add-event', component: AddEventComponent },
   {path: 'info-place', component: InfoPlaceComponent},
@@ -36,6 +35,8 @@ const routes: Routes = [
   {path: 'places-review', component: PlacesReviewComponent},
   {path: 'events-review', component: EventsReviewComponent},
   {path: 'desire-form', component: DesireFormComponent},
+  {path: 'welcome-start', component: WelcomeStartComponent},
+  {path: 'edit-profile', component: EditProfileComponent},
   {path: 'events/:id', component: DetailsEventComponent},
   {path: 'places/:id', component: DetailsPlaceComponent},
   {path: 'payment', component: PaymentViewComponent},
