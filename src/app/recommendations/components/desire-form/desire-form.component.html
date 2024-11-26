@@ -1,9 +1,17 @@
 <div class="content-desire">
-    <app-interest-selector
-        *ngFor="let interest of interestsList"
-        [interest]="interest.name"
-        [content]="interest.content"
+    <div class="scroll-desire-options">
+        <app-interest-selector
+            *ngFor="let interest of interestsList; let i = index"
+            [interest]="interest.name"
+            [content]="interest.content"
+            [(selected)]="interestBidirectional[i]"
+            [id]="i"
+            [(idGroup)]="indexSelected"
         >
-    </app-interest-selector>
-    <button class="button-send-interests">NO recuerdo el mensaje</button>
+        </app-interest-selector>
+    </div>
+    <button (click)="next()" class="button-send-interests">
+        Siguiente
+        <i class="fa-solid fa-arrow-right"></i>
+    </button>
 </div>

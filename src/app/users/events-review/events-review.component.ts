@@ -22,6 +22,7 @@ export class EventsReviewComponent {
     price: 0,
     willAttend: 0,
     images: [],
+    userOwner: 0,
     coordinates: {
       lat: 0,
       lng: 0,

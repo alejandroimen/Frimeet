@@ -1,7 +1,14 @@
 <section>
-    <div class="image-container border rounded d-flex align-items-center justify-content-center">
-        <img src="path-to-your-image.jpg" alt="Imagen" class="w-100 h-auto">
-        <p>oliwi</p>
+    <i id="button-back" class="fa-solid fa-arrow-left" (click)="back()"></i>
+    <div class="image-container-left-interest">
+        <img src="assets/images/friends.webp" alt="Imagen" />
     </div>
-    <app-desire-form></app-desire-form>
+    <app-desire-form [(isHere)]="isInInterest" *ngIf="isInInterest; else secondPhase"
+        [(interestsSelected)]="selected">
+    </app-desire-form>
+    <ng-template #secondPhase>
+        <app-tell-us
+            [tags]="selected">
+        </app-tell-us>
+    </ng-template>  
 </section>

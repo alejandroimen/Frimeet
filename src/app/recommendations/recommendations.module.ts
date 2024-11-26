@@ -6,7 +6,7 @@ import { ProfileNavbarComponent } from "../standalone/profile-navbar/profile-nav
 import { TellUsComponent } from './components/tell-us/tell-us.component';
 import { DesireViewComponent } from './components/desire-view/desire-view.component';
 import { InterestSelectorComponent } from './components/interest-selector/interest-selector.component';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import { InterestSelectorComponent } from './components/interest-selector/intere
   imports: [
     CommonModule,
     EventsModule,
-    ProfileNavbarComponent
+    ProfileNavbarComponent,
+    FormsModule
   ],
   exports: [
     DesireViewComponent,

@@ -11,6 +11,7 @@ export interface Ievent {
     price: number
     willAttend: number
     images: string[]
+    userOwner: number
     coordinates: {
         lat: number,
         lng: number,

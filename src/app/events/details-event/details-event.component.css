@@ -1,3 +1,4 @@
+/* General Styles */
 .details-event-container {
     position: relative;
     margin: 5vh 2vw;
@@ -23,7 +24,7 @@
     justify-content: center;
     align-items: center;
     width: 70vw;
-    z-index: 10;
+    z-index: 100;
     gap: 1rem;
     padding-top: 9vw;
     margin-top: -9vw;
@@ -73,9 +74,17 @@
     height: 60vh;
     background-color: #ff0202;
     position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.5s ease;
+}
+
+.banner-event img {
+    height: 100%;
+    width: auto;
 }
 
 .container-info-right {
@@ -142,6 +151,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 2vh;
+    z-index: 0;
 }
 
 #google-map {
@@ -149,6 +159,7 @@
     height: 40vh;
     border: 1px solid var(--black);
     border-radius: 12px;
+    overflow: hidden;
 }
 
 .see-all-photos {
@@ -227,4 +238,130 @@
     .btn-confirm{
         font-size: 1rem;
     }
+}
+/* Modales */
+.btn-primary:hover {
+    background-color: #bb960f !important; 
+}
+
+.btn-danger:hover {
+    background-color: #eb3548 !important ;
+}
+
+.button-group {
+    display: flex !important;
+    gap: 50px !important ;
+    justify-content: center !important;
+    width: 100%;
+}
+
+.modal-content {
+    z-index: 9999 !important;
+    background-color: #333333 !important;
+    color: #ffffff !important;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
+    overflow: hidden !important;
+}
+
+.modal-header {
+    background-color: #FFEB55 !important;
+    color: #000000 !important;
+    border-bottom: none !important;
+    padding: 15px !important;
+    font-size: 1.2rem !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+}
+
+.modal-title .btn-delete {
+    background-color: #ffffff;
+    border: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    opacity: 1;
+}
+
+.modal-body {
+    background: linear-gradient(135deg, #ffffff, #ffffff);
+    color: #000000;
+    padding: 20px;
+    font-size: 1rem;
+}
+
+.modal-footer {
+    background-color: #ffffff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-footer .btn-danger {
+    background-color: #c82333;
+    width: 30vh;
+}
+
+.modal-footer .btn-danger:hover {
+    background-color: #eb3548;
+}
+
+.modal-footer .btn-secondary {
+    background-color: #e0b600;
+    color: #ffffff;
+    width: 30vh;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #ffc700;
+}
+
+.modal-footer .btn-secondary-edit {
+    background-color: #c82333;
+    width: 30vh;
+}
+
+.modal-footer .btn-secondary-edit:hover {
+    background-color: #eb3548;
+}
+
+.modal-footer .btn-primary-edit {
+    background-color: #e0b600;
+    color: #ffffff;
+    width: 30vh;
+}
+
+.modal-footer .btn-primary-edit:hover {
+    background-color: #ffc700;
+}
+
+.details-event-container,
+.modal-content {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #e0b600;
+    color: #000000;
+}
+
+.modal-content {
+    background-color: #ffc700;
+}
+
+/* Redimension de la imagenes en la modal "actualizar" */
+.existing-image-preview {
+    width: 85px;
+    height: 85px;
+    object-fit: cover;
+    margin: 5px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 19px;
+    justify-content: center;
 }

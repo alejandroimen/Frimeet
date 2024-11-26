@@ -1,41 +1,32 @@
-<div class="container">
-    <button class="back-button">
-        <span>&larr;</span>
-    </button>
-    <div class="form-container">
-        <h2>Cuéntanos más...</h2>
-        <form>
-            <label>
-                ¿Cuántas personas van?
-                <input type="text" />
-            </label>
-            <label>
-                ¿Qué tipo de salida es?
-                <input type="text" />
-            </label>
-            <label>
-                ¿Cuál es tu presupuesto?
-                <input type="text" />
-            </label>
-            <label>
-                ¿A qué horas saldrás?
-                <input type="text" />
-            </label>
-            <label>
-                ¿Cuánto tiempo deseas estar fuera?
-                <input type="text" />
-            </label>
-            <label>
-                ¿Qué distancia estás dispuesto a recorrer?
-                <input type="text" />
-            </label>
-            <button class="recommend-button" type="button">
-                Recomiéndame algo!!
-            </button>
-        </form>
-    </div>
-    <div class="image-placeholder">
-        <div class="circle"></div>
-        <div class="triangle"></div>
-    </div>
+<div class="form-container">
+    <h2>Cuéntanos más...</h2>
+    <form>
+        <label> ¿Cuántas personas van? </label>
+        <input name="numPeople" [(ngModel)]="numPeople" type="number" />
+        <label> ¿Qué tipo de salida es? </label>
+        <select name="type" id="" [(ngModel)]="type">
+            <option value="para_amigos">Con amigos</option>
+            <option value="para_parejas">Cita romántica</option>
+            <option value="para_familia">Salida familiar</option>
+            <option value="para_trabajo">Salida de trabajo</option>
+            <option value="para_descansar">Relajacion</option>
+            <option value="para_educacion">Educación</option>
+        </select>
+        <label> ¿Cuál es tu presupuesto? </label>
+        <input name="money" [(ngModel)]="money" type="number">
+        <!-- <label> ¿A qué horas saldrás? </label>
+        <input name="time" [(ngModel)]="time" type="time" name="" id=""> -->
+        <label> ¿Cuánto tiempo deseas estar fuera? </label>
+        <select name="timeOut" [(ngModel)]="timeOut" id="">
+            <option [value]="1">Menos de 1 hora</option>
+            <option [value]="2">De 1 a 2 horas</option> 
+            <option [value]="3">De 2 a 4 horas</option>
+            <option [value]="4">Más de 4 horas</option>
+        </select>
+        <label> ¿Qué distancia estás dispuesto a recorrer en kilometros? </label>
+        <input type="number" name="distance"  [(ngModel)]="distance" id="">
+        <button class="recommend-button" type="button" (click)="sendForm()">
+            Recomiéndame algo!!
+        </button>
+    </form>
 </div>

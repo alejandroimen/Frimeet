@@ -7,7 +7,8 @@
         </ng-template>
 </button>
 <div class="container-cards-image-interest" *ngIf="buttonActivate">
-    <div class="card-image-interest" *ngFor="let int of content">
+    <div class="card-image-interest"
+        *ngFor="let int of content" (click)="clickCard(int.id)">
         <img [src]="int.image" alt="">
         <p>{{int.name}}</p>
     </div>

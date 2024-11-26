@@ -4,19 +4,19 @@
     align-items: center;
     position: relative;
     width: 100%;
-    background: none;
+    background-color: var(--white);
     border: none;
-    border-top: 1px solid var(--black);
+    border-top: 1.5px solid var(--black);
     padding: 15px 40px;
     font-size: 18px;
+    z-index: 1;
     font-weight: 450;
-    border-radius: 5px;
-    margin-top: 10px;
     transition: 0.3s;
 }
 
 .button-open-interests:hover {
-    backdrop-filter: brightness(0.9);
+    border-radius: 5px;
+    filter: brightness(0.9);
     transition: 0.3s;
 }
 
@@ -30,15 +30,29 @@
     display: flex;
     gap: 2vw;
     align-items: end;
+    z-index: 0;
+    overflow-x: scroll;
+    animation-name: slidein;
+    animation-duration: 0.2s;
+}
+
+@keyframes slidein {
+    from {
+      margin-top: -40vh;
+    }
+    to {
+      margin-top: 0vh;
+    }
 }
 
 .card-image-interest {
     position: relative;
     height: 40vh;
-    width: 30vh;
+    min-width: 30vh;
     align-items: end;
     overflow: hidden;
     border-radius: 20px;
+    transition: 0.3s;
 }
 
 .card-image-interest img {
@@ -54,4 +68,14 @@
     font-weight: 400;
     font-size: 18px;
     color: var(--white);
+}
+
+.card-image-interest:hover {
+    filter: brightness(0.7);
+    transition: 0.3s;
+}
+
+.card-image-interest:active {
+    transform: scale(0.9);
+    transition: 0.3s;
 }

@@ -14,7 +14,7 @@ import { EventsReviewComponent } from './users/events-review/events-review.compo
 import { DesireViewComponent } from './recommendations/components/desire-view/desire-view.component';
 import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navbar.component';
 import { PaymentViewComponent } from './payments/components/payment-view/payment-view.component';
-import { RegisterComponent } from './users/components/register/register.component';
+import { RegisterViewComponent } from './users/components/register-view/register-view.component';
 import { LoginComponent } from './users/components/login/login.component';
 import { RemindersViewsComponent } from './reminders/components/reminders-views/reminders-views.component';
 
@@ -24,7 +24,7 @@ import { MapComponent } from './map/map.component';
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'welcome', component: WelcomeComponent},
-  {path: 'register', component: RegisterComponent},
+  {path: 'register', component: RegisterViewComponent},
   {path: 'login', component: LoginComponent },
   {path: 'profile-navbar', component: ProfileNavbarComponent },
   {path: 'add-place', component: AddPlaceComponent},

@@ -6,10 +6,8 @@
   </div>
 
   <div class="container-event-info-and-images">
-    <div *ngIf="event.images.length > 1" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"
-      data-bs-interval="3000">
-      <div cls="carousel-container">
-        <!-- Cada `carousel-item` contendrá 4 imágenes -->
+    <div *ngIf="event.images.length > 1" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+      <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="image-group">
             <img *ngIf="event.images[0]" [src]="event.images[0]" class="d-block" alt="Imagen 1">
@@ -21,7 +19,6 @@
             Ver {{ event.images.length }} fotos
           </div>
 
-          <!-- Modal para ver todas las fotos -->
           <div class="photos-modal" id="photosModal">
             <div class="modal-content">
               <button class="close-modal" (click)="closePhotosModal()">✖</button>
@@ -31,25 +28,25 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
     <div *ngIf="event.images.length === 1" class="banner-event">
-    <img [src]="event.images[0]" alt="Imagen de {{ event.name }}">
+      <img [src]="event.images[0]" alt="Imagen de {{ event.name }}">
     </div>
 
     <div class="container-info-right">
       <div class="event-map">
-        <div id="google-map"></div>
+        <div id="google-map">
+          <app-map-display2></app-map-display2>
+        </div>
       </div>
       
       <div class="info-corta">
-        <p>9:00 PM (GMT - 06:00)</p>
-        <p>+999 asistentes 👤</p>
-        <p>$70.00</p>
-        <p>Calle olivos del valle y los girasoles, No.192</p>
-        <p>CP.29019. Col. Los Tulipanes</p>
+        <p>{{ event.date | date:'shortTime' }} ({{ event.date | date:'shortTimezone' }})</p>
+        <p>{{ event.willAttend }} asistentes 👤</p>
+        <p>\${{ event.price }}</p>
+        <p>{{ event.address }}</p>
         <div class="types-stars">
           <div class="star-rating">
             <div class="star"></div>
@@ -74,10 +71,146 @@
         </div>
       </div>
       <div class="button-group">
-        <button class="btn btn-primary btn-confirm">Confimar Asistencia</button>
+        <button class="btn btn-primary btn-confirm">Confirmar Asistencia</button>
+      </div>
+      <div class="button-group">
+        <!-- Botón para abrir la modal de actualización -->
+        <button (click)="openUpdateModal()" class="btn btn-primary">Actualizar Lugar</button>
+    
+        <!-- Botón para eliminar el lugar -->
+        <button (click)="openDeleteModal()" class="btn btn-danger">Eliminar Lugar</button>
+      </div>
+
+    </div>
+    <!-- Modal de eliminación -->
+      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h5>
+              <button type="button" class="btn-close btn-delete" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ¿Estás seguro de que deseas eliminar este lugar?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-danger" (click)="deleteEvent()">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Modal de actualización -->
+      <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="updateModalLabel">Actualizar Lugar</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3" [ngClass]="{'invalid': !nameValid && event.name !== ''}">
+                  <label for="eventName" class="form-label">Nombre del Lugar</label>
+                  <input type="text" class="form-control" id="eventName" [(ngModel)]="event.name" name="name" maxlength="50" required>
+                  <small *ngIf="!nameValid && event.name !== ''" class="error-text">El nombre debe comenzar con una letra, contener al menos una letra y no más de 50 caracteres.</small>
+                </div>
+                <div class="mb-3" [ngClass]="{'invalid': !descriptionValid && event.description !== ''}">
+                  <label for="eventDescription" class="form-label">Descripción</label>
+                  <textarea class="form-control" id="eventDescription" [(ngModel)]="event.description" name="description" maxlength="250" required></textarea>
+                  <small *ngIf="!descriptionValid && event.description !== ''" class="error-text">La descripción no puede tener más de 250 caracteres.</small>
+                </div>
+                <div class="mb-3" [ngClass]="{'invalid': !addressValid && event.address !== ''}">
+                  <label for="eventAddress" class="form-label">Dirección</label>
+                  <input type="text" class="form-control" id="eventAddress" [(ngModel)]="event.address" name="address" required>
+                  <small *ngIf="!addressValid && event.address !== ''" class="error-text">La dirección no puede estar vacía.</small>
+                </div>
+                <div class="mb-3">
+                  <label for="file-input" class="form-label">Subir Nuevas Imágenes</label>
+                  <input type="file" class="form-control" id="file-input" (change)="onFileSelected($event)" multiple>
+                  <ng-container *ngIf="event?.images?.length">
+                    <div class="image-container">
+                      <div *ngFor="let img of event.images.slice(0, 40)">
+                        <img [src]="img" alt="Imagen existente" class="existing-image-preview">
+                      </div>
+                    </div>
+                  </ng-container>
+                  <small *ngIf="!imageSelected" class="error-text">Por favor, selecciona al menos una imagen.</small>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary-edit" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary-edit" (click)="updateEvent()">Actualizar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <!-- Modal de eliminación -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h5>
+          <button type="button" class="btn-close btn-delete" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Estás seguro de que deseas eliminar este lugar?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" (click)="deleteEvent()">Eliminar</button>
+        </div>
       </div>
     </div>
   </div>
-
-
+  
+  <!-- Modal de actualización -->
+  <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModalLabel">Actualizar Lugar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3" [ngClass]="{'invalid': !nameValid && event.name !== ''}">
+              <label for="eventName" class="form-label">Nombre del Lugar</label>
+              <input type="text" class="form-control" id="eventName" [(ngModel)]="event.name" name="name" maxlength="50" required>
+              <small *ngIf="!nameValid && event.name !== ''" class="error-text">El nombre debe comenzar con una letra, contener al menos una letra y no más de 50 caracteres.</small>
+            </div>
+            <div class="mb-3" [ngClass]="{'invalid': !descriptionValid && event.description !== ''}">
+              <label for="eventDescription" class="form-label">Descripción</label>
+              <textarea class="form-control" id="eventDescription" [(ngModel)]="event.description" name="description" maxlength="250" required></textarea>
+              <small *ngIf="!descriptionValid && event.description !== ''" class="error-text">La descripción no puede tener más de 250 caracteres.</small>
+            </div>
+            <div class="mb-3" [ngClass]="{'invalid': !addressValid && event.address !== ''}">
+              <label for="eventAddress" class="form-label">Dirección</label>
+              <input type="text" class="form-control" id="eventAddress" [(ngModel)]="event.address" name="address" required>
+              <small *ngIf="!addressValid && event.address !== ''" class="error-text">La dirección no puede estar vacía.</small>
+            </div>
+            <div class="mb-3">
+              <label for="file-input" class="form-label">Subir Nuevas Imágenes</label>
+              <input type="file" class="form-control" id="file-input" (change)="onFileSelected($event)" multiple>
+              <ng-container *ngIf="event?.images?.length">
+                <div class="image-container">
+                  <div *ngFor="let img of event.images.slice(0, 40)">
+                    <img [src]="img" alt="Imagen existente" class="existing-image-preview">
+                  </div>
+                </div>
+              </ng-container>
+              <small *ngIf="!imageSelected" class="error-text">Por favor, selecciona al menos una imagen.</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary-edit" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary-edit" (click)="updateEvent()">Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
