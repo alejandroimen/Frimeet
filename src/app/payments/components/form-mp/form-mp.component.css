@@ -8,6 +8,10 @@
     box-sizing: border-box;
 }
 
+small {
+  color: var(--red);
+}
+
 #form-checkout input,
 #form-checkout div:not(.cvv-and-expiration) {
     width: 100%;

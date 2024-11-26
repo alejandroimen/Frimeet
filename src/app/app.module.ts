@@ -11,8 +11,10 @@ import { PaymentsModule } from './payments/payments.module';
 import { NavbarComponent } from './standalone/navbar/navbar.component';
 import { HeaderComponent } from './standalone/header/header.component';
 import { FormsModule } from '@angular/forms';
+import { RecommendationsModule } from './recommendations/recommendations.module';
 import { WelcomeStartComponent } from './standalone/welcome-start/welcome-start.component';
 import { RemindersModule } from './reminders/reminders.module';
+import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navbar.component';
 
 
 @NgModule({
@@ -33,6 +35,7 @@ import { RemindersModule } from './reminders/reminders.module';
     UsersModule,
     PaymentsModule,
     RemindersModule,
+    RecommendationsModule,
     NavbarComponent,
     HeaderComponent,
   ],
