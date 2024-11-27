@@ -86,11 +86,11 @@ app-info-place {
 }
 
 .info-corta .fa-heart {
-    color: red;
+    color: var(--red);
 }
 
 .info-corta .fa-heart-o {
-    color: red;
+    color: var(--red);
 }
 /* */
 
