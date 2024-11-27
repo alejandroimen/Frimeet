@@ -3,6 +3,7 @@ import * as L from 'leaflet';
 
 @Component({
   selector: 'app-map-display',
+  standalone: true,
   templateUrl: './map-display.component.html',
   styleUrls: ['./map-display.component.css']
 })

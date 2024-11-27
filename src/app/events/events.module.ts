@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsEventComponent } from './details-event/details-event.component';
 import { RouterModule } from '@angular/router';
 import { MapsComponent } from '../map-display2/map-display2.component';
+import { MapDisplayComponent } from '../map-display/map-display.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MapsComponent } from '../map-display2/map-display2.component';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MapDisplayComponent
   ],
   exports: [
     RouterModule,

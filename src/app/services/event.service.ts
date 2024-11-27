@@ -40,4 +40,14 @@ export class EventService {
     const headers = this.createAuthorizationHeader();
     return this.http.delete(`${this.apiUrl}api/events/delete/${id}`, { headers});
   }
+
+  joinEvent(id: string): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.post(`${this.apiUrl}api/events/${id}/join`, {}, { headers });
+  }
+
+  leaveEvent(id: string): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.post(`${this.apiUrl}api/events/${id}/leave`, {}, { headers });
+  }
 }

@@ -1,16 +1,32 @@
 <div class="card-group-container">
-  <section *ngFor="let place of places" class="info-place-container" (click)="goToDetails(place._id)">
-    <div class="banner-place">
+  <section *ngFor="let place of places" class="info-place-container">
+    <h1>{{ place.name }}</h1>
+    <div *ngIf="place.images.length > 1" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div *ngFor="let img of place.images; let i = index" class="carousel-item" [ngClass]="{'active': i === 0}">
+          <img [src]="img" class="d-block w-100" alt="Imagen de {{ place.name }}">
+        </div>
+      </div>
+    </div>
+    <div *ngIf="place.images.length === 1" class="banner-place">
       <img [src]="place.images[0]" alt="Imagen de {{ place.name }}">
     </div>
-    <div class="card-body">
-      <h1 class="card-title">{{ place.name }}</h1>
-      <p class="card-text">{{ place.description }}</p>
-    </div>
     <div class="info-corta">
-      <span>{{ place.address }}</span>
+      <span>{{ place.types }}</span>
+      <div>
+        <span>
+          <!-- Icono de corazón para favoritos -->
+          <i class="fa" [ngClass]="{'fa-heart': favorites.has(place._id), 'fa-heart-o': !favorites.has(place._id)}"
+             (click)="toggleFavorite(place._id)"></i>
+        </span>
+      </div>
+    </div>
+    <p>
+      {{ place.description }}
+    </p>
+    <div *ngIf="place.tag" class="tags-container">
+      <span *ngFor="let tag of place.tag.split(',')"> {{tag}} </span>
     </div>
 
   </section>
 </div>
-

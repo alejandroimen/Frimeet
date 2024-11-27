@@ -5,7 +5,9 @@ export interface Iplace {
     description: string
     images: string[]
     address: string
-    tags: string
+    tag: string
+    totalStarts: number
+    userOwner: number
     coordinates: {
         lat: number,
         lng: number,

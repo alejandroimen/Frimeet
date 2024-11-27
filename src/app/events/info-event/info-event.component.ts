@@ -22,7 +22,9 @@ export class InfoEventComponent implements OnInit {
     address: "",
     price: 0,
     willAttend: 0,
+    attendees: [],
     images: [],
+    tag: [],
     userOwner: 0,
     coordinates: {
       lat: 0,
