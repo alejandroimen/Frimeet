@@ -12,6 +12,7 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class DetailsEventComponent implements OnInit, DoCheck {
   event: Ievent | undefined;
+
   imageSelected: boolean = true;
   selectedFiles: File[] = [];
   nameValid: boolean = true;
@@ -44,6 +45,7 @@ export class DetailsEventComponent implements OnInit, DoCheck {
         }
       }, error => {
         this.alertService.showError('Error al obtener los detalles del evento.');
+
         console.error('Error al obtener los detalles del evento:', error);
       });
     }
@@ -214,6 +216,7 @@ export class DetailsEventComponent implements OnInit, DoCheck {
       }, error => {
         this.alertService.showError('Hubo un error al eliminar el evento.');
         console.error('Error al eliminar el evento:', error);
+
       });
     }
   }

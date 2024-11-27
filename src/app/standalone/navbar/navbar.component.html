@@ -3,48 +3,30 @@
         <i [class]="isCollapsed ? 'bi bi-chevron-right right-btn' : 'bi bi-chevron-left'"></i>
     </button>
     <ul class="input">
-        <li class="value">
-            <a routerLink="/welcome">
-                Inicio
-            </a>
+        <li class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <a routerLink="/welcome">Inicio</a>
         </li>
-        <li class="value">
-            <a routerLink="/profile-navbar">
-                Profile
-            </a>
+        <li class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <a routerLink="/add-place">Agregar lugar</a>
         </li>
-        <li class="value">
-            <a routerLink="/add-place">
-                Agregar lugar
-            </a>
+        <li class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <a routerLink="/add-event">Agregar evento</a>
         </li>
-        <li class="value">
-            <a routerLink="/add-event">
-                Agregar evento
-            </a>
+        <li class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <a routerLink="/info-place">Info lugar</a>
         </li>
-        <li class="value">
-            <a routerLink="/info-place">
-                Info lugar
-            </a>
+        <li class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <a routerLink="/info-event">Info Evento</a>
         </li>
-        <li class="value">
-            <a routerLink="/info-event">
-                Info Evento
-            </a>
+        <li class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <a routerLink="/desire-form">Recomendaciones</a>
         </li>
-        <li class="value">
-            <a routerLink="/check-availability">
-                Check
-            </a>
-        </li><li class="value">
-            <a routerLink="/desire-form">
-                Recomendaciones
-            </a>
+        <li class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <a routerLink="/payment">Asciende a premium</a>
         </li>
     </ul>
+
+    <button class="logout-button" (click)="logout()">
+        <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+    </button>
 </nav>
-
-
-    <!-- Navbar Standalone (Se muestra dinámicamente) -->
-    <app-navbar *ngIf="show"></app-navbar>

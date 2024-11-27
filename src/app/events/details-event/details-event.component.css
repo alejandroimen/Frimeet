@@ -123,6 +123,11 @@
   
 /* info */
 
+.banner-event img {
+    height: 100%;
+    width: auto;
+}
+
 .container-info-right {
     width: 37vw;
     position: relative;
@@ -198,6 +203,23 @@
     border: 1px solid var(--black);
     border-radius: 12px;
     overflow: hidden;
+
+}
+
+.see-all-photos {
+    position: absolute;
+    bottom: 1vh;
+    right: 1vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1rem;
+    border: 1px solid #fff;
+    z-index: 10;
 }
 
 .btn-confirm {
@@ -420,6 +442,7 @@ input[type="file"]:focus {
   } */
 
   /* Redimension de la imagenes en la modal "actualizar" */
+
 .existing-image-preview {
     width: 85px;
     height: 85px;
@@ -436,3 +459,4 @@ input[type="file"]:focus {
     justify-content: center;
 }
   
+

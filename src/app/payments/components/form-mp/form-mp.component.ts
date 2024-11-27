@@ -11,6 +11,7 @@ import { AlertService } from '../../../services/alert.service';
   styleUrl: './form-mp.component.css'
 })
 export class FormMpComponent implements OnInit {
+  isSubmiting: boolean = false
   ultimos: string = ''
   cardholderValid:boolean = true
   mp: any
@@ -62,16 +63,23 @@ export class FormMpComponent implements OnInit {
     
   }
 
+  validateEmail(email: string): boolean {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  }
+
   ngDoCheck():void {
     const cardholderInput = document.getElementById('form-checkout__cardholderName') as HTMLInputElement | null;
     if (cardholderInput) {
       this.name = cardholderInput.value;
+      this.cardholderValid = this.validateName(cardholderInput.value)
     } else {
       console.warn("El elemento con ID 'form-checkout__cardholderName' no fue encontrado.");
     }
   }
 
   submit(event: any, cardForm:any):void{
+    this.isSubmiting = true
     console.log('before prevent default');
     event.preventDefault();
     console.log('after prevent default');
@@ -103,8 +111,12 @@ export class FormMpComponent implements OnInit {
       response => {
         console.log('Ta bien: ', response)
         this.alertServ.showSuccess('Pago realizado con éxito')
+        this.isSubmiting = false
       },
-      error => console.log('errorsito: ', error)
+      error => {
+        console.log('errorsito: ', error)
+        this.isSubmiting = false
+      }
     )
     
     fetch("/process_payment", {
@@ -145,18 +157,20 @@ export class FormMpComponent implements OnInit {
     return
   }
 
-  validateDataCard (cardForm: any){
+  validateName(name: string): boolean {
+    const namePattern = /^[A-Za-z][A-Za-z0-9_]*$/;
+    return namePattern.test(name) && /[A-Za-z]/.test(name);
+  }
+
+  validateDataCard (cardForm: any): void{
     console.log('Si entre');
 
-    console.log('COMO POR QUE CARAJOS NO ENTRAAAAAAAAA');
-    
-    
     const {
       paymentMethodId: payment_method_id,
       cardholderEmail: email,
     } = cardForm.getCardFormData();
     if (!payment_method_id ||
-        !email ) {
+        !email) {
       console.log('entre al if');
           
       this.alertServ.showError('Completa todos los campos xfi uwu')

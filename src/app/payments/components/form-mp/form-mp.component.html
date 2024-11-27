@@ -26,10 +26,11 @@
         <div id="form-checkout__securityCode" class="container"></div>
     </div>
     <input type="text" id="form-checkout__cardholderName" />
+    <small *ngIf="cardholderValid">El nombre no puede contener caracteres especiales</small>
     <select class="invisibleInput" id="form-checkout__issuer" ></select>
     <select class="invisibleInput" id="form-checkout__installments" ></select>
     <input type="email" id="form-checkout__cardholderEmail" />
 
-    <button type="submit" id="form-checkout__submit">Pagar</button>
+    <button [disabled]="isSubmiting" type="submit" id="form-checkout__submit">Pagar</button>
     <progress value="0" class="progress-bar">Cargando...</progress>
 </form>

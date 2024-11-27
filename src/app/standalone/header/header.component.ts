@@ -11,7 +11,9 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  idUser: string = ''
+  idUser: string = '';
+  isMenuOpen: boolean = false;
+
 
   constructor(private router: Router) { }
 
@@ -20,4 +22,9 @@ export class HeaderComponent {
     this.idUser=localStorage.getItem('userId') || ''
     this.router.navigate(['/reminders', this.idUser])
   }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
 }

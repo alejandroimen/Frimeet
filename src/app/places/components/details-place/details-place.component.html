@@ -20,8 +20,10 @@
 
         <div class="photos-modal" id="photosModal">
           <div class="modal-content">
-            <button class="close-modal" (click)="closePhotosModal()">✖</button>
-            <h2>Fotos de {{ place.name }}</h2>
+            <header class="modal-header">
+              <h2>Fotos de {{ place.name }}</h2>
+              <button class="close-modal" (click)="closePhotosModal()">✖</button>
+            </header>
             <div class="photos-grid">
               <img *ngFor="let img of place.images" [src]="img" alt="Image of {{ place.name }}">
             </div>

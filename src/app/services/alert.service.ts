@@ -14,6 +14,7 @@ export class AlertService {
       text: message,
       confirmButtonText: 'OK',
       customClass: {
+        confirmButton: 'custom-confirm-button',
         popup: 'success-popup',
         icon: 'success-icon',
         title: 'success-message'
@@ -28,6 +29,7 @@ export class AlertService {
       text: message,
       confirmButtonText: 'OK',
       customClass: {
+        confirmButton: 'custom-confirm-button',
         popup: 'alert-popup',
         icon: 'alert-icon',
         title: 'alert-message'
@@ -42,6 +44,7 @@ export class AlertService {
       text: message,
       confirmButtonText: 'OK',
       customClass: {
+        confirmButton: 'custom-confirm-button',
         popup: 'error-popup',
         icon: 'error-icon',
         title: 'error-message'
@@ -56,6 +59,7 @@ export class AlertService {
       text: message,
       confirmButtonText: 'OK',
       customClass: {
+        confirmButton: 'custom-confirm-button',
         popup: 'info-popup',
         icon: 'info-icon',
         title: 'info-message'

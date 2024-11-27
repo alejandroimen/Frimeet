@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+import { ParticlesWelcomeComponent } from '../particles-welcome/particles-welcome.component';
 
 @Component({
   selector: 'app-welcome',
+  standalone: true,
+  imports: [
+    ParticlesWelcomeComponent
+  ],
   templateUrl: './welcome.component.html',
-  styleUrl: './welcome.component.css'
+  styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent {
-
+ 
 }
