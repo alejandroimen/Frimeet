@@ -47,6 +47,9 @@
 
 .card-image-interest {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 40vh;
     min-width: 30vh;
     align-items: end;
@@ -57,6 +60,7 @@
 
 .card-image-interest img {
     height: 100%;
+    filter: brightness(0.7);
 }
 
 .card-image-interest p {
