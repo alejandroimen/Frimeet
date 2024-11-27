@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Iuser } from '../interfaces/iuser';
 import { Router } from '@angular/router';
@@ -11,6 +11,13 @@ export class UserService {
   url: string = 'http://127.0.0.1:5000';
 
   constructor(private http: HttpClient, private router: Router) {}
+
+  private createAuthorizationHeader(): HttpHeaders {
+    const token = localStorage.getItem('jwtToken'); // Asumiendo que el token se almacena en localStorage
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
 
   login(user: Iuser): Observable<any> {
     return this.http.post(`${this.url}/login`, {
@@ -29,29 +36,34 @@ export class UserService {
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(`${this.url}/users/${id}`);
+    const headers = this.createAuthorizationHeader();
+    return this.http.delete(`${this.url}/users/${id}`, {headers});
   }
 
   getUser(): Observable<any> {
-    return this.http.get(`${this.url}/profile`);
+    const headers = this.createAuthorizationHeader();
+    return this.http.get(`${this.url}/profile`, {headers});
   }
 
   updateProfile(id: number, user: Iuser): Observable<any> {
+    const headers = this.createAuthorizationHeader();
     return this.http.put(`${this.url}/users/${id}/edit`, {
       nombre: user.name,
       email: user.email,
       password: user.password,
-    });
+    }, {headers});
   }
 
   getPremium(id: number, activar: boolean): Observable<any> {
+    const headers = this.createAuthorizationHeader();
     return this.http.post(`${this.url}/users/${id}/premium`, {
       activar: activar,
-    });
+    }, {headers});
   }
 
   addReminder(id: number, reminder: any): Observable<any> {
-    return this.http.patch(`${this.url}/users/${id}/addReminder`, reminder);
+    const headers = this.createAuthorizationHeader();
+    return this.http.patch(`${this.url}/users/${id}/addReminder`, reminder, {headers});
   }
 
   getReminders(id: number): Observable<any> {
