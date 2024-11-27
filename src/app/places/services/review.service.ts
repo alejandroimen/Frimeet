@@ -34,4 +34,9 @@ export class ReviewService {
         const headers = this.createAuthorizationHeader();
         return this.http.delete(`${this.apiUrl}api/reviews/${id}`, {headers})
     }
+
+    getReviewById(): Observable<any> {
+      const headers = this.createAuthorizationHeader();
+      return this.http.get(`${this.apiUrl}api/reviews/user`, {headers})
+  }
 }

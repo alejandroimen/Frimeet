@@ -17,11 +17,14 @@ export class EditProfileComponent implements OnInit, DoCheck {
     rol: 0,
   };
   confirmPassword: string = '';
-  emailValid: boolean = true;
+  isEditingName: boolean = false;
+  isEditingEmail: boolean = false;
   passwordValid: boolean = true;
   passwordsMatch: boolean = true;
+  updatedName: string = '';
+  updatedEmail: string = '';
+  emailValid: boolean = true;
   nameValid: boolean = true;
-  phoneValid: boolean = true;
   isSubmitting: boolean = false;
   userId: number = 0;
 
@@ -35,13 +38,24 @@ export class EditProfileComponent implements OnInit, DoCheck {
     this.loadUserData();
   }
 
+  ngDoCheck(): void {
+    this.emailValid = this.validateEmail(this.user.email);
+    this.passwordValid = this.user.password.length >= 8;
+    this.passwordsMatch = this.user.password === this.confirmPassword;
+    this.nameValid = this.validateName(this.user.name);
+  }
+
   loadUserData(): void {
     this.userService.getUser().subscribe(
-      (response: Iuser) => {
-        this.user = response;
-        this.user.name = response.name;
+      (response: any) => {
+        this.user = {
+          name: response.nombre,
+          email: response.email,
+          password: '',
+          rol: response.rol,
+        };
       },
-      (error: any) => {
+      () => {
         this.alertService.showError('Hubo un error al cargar los datos del usuario.');
       }
     );
@@ -53,55 +67,67 @@ export class EditProfileComponent implements OnInit, DoCheck {
   }
 
   validateName(name: string): boolean {
-    const namePattern = /^[A-Za-z][A-Za-z0-9_]*$/;
-    return namePattern.test(name) && /[A-Za-z]/.test(name);
+    const namePattern = /^[A-Za-z][A-Za-z ]*$/;
+    return namePattern.test(name);
   }
 
-  validatePhone(phone: string): boolean {
-    const phonePattern = /^[0-9]{10,15}$/;
-    return phonePattern.test(phone);
+  toggleEdit(field: 'name' | 'email'): void {
+    if (field === 'name') {
+      this.isEditingName = !this.isEditingName;
+      this.updatedName = this.user.name;
+    } else if (field === 'email') {
+      this.isEditingEmail = !this.isEditingEmail;
+      this.updatedEmail = this.user.email;
+    }
   }
 
-  ngDoCheck(): void {
-    this.emailValid = this.validateEmail(this.user.email);
-    this.passwordValid = this.user.password.length >= 8;
-    this.passwordsMatch = this.user.password === this.confirmPassword;
-    this.nameValid = this.validateName(this.user.name);
+  saveChanges(field: 'name' | 'email'): void {
+    if (field === 'name') {
+      if (this.validateName(this.updatedName)) {
+        this.user.name = this.updatedName;
+        this.isEditingName = false;
+        this.alertService.showSuccess('Nombre actualizado correctamente.');
+      } else {
+        this.alertService.showWarning('El nombre no puede tener caracteres especiales.');
+      }
+    } else if (field === 'email') {
+      if (this.validateEmail(this.updatedEmail)) {
+        this.user.email = this.updatedEmail;
+        this.isEditingEmail = false;
+        this.alertService.showSuccess('Correo actualizado correctamente.');
+      } else {
+        this.alertService.showWarning('Por favor, ingresa un correo válido.');
+      }
+    }
   }
 
   updateProfile(): void {
     this.isSubmitting = true;
-
     if (!this.user.name || !this.user.email || !this.user.password || !this.confirmPassword) {
       this.alertService.showWarning('Por favor, completa todos los campos.');
       this.isSubmitting = false;
       return;
     }
-
     if (!this.emailValid) {
       this.alertService.showWarning('Por favor, ingresa un correo válido.');
       this.isSubmitting = false;
       return;
     }
-
     if (!this.passwordValid) {
       this.alertService.showWarning('La contraseña debe tener al menos 8 caracteres.');
       this.isSubmitting = false;
       return;
     }
-
     if (!this.passwordsMatch) {
       this.alertService.showWarning('Las contraseñas no coinciden.');
       this.isSubmitting = false;
       return;
     }
-
     if (!this.nameValid) {
       this.alertService.showWarning('El nombre de usuario debe comenzar con una letra y no se permiten caracteres especiales.');
       this.isSubmitting = false;
       return;
     }
-
     this.userService.updateProfile(this.userId, this.user).subscribe(
       (response: { message: string; success: boolean }) => {
         this.alertService.showSuccess(response.message);
@@ -112,5 +138,10 @@ export class EditProfileComponent implements OnInit, DoCheck {
         this.isSubmitting = false;
       }
     );
+  }
+
+  cancelChanges(field: 'name' | 'email'): void {
+    if (field === 'name') this.isEditingName = false;
+    if (field === 'email') this.isEditingEmail = false;
   }
 }
