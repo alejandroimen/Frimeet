@@ -12,8 +12,6 @@ import { ReviewComponent } from './users/review/review.component';
 import { PlacesReviewComponent } from './users/places-review/places-review.component';
 import { EventsReviewComponent } from './users/events-review/events-review.component';
 import { DesireViewComponent } from './recommendations/components/desire-view/desire-view.component';
-import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navbar.component';
-import { DesireFormComponent } from './recommendations/desire-form/desire-form.component';
 import { WelcomeStartComponent } from './standalone/welcome-start/welcome-start.component';
 import { PaymentViewComponent } from './payments/components/payment-view/payment-view.component';
 import { RegisterViewComponent } from './users/components/register-view/register-view.component';
