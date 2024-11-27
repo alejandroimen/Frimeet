@@ -1,5 +1,5 @@
 nav {
-    width: 15vw;
+    width: 16vw;
     height: 92vh;
     position: fixed;
     left: 0;
@@ -50,6 +50,7 @@ nav {
     color: rgb(0, 0, 0);
     text-decoration: none;
     display: flex;
+    align-items: center;
     gap: 0.625rem;
     width: 100%;
     font-size: 1rem;

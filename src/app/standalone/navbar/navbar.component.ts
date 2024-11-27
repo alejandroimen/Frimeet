@@ -1,3 +1,4 @@
+import { UserService } from './../../users/services/user.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
@@ -17,7 +18,7 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
   isCollapsed: boolean = true;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userServ: UserService) {}
 
   toggleMenu(): void {
     this.isCollapsed = !this.isCollapsed;
@@ -29,10 +30,8 @@ export class NavbarComponent {
     this.show = !this.show;
   }
 
-  logout():
-  void {
-    localStorage.removeItem('jwtToken');
-    this.router.navigate(['/login']);
-    }
+  logout():void {
+    this.userServ.logout()
+  }
 
 }

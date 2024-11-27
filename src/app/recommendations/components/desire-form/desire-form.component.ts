@@ -7,6 +7,7 @@ import { Iinterest } from '../../interfaces/iinterest';
   styleUrl: './desire-form.component.css'
 })
 export class DesireFormComponent {
+  urlImages: string = 'assets/images/'
   @Input() isHere: boolean = true
   @Output() isHereChange: EventEmitter<boolean> = new EventEmitter()
   interestsList : {
@@ -16,52 +17,49 @@ export class DesireFormComponent {
     {
       name: 'Alimentos',
       content: [
-        {id: 1, name: 'Comida rapida', image: 'assets/images/siluetas.jpg'},
-        {id: 2, name: 'Heladeria', image: 'assets/images/siluetas.jpg'},
-        {id: 3, name: 'Cafeteria', image: 'assets/images/siluetas.jpg'},
-        {id: 4, name: 'Comida', image: 'assets/images/siluetas.jpg'},
-        {id: 5, name: 'Bar', image: 'assets/images/siluetas.jpg'}
+        {id: 1, name: 'Comida rapida', image: `${this.urlImages}comida/rapida.jpg`},
+        {id: 2, name: 'Heladeria', image: `${this.urlImages}comida/helados.webp`},
+        {id: 3, name: 'Cafeteria', image: `${this.urlImages}comida/cafe.webp`},
+        {id: 4, name: 'Comida', image: `${this.urlImages}comida/comida.webp`}
       ]
     },
     {
       name: 'Naturaleza',
       content: [
-        {id: 19, name: 'Animales', image: 'assets/images/siluetas.jpg'},
-        {id: 20, name: 'Plantas', image: 'assets/images/siluetas.jpg'},
-        {id: 21, name: 'Naturaleza', image: 'assets/images/siluetas.jpg'},
-        {id: 22, name: 'Senderismo', image: 'assets/images/siluetas.jpg'},
-        {id: 23, name: 'Exploración', image: 'assets/images/siluetas.jpg'},
-        {id: 31, name: 'Parques', image: 'assets/images/siluetas.jpg'}
+        {id: 19, name: 'Animales', image: `${this.urlImages}naturaleza/animales.webp`},
+        {id: 20, name: 'Plantas', image: `${this.urlImages}naturaleza/planta.webp`},
+        {id: 22, name: 'Senderismo', image: `${this.urlImages}naturaleza/senderismo.jpg`},
+        {id: 23, name: 'Exploración', image: `${this.urlImages}naturaleza/exploracion.webp`},
+        {id: 31, name: 'Parques', image: `${this.urlImages}naturaleza/parque.webp`}
       ]
     },
     {
       name: 'Cultura',
       content: [
-        {id: 8, name: 'Conciertos', image: 'assets/images/siluetas.jpg'},
-        {id: 9, name: 'Grupos de musica', image: 'assets/images/siluetas.jpg'},
-        {id: 10, name: 'Teatro', image: 'assets/images/siluetas.jpg'},
-        {id: 11, name: 'Arte', image: 'assets/images/siluetas.jpg'},
-        {id: 12, name: 'Galerias', image: 'assets/images/siluetas.jpg'},
-        {id: 13, name: 'Museo', image: 'assets/images/siluetas.jpg'}
+        {id: 9, name: 'Grupos de musica', image: `${this.urlImages}cultura/grupos.jpeg`},
+        {id: 10, name: 'Teatro', image: `${this.urlImages}cultura/teatro.jpg`},
+        {id: 11, name: 'Arte', image: `${this.urlImages}cultura/arte.jpg`},
+        {id: 12, name: 'Galerias', image: `${this.urlImages}cultura/galeria.jpg`},
+        {id: 13, name: 'Museo', image: `${this.urlImages}cultura/museo.jpg`}
       ]
     },
     {
       name: 'Salidas casuales',
       content: [
-        {id: 5, name: 'Bar', image: 'assets/images/siluetas.jpg'},
-        {id: 6, name: 'Boliche', image: 'assets/images/siluetas.jpg'},
-        {id: 7, name: 'Karaoke', image: 'assets/images/siluetas.jpg'},
-        {id: 8, name: 'Concierto', image: 'assets/images/siluetas.jpg'}
+        {id: 5, name: 'Bar', image: `${this.urlImages}casual/bar.jpg`},
+        {id: 6, name: 'Boliche', image: `${this.urlImages}casual/boliche.webp`},
+        {id: 7, name: 'Karaoke', image: `${this.urlImages}casual/karaoke.jpg`},
+        {id: 8, name: 'Concierto', image: `${this.urlImages}casual/concierto.jpg`},
+        {id: 15, name: 'Mirador', image: `${this.urlImages}casual/mirador.jpg`}
       ]
     },
     {
       name: 'Ciencia',
       content: [
-        {id: 14, name: 'Planetario', image: 'assets/images/siluetas.jpg'},
-        {id: 15, name: 'Mirador', image: 'assets/images/siluetas.jpg'},
-        {id: 16, name: 'Astronomia', image: 'assets/images/siluetas.jpg'},
-        {id: 17, name: 'Historia', image: 'assets/images/siluetas.jpg'},
-        {id: 18, name: 'Paleontología', image: 'assets/images/siluetas.jpg'}
+        {id: 14, name: 'Planetario', image: `${this.urlImages}ciencia/planetario.jpg`},
+        {id: 16, name: 'Astronomia', image: `${this.urlImages}ciencia/astronomia.jpg`},
+        {id: 17, name: 'Historia', image: `${this.urlImages}ciencia/historia.jpg`},
+        {id: 18, name: 'Paleontología', image: `${this.urlImages}ciencia/paleon.jpg`}
       ]
     }
   ]
