@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DesireFormComponent } from './components/desire-form/desire-form.component';
 import { EventsModule } from "../events/events.module";
-import { ProfileNavbarComponent } from "../standalone/profile-navbar/profile-navbar.component";
 import { TellUsComponent } from './components/tell-us/tell-us.component';
 import { DesireViewComponent } from './components/desire-view/desire-view.component';
 import { InterestSelectorComponent } from './components/interest-selector/interest-selector.component';
@@ -18,7 +17,6 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     EventsModule,
-    ProfileNavbarComponent,
     FormsModule
   ],
   exports: [
