@@ -1,5 +1,5 @@
 <div class="card-group-container">
-  <section *ngFor="let place of places" class="info-place-container" (click)="goToDetails(place._id)">
+  <section *ngFor="let place of places" class="info-place-container">
     <h1>{{ place.name }}</h1>
     <div *ngIf="place.images.length > 1" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
@@ -15,7 +15,9 @@
       <span>{{ place.types }}</span>
       <div>
         <span>
-          <!-- Aquí podrías poner un componente para mostrar el número de opiniones y estrellas si es necesario -->
+          <!-- Icono de corazón para favoritos -->
+          <i class="fa" [ngClass]="{'fa-heart': favorites.has(place._id), 'fa-heart-o': !favorites.has(place._id)}"
+             (click)="toggleFavorite(place._id)"></i>
         </span>
       </div>
     </div>

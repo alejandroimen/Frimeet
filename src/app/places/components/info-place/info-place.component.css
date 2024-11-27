@@ -71,6 +71,28 @@ app-info-place {
     height: 100%;
     object-fit: cover;
 }
+/* favorito */
+.info-corta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.info-corta .fa {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.info-corta .fa-heart {
+    color: red;
+}
+
+.info-corta .fa-heart-o {
+    color: red;
+}
+/* */
 
 .info-corta span {
     font-size: 0.85rem;
