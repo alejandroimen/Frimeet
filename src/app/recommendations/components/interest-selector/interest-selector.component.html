@@ -1,15 +1,18 @@
 <button class="button-open-interests" (click)="changeVisibility()">
     {{interest}}
-        <i class="fa-solid fa-chevron-up"
-            *ngIf="buttonActivate; else open"></i>
-        <ng-template #open>
-            <i class="fa-solid fa-chevron-down"></i>
-        </ng-template>
+    <i class="fa-solid fa-chevron-up"
+        *ngIf="buttonActivate; else open"></i>
+    <ng-template #open>
+        <i class="fa-solid fa-chevron-down"></i>
+    </ng-template>
 </button>
-<div class="container-cards-image-interest" *ngIf="buttonActivate">
-    <div class="card-image-interest"
-        *ngFor="let int of content" (click)="clickCard(int.id)">
-        <img [src]="int.image" alt="">
-        <p>{{int.name}}</p>
+<div class="container-cards-image-interest" 
+    *ngIf="buttonActivate">
+    <div *ngFor="let int of content" 
+        [ngClass]="{'card-image-selected': (allSelected.indexOf(int.id) !== -1), 
+                    'card-image-interest': !(allSelected.indexOf(int.id) !== -1)}" 
+        (click)="clickCard(int.id)">
+            <img [src]="int.image" alt="">
+            <p>{{int.name}}</p>
     </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Iinterest } from '../../interfaces/iinterest';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-desire-form',
@@ -68,16 +69,22 @@ export class DesireFormComponent {
   @Output() interestsSelectedChange:EventEmitter<number[]> = new EventEmitter()
   interestBidirectional: number[] = new Array(this.interestsList.length).fill(-1)
   
+  constructor(private alertServ: AlertService){}
+
   next(): void {
-    this.isHereChange.emit(false)
+    if(this.interestsSelected.length>0){
+      this.isHereChange.emit(false)
+    } else {
+      this.alertServ.showWarning('Selecciona al menos un interes')
+    }  
   }
 
   ngDoCheck():void {
     console.log('EL pinshi numero: ', this.interestBidirectional[this.indexSelected]);
     if(this.interestBidirectional[this.indexSelected]  !== -1 &&
+      this.interestBidirectional[this.indexSelected]  !== -2 &&
       this.interestBidirectional[this.indexSelected]  !== undefined
     ){
-    
       const index = this.interestsSelected.indexOf(this.interestBidirectional[this.indexSelected]);
       console.log('El index es ', index);
       
@@ -86,6 +93,7 @@ export class DesireFormComponent {
       } else {
         this.interestsSelected.push(this.interestBidirectional[this.indexSelected]);
       }
+      this.interestBidirectional[this.indexSelected] = -2     
       console.log('Etos son', this.interestsSelected);
       this.interestsSelectedChange.emit(this.interestsSelected)
     }
