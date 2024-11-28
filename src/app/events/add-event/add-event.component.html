@@ -3,14 +3,20 @@
 
   <div class="input-group">
     <label for="place">Seleccionar lugar:</label>
-    <select id="place" name="idPlace" [(ngModel)]="event.idPlace" (change)="onPlaceChange()">
-      <option *ngFor="let place of places" [value]="place._id">{{ place.name }}</option>
-    </select>
+    <div class="select-container">
+      <select id="place" name="idPlace" [(ngModel)]="event.idPlace" (change)="onPlaceChange()" [disabled]="disablePlaceSelect">
+        <option *ngFor="let place of places" [value]="place._id">{{ place.name }}</option>
+      </select>
+      <span *ngIf="disablePlaceSelect" class="disabled-message">Lugar ya ha sido seleccionado automáticamente</span>
+    </div>
   </div>
+  
 
   <div class="add-place-button">
     <p>¿El lugar donde será el evento no existe?</p>
-    <button type="button" class="add-place-btn" (click)="onAddNewPlace()">Haz click aquí para registrar tu ubicación</button>
+    <button type="button" class="add-place-btn" (click)="onAddNewPlace()">
+      {{ disablePlaceSelect ? 'Volver a registrar la ubicación' : 'Haz click aquí para registrar tu ubicación' }}
+    </button>
   </div>  
 
   <div class="input" [ngClass]="{'invalid': !nameValid && event.name !== ''}">
@@ -21,26 +27,26 @@
 
   <div class="input" [ngClass]="{'invalid': !maxPeoplesValid && event.maxPeoples !== 0}">
     <label for="maxPeoples">Capacidad máxima</label>
-    <input type="number" id="maxPeoples" name="maxPeoples" [(ngModel)]="event.maxPeoples" required>
+    <input type="number" id="maxPeoples" name="maxPeoples" [(ngModel)]="event.maxPeoples" [min]="1" required>
     <small *ngIf="!maxPeoplesValid && event.maxPeoples !== 0" class="error-text">La capacidad máxima debe ser al menos 1.</small>
   </div>
 
   <div class="input">
     <label for="date">Fecha del evento</label>
-    <input type="datetime-local" id="date" name="date" [(ngModel)]="event.date" required>
+    <input type="datetime-local" id="date" name="date" [(ngModel)]="event.date" [min]="currentDate" required>
     <small *ngIf="!dateValid" class="error-text">La fecha del evento debe ser anterior a la fecha de finalización.</small>
   </div>
 
   <div class="input">
     <label for="endDate">Fecha-Hora de fin</label>
-    <input type="datetime-local" id="endDate" name="endDate" [(ngModel)]="event.endDate" required>
+    <input type="datetime-local" id="endDate" name="endDate" [(ngModel)]="event.endDate" [min]="event.date | date: 'yyyy-MM-ddTHH:mm'" required>
     <small *ngIf="!endDateValid" class="error-text">La fecha de finalización debe ser posterior a la fecha del evento.</small>
   </div>
 
   <div class="input" [ngClass]="{'invalid': !descriptionValid && event.description !== ''}">
     <label for="description">Descripción</label>
     <textarea id="description" name="description" [(ngModel)]="event.description" maxlength="250" placeholder="Agrega una breve descripción" required></textarea>
-    <small *ngIf="!descriptionValid && event.description !== ''" class="error-text">La descripción no puede tener más de 250 caracteres.</small>
+    <small *ngIf="!descriptionValid && event.description !== ''" class="error-text">La descripción debe tener entre 1 y 250 caracteres y contener al menos 10 letras.</small>
   </div>
 
   <div class="input" [ngClass]="{'invalid': !addressValid && event.address !== ''}">
@@ -51,7 +57,7 @@
 
   <div class="input">
     <label for="price">Precio de entrada</label>
-    <input type="number" id="price" name="price" [(ngModel)]="event.price">
+    <input type="number" id="price" name="price" [(ngModel)]="event.price" [min]="0">
   </div>
 
   <div class="file-upload-container">
@@ -64,5 +70,5 @@
     </label>
   </div>
 
-  <button type="submit" [disabled]="isSubmitting">Agregar</button>
+  <button type="submit" [disabled]="isSubmitting || !imageSelected || event.coordinates.lat === 0">Agregar</button>
 </form>

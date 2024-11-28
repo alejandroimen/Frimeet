@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class SharedDataService {
   private eventCoordinates: { lat: number, lng: number } = { lat: 0, lng: 0 };
+  private disablePlaceSelect: boolean = false;
 
   setCoordinates(coords: { lat: number, lng: number }): void {
     this.eventCoordinates = coords;
@@ -15,4 +16,12 @@ export class SharedDataService {
     console.log('Coordenadas recuperadas del servicio:', this.eventCoordinates);
     return this.eventCoordinates;
   }
+
+  setDisablePlaceSelect(value: boolean): void { 
+    this.disablePlaceSelect = value; 
+  }
+
+  getDisablePlaceSelect(): boolean { 
+    return this.disablePlaceSelect;
+   }
 }

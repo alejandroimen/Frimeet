@@ -132,3 +132,25 @@
  { 
     border-color: red;
  }
+
+ /* Mensaje del disable en el select*/
+
+  .select-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .disabled-message {
+    display: block;
+    color: var(--orange);
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+  
+  select[disabled] {
+    background-color: #f9f9f9;
+    color: #ccc;
+    cursor: not-allowed;
+  }
+  

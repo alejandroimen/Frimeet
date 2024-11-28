@@ -47,6 +47,8 @@ export class AddEventComponent implements DoCheck {
   addressValid: boolean = true;
   coordinatesValid: boolean = true;
   imageSelected: boolean = false;
+  disablePlaceSelect: boolean = false;
+  currentDate: string ='';
 
   constructor(
     private eventService: EventService,
@@ -57,6 +59,9 @@ export class AddEventComponent implements DoCheck {
   ) {}
 
   ngOnInit(): void {
+    const now= new Date();
+    this.currentDate = now.toISOString().slice(0, 16)
+
     this.placeService.getPlaces().subscribe((data: Iplace[]) => {
       this.places = data;
     });
@@ -67,6 +72,8 @@ export class AddEventComponent implements DoCheck {
       this.event.coordinates = coords;
       console.log('Coordenadas recuperadas del servicio:', coords);
     }
+    this.disablePlaceSelect = this.sharedDataService.getDisablePlaceSelect();
+
   }
 
   onPlaceChange(): void {
@@ -92,7 +99,9 @@ export class AddEventComponent implements DoCheck {
   }
 
   validateDescription(description: string): boolean {
-    return description.length <= 250;
+    const descriptionPattern = /^(?=.*[A-Za-z]).{1,250}$/;
+    const hasEnoughLetters = (description.match(/[A-Za-z]/g) || []).length >= 10;
+    return descriptionPattern.test(description) && hasEnoughLetters;
   }
 
   validateAddress(address: string): boolean {
