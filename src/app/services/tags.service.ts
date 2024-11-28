@@ -44,4 +44,15 @@ export class TagsService {
     return this.http.delete(`${this.apiUrl}tags/${id}/delete`, { headers });
   }
 
+  getTagsEvent(): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get(`${this.apiUrl}tags/events`, { headers });
+  }
+
+  getTagsPlace(): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get(`${this.apiUrl}tags/places`, { headers });
+  }
+  
+
 }

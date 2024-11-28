@@ -1,4 +1,4 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Ievent } from '../interfaces/ievent';
 import { EventService } from '../../services/event.service';
@@ -7,13 +7,14 @@ import { Iplace } from '../../places/interfaces/iplace';
 import { Router } from '@angular/router';
 import { SharedDataService } from '../../services/shared-data.service';
 import { AlertService } from '../../services/alert.service';
+import { TagsService } from '../../services/tags.service';
 
 @Component({
   selector: 'app-add-event',
   templateUrl: './add-event.component.html',
   styleUrls: ['./add-event.component.css']
 })
-export class AddEventComponent implements DoCheck {
+export class AddEventComponent implements OnInit, DoCheck {
   event: Ievent = {
     _id: '',
     name: '',
@@ -48,19 +49,26 @@ export class AddEventComponent implements DoCheck {
   coordinatesValid: boolean = true;
   imageSelected: boolean = false;
   disablePlaceSelect: boolean = false;
-  currentDate: string ='';
+  currentDate: string = '';
+
+  allTags: string[] = []; 
+  selectedTags: string[] = [];
+  itemsPerPage: number = 8; // Número de etiquetas por página
+  currentPage: number = 0; // Página actual
+  visibleTags: string[] = []; // Etiquetas visibles en la página actual
 
   constructor(
     private eventService: EventService,
     private placeService: PlaceService,
     private router: Router,
     private sharedDataService: SharedDataService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private tagsService: TagsService
   ) {}
 
   ngOnInit(): void {
-    const now= new Date();
-    this.currentDate = now.toISOString().slice(0, 16)
+    const now = new Date();
+    this.currentDate = now.toISOString().slice(0, 16);
 
     this.placeService.getPlaces().subscribe((data: Iplace[]) => {
       this.places = data;
@@ -74,7 +82,45 @@ export class AddEventComponent implements DoCheck {
     }
     this.disablePlaceSelect = this.sharedDataService.getDisablePlaceSelect();
 
+    this.tagsService.getTagsEvent().subscribe(tagsData => {
+      this.allTags = tagsData.tagsEvent.map((tag: any) => tag.tagsEvent);
+      this.updateVisibleTags(); // Actualiza las etiquetas visibles
+    });
   }
+
+  updateVisibleTags(): void {
+    const start = this.currentPage * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.visibleTags = this.allTags.slice(start, end); // Subconjunto de etiquetas
+  }
+
+  toggleTag(event: Event, tag: string): void {
+    event.preventDefault();  // Evita la validación del formulario
+    const index = this.selectedTags.indexOf(tag);
+    if (index > -1) {
+      this.selectedTags.splice(index, 1);
+    } else {
+      this.selectedTags.push(tag);
+    }
+  }  
+
+  scrollLeft(event: Event): void {
+    event.preventDefault(); // Evita la validación del formulario
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.updateVisibleTags(); // Actualiza las etiquetas visibles
+    }
+  }
+
+  scrollRight(event: Event): void {
+    event.preventDefault(); // Evita la validación del formulario
+    const maxPage = Math.ceil(this.allTags.length / this.itemsPerPage) - 1;
+    if (this.currentPage < maxPage) {
+      this.currentPage++;
+      this.updateVisibleTags(); // Actualiza las etiquetas visibles
+    }
+  }
+
 
   onPlaceChange(): void {
     const selectedPlace = this.places.find(place => place._id === this.event.idPlace);
@@ -165,6 +211,8 @@ export class AddEventComponent implements DoCheck {
       this.isSubmitting = false;
       return;
     }
+
+    this.event.tag = this.selectedTags; // Añadir las etiquetas seleccionadas al evento
 
     const formData = new FormData();
     formData.append('name', this.event.name);
