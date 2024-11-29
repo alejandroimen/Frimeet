@@ -50,4 +50,9 @@ export class EventService {
     const headers = this.createAuthorizationHeader();
     return this.http.post(`${this.apiUrl}api/events/${id}/leave`, {}, { headers });
   }
+
+  getAttendingEvents(): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get(`${this.apiUrl}api/events/user/attending`, { headers})
+  }
 }
