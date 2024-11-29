@@ -21,6 +21,11 @@ nav {
     font-weight: bold;
 }
 
+.active-link:hover  a {
+    color: var(--black) !important;
+} 
+
+
 .input {
     display: flex;
     flex-direction: column;
@@ -47,7 +52,7 @@ nav {
 }
 
 .value a {
-    color: rgb(0, 0, 0);
+    color: var(--black);
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -58,7 +63,8 @@ nav {
 
 .value:not(:active):hover,
 .value:focus {
-    background-color: #ffc800a4;
+    background-color: var(--yellow);
+    color: var(--black);
 }
 
 .value:focus,
@@ -93,14 +99,14 @@ nav {
 
 .logout-button {
     margin-top: auto;
+    background: none;
     width: 100%;
-    background-color: #ffc800a4;
     border: none;
     padding: 0.625rem;
-    color: #000;
+    color: var(--black);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     gap: 0.5rem;
     font-size: 1rem;
     cursor: pointer;
@@ -110,7 +116,6 @@ nav {
 }
 
 .logout-button:hover {
-    background-color: #ffc800;
     transform: scale(1.05);
 }
 

@@ -12,11 +12,13 @@ import { Time } from '@angular/common';
 export class TellUsComponent {
   @Input() tags: number[] = []
   type: string = ''
-  numPeople: number = 0
-  money: number = 0
-  //time: string = '12:00 p.m'
-  timeOut: number= 0
-  distance: number = 0
+  numPeople: number = 1
+  money: number = 1
+  timeOut: number= 1
+  distance: number = 1
+  validNumPeople: boolean = true
+  validMoney: boolean = true
+  validDistance: boolean = true
 
   constructor(private recServ: RecommendationsService,
               private alertServ: AlertService,
@@ -24,18 +26,15 @@ export class TellUsComponent {
 
   sendForm():void {
     if(!this.type ||
-      !this.numPeople ||
-      !this.money ||
-      //!this.time ||
+      !this.validNumber(this.numPeople) ||
+      !this.validNumber(this.money) ||
       !this.timeOut ||
-      !this.distance ) {
+      !this.validNumber(this.distance) ) {
         console.log(this.type,
           this.numPeople,
           this.money,
-          //this.time,
           this.timeOut,
-          this.distance);
-        
+          this.distance);       
         this.alertServ.showWarning('Por favor completa todos los campos')
         return
     }
@@ -53,5 +52,17 @@ export class TellUsComponent {
         }
       }
     )
+  }
+
+  validNumber(num: number): boolean {
+    if(this.numPeople && this.numPeople>0)
+      return true
+    else return false
+  }
+
+  ngDoCheck(): void {
+    this.validNumPeople = this.validNumber(this.numPeople)
+    this.validMoney = this.validNumber(this.money)
+    this.validDistance = this.validNumber(this.distance)
   }
 }

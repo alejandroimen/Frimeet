@@ -27,12 +27,19 @@ body {
 
 .custom-confirm-button {
     background-color: var(--yellow) !important; /* Cambia el color */
-    color: white !important;
+    color: var(--black) !important;
     border: none !important;
     border-radius: 5px !important;
     padding: 10px 20px !important;
     font-size: 16px !important;
+    font-weight: 500 !important;
     width: 12em !important;
+    transition: 0.3s !important;
+}
+
+.custom-confirm-button:hover{
+    background-color: var(--orange) !important;
+    transition: 0.3s !important;
 }
 
 app-add-place,
@@ -74,5 +81,5 @@ button:active {
   
   .error-text {
     color: var(--red);
-    font-size: 12px;
+    font-size: 14px;
   }
