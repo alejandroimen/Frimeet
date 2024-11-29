@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlaceService } from '../../places/services/place.service';
 import { Iplace } from '../../places/interfaces/iplace';
+import { FavoriteService } from '../../services/favorite.service';
 
 @Component({
   selector: 'app-places-review',
@@ -26,12 +27,13 @@ export class PlacesReviewComponent {
     }
   };
 
-  constructor(private placeService: PlaceService, private router: Router) {}
+  constructor(private placeService: PlaceService, private router: Router, private favoriteService: FavoriteService) {}
 
   ngOnInit(): void {
-    this.placeService.getPlaces().subscribe(
-      (data: Iplace[]) => {
-        this.places = data;
+    this.favoriteService.getFavorites().subscribe(
+      (data: any) => {
+        // Suponiendo que el servicio devuelve una estructura como { idFavorite: ..., place: {...} }
+        this.places = data.map((item: any) => item.place);
         console.log('Lugares obtenidos:', this.places);
       },
       error => {

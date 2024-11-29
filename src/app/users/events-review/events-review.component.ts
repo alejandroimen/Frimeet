@@ -35,7 +35,7 @@ export class EventsReviewComponent {
   constructor(private eventService: EventService, private router: Router) {}
 
   ngOnInit(): void {
-    this.eventService.getEvents().subscribe(
+    this.eventService.getAttendingEvents().subscribe(
       (data: Ievent[]) => {
         this.events = data;
         console.log('Eventos obtenidos:', this.events);

@@ -54,6 +54,7 @@ export class EditProfileComponent implements OnInit, DoCheck {
           password: '',
           rol: response.rol,
         };
+        this.userId = response.id;
       },
       () => {
         this.alertService.showError('Hubo un error al cargar los datos del usuario.');
@@ -84,17 +85,33 @@ export class EditProfileComponent implements OnInit, DoCheck {
   saveChanges(field: 'name' | 'email'): void {
     if (field === 'name') {
       if (this.validateName(this.updatedName)) {
-        this.user.name = this.updatedName;
-        this.isEditingName = false;
-        this.alertService.showSuccess('Nombre actualizado correctamente.');
+        const updatedUser: Partial<Iuser> = { name: this.updatedName };
+        this.userService.updateProfile(this.userId, updatedUser as Iuser).subscribe(
+          () => {
+            this.user.name = this.updatedName;
+            this.isEditingName = false;
+            this.alertService.showSuccess('Nombre actualizado correctamente.');
+          },
+          () => {
+            this.alertService.showError('Hubo un error al actualizar el nombre.');
+          }
+        );
       } else {
         this.alertService.showWarning('El nombre no puede tener caracteres especiales.');
       }
     } else if (field === 'email') {
       if (this.validateEmail(this.updatedEmail)) {
-        this.user.email = this.updatedEmail;
-        this.isEditingEmail = false;
-        this.alertService.showSuccess('Correo actualizado correctamente.');
+        const updatedUser: Partial<Iuser> = { email: this.updatedEmail };
+        this.userService.updateProfile(this.userId, updatedUser as Iuser).subscribe(
+          () => {
+            this.user.email = this.updatedEmail;
+            this.isEditingEmail = false;
+            this.alertService.showSuccess('Correo actualizado correctamente.');
+          },
+          () => {
+            this.alertService.showError('Hubo un error al actualizar el correo.');
+          }
+        );
       } else {
         this.alertService.showWarning('Por favor, ingresa un correo válido.');
       }
