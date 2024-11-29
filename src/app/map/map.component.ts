@@ -23,7 +23,7 @@ export class MapComponent implements AfterViewInit {
 
   private initializeMap(): void {
     // Crear el mapa centrado en una ubicación inicial
-    this.map = L.map('map').setView([37.7749, -122.4194], 12); // San Francisco
+    this.map = L.map('map').setView([16.753045453139816, -93.1156221748877], 12); // Tuxtla Gutierrez, parque de la marimba
 
     // Agregar el mapa base de OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

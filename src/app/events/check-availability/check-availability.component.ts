@@ -41,6 +41,7 @@ export class CheckAvailabilityComponent {
   }
 
   onNext(): void {
+    this.sharedDataService.setDisablePlaceSelect(true);
     console.log('Redireccionando con coordenadas:', this.sharedDataService.getCoordinates());
     this.router.navigate(['/add-event']); // Actualizar la ruta según sea necesario
   }
