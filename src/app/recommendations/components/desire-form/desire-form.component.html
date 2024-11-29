@@ -1,7 +1,9 @@
 <div class="content-desire">
+    <h2>Dinos de qué tienes ganas</h2>
     <div class="scroll-desire-options">
         <app-interest-selector
             *ngFor="let interest of interestsList; let i = index"
+            [allSelected]="interestsSelected"
             [interest]="interest.name"
             [content]="interest.content"
             [(selected)]="interestBidirectional[i]"

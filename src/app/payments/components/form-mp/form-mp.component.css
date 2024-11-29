@@ -233,7 +233,7 @@ small {
     display: block;
     position: absolute;
     aspect-ratio: 1 / 1;
-    background: red;
+    background: var(--red);
     bottom: -10px;
     right: 0px;
     border-radius: 50%;

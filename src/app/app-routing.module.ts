@@ -33,7 +33,7 @@ const routes: Routes = [
   {path: 'review', component: ReviewComponent},
   {path: 'places-review', component: PlacesReviewComponent},
   {path: 'events-review', component: EventsReviewComponent},
-  {path: 'desire-form', component: DesireViewComponent},
+  {path: 'desire', component: DesireViewComponent},
   {path: 'welcome-start', component: WelcomeStartComponent},
   {path: 'edit-profile', component: EditProfileComponent},
   {path: 'events/:id', component: DetailsEventComponent},

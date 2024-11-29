@@ -1,6 +1,7 @@
 .content-desire {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
   width: 48vw;
   height: 80vh;
@@ -8,7 +9,12 @@
   padding: 0px 40px;
 }
 
+h2 {
+  font-size: 24px;
+}
+
 .scroll-desire-options {
+  height: 80%;
   width: 100%;
   overflow-y: scroll;
 }

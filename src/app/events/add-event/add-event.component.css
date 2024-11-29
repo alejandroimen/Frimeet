@@ -121,16 +121,12 @@
     transition: 0.3s;
 }
 
-.error-text { 
-    color: red; 
-    font-size: 12px; 
-    margin-top: 5px; 
-} 
 
 .invalid input, 
 .invalid textarea
  { 
-    border-color: red;
+    border-color: var(--red);
+ 
  }
 
  /* Mensaje del disable en el select*/

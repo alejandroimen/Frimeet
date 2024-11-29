@@ -6,6 +6,7 @@ import { TellUsComponent } from './components/tell-us/tell-us.component';
 import { DesireViewComponent } from './components/desire-view/desire-view.component';
 import { InterestSelectorComponent } from './components/interest-selector/interest-selector.component';
 import { FormsModule } from '@angular/forms';
+import { ResultViewComponent } from './components/result-view/result-view.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { FormsModule } from '@angular/forms';
     TellUsComponent,
     DesireViewComponent,
     InterestSelectorComponent,
+    ResultViewComponent,
   ],
   imports: [
     CommonModule,
