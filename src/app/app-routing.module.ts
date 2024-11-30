@@ -20,6 +20,8 @@ import { RemindersViewsComponent } from './reminders/components/reminders-views/
 import { MapComponent } from './map/map.component';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 import { ResultViewComponent } from './recommendations/components/result-view/result-view.component';
+import { AceptPlacesComponent } from './places/components/acept-places/acept-places.component';
+import { InfoAceptPlacesComponent } from './places/components/info-acept-places/info-acept-places.component';
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
@@ -42,7 +44,9 @@ const routes: Routes = [
   {path: 'places/:id', component: DetailsPlaceComponent},
   {path: 'payment', component: PaymentViewComponent},
   {path: 'reminders/:id', component: RemindersViewsComponent},
-  { path: 'map', component: MapComponent}
+  { path: 'map', component: MapComponent},
+  {path: 'acept-place', component: AceptPlacesComponent},
+  {path: 'acept-place/:id', component: InfoAceptPlacesComponent}
 ];
 
 @NgModule({

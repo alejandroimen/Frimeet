@@ -49,7 +49,11 @@ app-info-event,
 app-details-event,
 app-payment-view,
 app-reminders-views,
-app-desire-view {
+app-desire-view,
+app-edit-profile,
+app-review,
+app-events-review,
+app-places-review {
     position: relative;
     left: 20vw;
     top: 8vh;
