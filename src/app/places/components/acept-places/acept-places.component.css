@@ -1,0 +1,118 @@
+.card-group-container-acept {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.acept-place-container {
+    position: relative;
+    width: 220px;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+    color: white;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.acept-place-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 15px 25px #F28C22;
+}
+
+.banner-place {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.banner-place img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* favorito */
+.info-corta-acept {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.info-corta-acept .fa {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.info-corta-acept .fa-heart {
+    color: var(--red);
+}
+
+.info-corta-acept .fa-heart-o {
+    color: var(--red);
+}
+/* */
+
+.card-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 10px 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000000;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #000000;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.info-cortaacept span {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #000;
+    text-transform: uppercase;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.tags-container span {
+    background-color: #ffc700;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+}
+
+@media (max-width: 1024px) {
+    .card-group-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .card-group-container {
+        grid-template-columns: 1fr;
+    }
+}
