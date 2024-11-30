@@ -21,9 +21,9 @@ nav {
     font-weight: bold;
 }
 
-.active-link:hover  a {
+.active-link:hover a {
     color: var(--black) !important;
-} 
+}
 
 
 .input {
@@ -91,9 +91,9 @@ nav {
     opacity: 1;
 }
 
-.input:hover > :not(.value:hover) {
+.input:hover> :not(.value:hover) {
     transition: 300ms;
-    filter: blur(0.0625rem);
+
     transform: scale(0.95, 0.95);
 }
 
