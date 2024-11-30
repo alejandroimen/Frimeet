@@ -43,7 +43,7 @@ export class TellUsComponent {
       response => {
         console.log('Exito', response);
         const id = response.places[0].id
-        this.router.navigate(['/places', id])
+        this.router.navigate(['/recommendation', id])
       },
       error => {
         console.log('Error: ', error);
