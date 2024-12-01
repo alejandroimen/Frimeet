@@ -326,7 +326,7 @@
 }
 
 .modal-header {
-    background-color: var(--yellow);
+    background-color: var(--yellow) !important;
     color: #000000;
     border-bottom: none;
     padding: 15px;

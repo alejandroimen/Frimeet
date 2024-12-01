@@ -1,19 +1,19 @@
 <div class="welcome-container">
-    <h1>¡ WELCOME !</h1>
-    <img src="logo-white.svg" alt="">
-    <span>Te ayudamos a planear tu salida</span>
-  
-    <!-- Contenedor de la ruleta -->
-    <div class="roulette-container">
-        <p>¿No estas seguro de a donde ir? <br>
-            Nosotros te ayudamos.</p>
-      <div class="roulette-wrapper">
-        <img src="rulet.svg" alt="Ruleta de opciones" class="roulette-image" />
-        <button class="surprise-button">
-          <span style="color: var(--black);">Sorpréndeme</span>
-          <i class="fa-solid fa-dice dice-icon"></i>
-        </button>
-      </div>
+  <h1>¡ WELCOME !</h1>
+  <img src="logo-white.svg" alt="">
+  <span>Te ayudamos a planear tu salida</span>
+
+  <!-- Contenedor de la ruleta -->
+  <div class="roulette-container">
+    <p>¿No estás seguro de a dónde ir? <br>
+      Nosotros te ayudamos.</p>
+    <div class="roulette-wrapper">
+      <img src="rulet.svg" alt="Ruleta de opciones" class="roulette-image" />
+      <button class="surprise-button" (click)="surpriseMe()" [disabled]="userIdRol === 1 && attemptsRemaining <= 0">
+        <span *ngIf="userIdRol === 1" style="color: var(--black); text-align: center;">Sorpréndeme ({{ attemptsRemaining }})</span>
+        <span *ngIf="userIdRol !== 1" style="color: var(--black); text-align: center;">Sorpréndeme</span> 
+        <i class="fa-solid fa-dice dice-icon"></i>
+      </button>
     </div>
   </div>
-  
+</div>

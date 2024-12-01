@@ -18,7 +18,7 @@ export class PlacesReviewComponent {
     description: "",
     images: [],
     address: "",
-    tag: "",
+    tag: [],
     totalStarts: 0,
     userOwner: 0,
     coordinates: {
