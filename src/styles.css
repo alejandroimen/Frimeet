@@ -83,3 +83,141 @@ button:active {
     color: var(--red);
     font-size: 14px;
   }
+
+.container-load {
+    width: 25vw !important;
+    height: 30vw !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 10px;
+    transform: scale(0%);
+    animation: grow .5s ease forwards;
+}
+
+.container-load .circle {
+    width: 240px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 7px solid var(--yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-load .circle .dots {
+    width: 50%;
+    height: 50%;
+    position: relative;
+    transform:  scale(200%);
+}
+
+.container-load .circle .dot {
+    position: absolute;
+    width: 5px;
+    aspect-ratio: 1;
+    border-radius:  50%;
+    background-color: var(--black-soft);
+    offset-path: path('M1 95.5C4.5 58 20 36 30.5 36C41 36 47.5 48 51.5 64C55.5 80 62 95.5 70.5 95.5C79 95.5 97.5 83 101.5 0.5');
+    opacity: 0; /*Pa q se oculten*/
+    transform: translateY(1px); /* Se desplazan un poco hacia abajo para dar un efecto shidori */
+    animation: fadeInUp 3.6s ease forwards;
+    animation-iteration-count: infinite;
+}
+
+.container-load svg {
+    position: absolute;
+}
+
+.container-load span {
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-top: 25px;
+}
+
+.dot:nth-child(1) {
+    offset-distance: 0%;
+    animation-delay: 0s !important;
+}
+.dot:nth-child(2) {
+    offset-distance: 10%;
+    animation-delay: 0.4s !important;
+}
+
+.dot:nth-child(3) {
+    offset-distance: 20%;
+    animation-delay: 0.8s !important;
+}
+
+.dot:nth-child(4) {
+    offset-distance: 30%;
+    animation-delay: 1.2s !important;
+}
+
+.dot:nth-child(5) {
+    offset-distance: 40%;
+    animation-delay: 1.6s !important;
+}
+
+.dot:nth-child(6) {
+    offset-distance: 50%;
+    animation-delay: 2s !important;
+}
+
+.dot:nth-child(7) {
+    offset-distance: 60%;
+    animation-delay: 2.4s !important;
+}
+
+.dot:nth-child(8) {
+    offset-distance: 70%;
+    animation-delay: 2.8s !important;
+}
+
+.dot:nth-child(9) {
+    offset-distance: 80%;
+    animation-delay: 3.2s !important;
+}
+
+.container-load .circle i {
+    font-size: 32px;
+    color: var(--red);
+    offset-distance: 95%;
+    offset-path: path('M1 95.5C4.5 58 20 36 30.5 36C41 36 47.5 48 51.5 64C55.5 80 62 95.5 70.5 95.5C79 95.5 97.5 83 101.5 0.5');
+    transform: rotate(87deg) translate(-190%) !important;
+    animation: fadeInUp 4s ease forwards;
+    animation-delay: 3.6s;
+    animation-iteration-count: infinite;
+}
+
+.swal-class-container-load {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 20px !important;
+}
+.custom-popup-style {
+    border-radius: 20px !important;
+}
+
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(1px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+@keyframes grow {
+    from {
+        transform: scale(0%);
+    }
+    to {
+        transform: scale(100%);
+    }
+}

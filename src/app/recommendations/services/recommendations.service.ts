@@ -8,7 +8,7 @@ import { Iplace } from '../../places/interfaces/iplace';
   providedIn: 'root'
 })
 export class RecommendationsService {
-  url: string = 'http://localhost:3000/api/places'
+  apiUrl: string = 'http://localhost:3000/api/places'
 
   constructor(private http: HttpClient) { }
 
@@ -21,11 +21,8 @@ export class RecommendationsService {
     });
   }
 
-  suggest(tagList: number[], typePlace: string): Observable<any> {
-    const headers: HttpHeaders = this.createAuthorizationHeader()
-    return this.http.post(`${this.url}/suggest`, {
-      tags: tagList,
-      type: typePlace
-    }, {headers})
-  }
+  suggest(data: { type: string, tags: number[] }): Observable<any> { 
+    const headers = this.createAuthorizationHeader(); 
+    return this.http.post(`${this.apiUrl}/tags/places/filter`, data, { headers }); 
+    }
 }
