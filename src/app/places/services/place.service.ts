@@ -57,4 +57,9 @@ export class PlaceService {
     return this.http.get(`${this.apiUrl}api/places/approved`, {headers})
   }
 
+  getRandomPlace(): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get(`${this.apiUrl}api/places/random`, {headers})
+  }
+
 }

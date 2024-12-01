@@ -21,6 +21,7 @@ import { MapComponent } from './map/map.component';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 import { AceptPlacesComponent } from './places/components/acept-places/acept-places.component';
 import { InfoAceptPlacesComponent } from './places/components/info-acept-places/info-acept-places.component';
+import { SorpresePlaceComponent } from './places/components/sorprese-place/sorprese-place.component';
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
@@ -44,7 +45,8 @@ const routes: Routes = [
   {path: 'reminders/:id', component: RemindersViewsComponent},
   { path: 'map', component: MapComponent},
   {path: 'acept-place', component: AceptPlacesComponent},
-  {path: 'acept-place/:id', component: InfoAceptPlacesComponent}
+  {path: 'acept-place/:id', component: InfoAceptPlacesComponent},
+  {path: 'random/:id', component: SorpresePlaceComponent}
 ];
 
 @NgModule({
