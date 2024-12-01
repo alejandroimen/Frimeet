@@ -9,6 +9,7 @@ import { MapComponent } from '../map/map.component';
 import { MapDisplayComponent } from '../map-display/map-display.component';
 import { AceptPlacesComponent } from './components/acept-places/acept-places.component';
 import { InfoAceptPlacesComponent } from './components/info-acept-places/info-acept-places.component';
+import { SorpresePlaceComponent } from './components/sorprese-place/sorprese-place.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { InfoAceptPlacesComponent } from './components/info-acept-places/info-ac
     DetailsPlaceComponent,
     MapComponent,
     AceptPlacesComponent,
-    InfoAceptPlacesComponent
+    InfoAceptPlacesComponent,
+    SorpresePlaceComponent
   ],
   imports: [
     CommonModule,

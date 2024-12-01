@@ -21,7 +21,7 @@
     </div>
     <p class="card-text" *ngIf="place.description">{{ place.description }}</p>
     <div *ngIf="place.tag" class="tags-container">
-      <span *ngFor="let tag of place.tag.split(',')">{{ tag }}</span>
+      <span *ngFor="let tag of place.tag">{{ tag }}</span>
     </div>
   </section>
 </div>

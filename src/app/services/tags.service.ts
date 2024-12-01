@@ -54,5 +54,4 @@ export class TagsService {
     return this.http.get(`${this.apiUrl}tags/places`, { headers });
   }
   
-
 }

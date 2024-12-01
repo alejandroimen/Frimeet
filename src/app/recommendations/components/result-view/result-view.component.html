@@ -49,7 +49,7 @@
     </div>
     <p class="description">{{ place.description }}</p>
     <div *ngIf="place.tag" class="tags-container">
-      <span *ngFor="let tag of place.tag.split(',')">{{ place.tag }}</span>
+      <span *ngFor="let tag of place.tag">{{ tag }}</span>
     </div>
     <div class="address">
       <h5>Lo encuentras en:</h5>

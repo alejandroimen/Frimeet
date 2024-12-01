@@ -47,7 +47,7 @@
     </div>
     <p class="description">{{ place.description }}</p>
     <div *ngIf="place.tag" class="tags-container">
-      <span *ngFor="let tag of place.tag.split(',')">{{ place.tag }}</span>
+      <span *ngFor="let tag of place.tag">{{ tag }}</span>
     </div>
     <div class="address">
       <h5>Direccion:</h5>
@@ -143,11 +143,6 @@
             <label for="placeAddress" class="form-label">Dirección</label>
             <input type="text" class="form-control" id="placeAddress" [(ngModel)]="place.address" name="address" required>
             <small *ngIf="!addressValid && place.address !== ''" class="error-text">La dirección no puede estar vacía.</small>
-          </div>
-          <div class="mb-3" [ngClass]="{'invalid': !tagsValid && place.tag !== ''}">
-            <label for="placeTags" class="form-label">Etiquetas</label>
-            <input type="text" class="form-control" id="placeTags" [(ngModel)]="place.tag" name="tags" required>
-            <small *ngIf="!tagsValid && place.tag !== ''" class="error-text">Las etiquetas no pueden estar vacías.</small>
           </div>
           <div class="mb-3">
             <label for="file-input" class="form-label">Subir Nuevas Imágenes</label>
