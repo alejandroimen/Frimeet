@@ -19,6 +19,7 @@ import { LoginComponent } from './users/components/login/login.component';
 import { RemindersViewsComponent } from './reminders/components/reminders-views/reminders-views.component';
 import { MapComponent } from './map/map.component';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
+import { ResultViewComponent } from './recommendations/components/result-view/result-view.component';
 import { AceptPlacesComponent } from './places/components/acept-places/acept-places.component';
 import { InfoAceptPlacesComponent } from './places/components/info-acept-places/info-acept-places.component';
 import { SorpresePlaceComponent } from './places/components/sorprese-place/sorprese-place.component';
@@ -37,6 +38,7 @@ const routes: Routes = [
   {path: 'places-review', component: PlacesReviewComponent},
   {path: 'events-review', component: EventsReviewComponent},
   {path: 'desire', component: DesireViewComponent},
+  {path: 'recommendation/:id', component: ResultViewComponent},
   {path: 'welcome-start', component: WelcomeStartComponent},
   {path: 'edit-profile', component: EditProfileComponent},
   {path: 'events/:id', component: DetailsEventComponent},
