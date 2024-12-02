@@ -23,7 +23,7 @@ export class MapsComponent implements AfterViewInit {
 
   private initializeMap(): void {
     // Crear el mapa centrado en una ubicación inicial
-    this.map = L.map('map').setView([16.753045453139816, -93.1156221748877], 12); 
+    this.map = L.map('map').setView([16.753045453139816, -93.1156221748877], 12);
 
     // Agregar el mapa base de OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -51,5 +51,4 @@ export class MapsComponent implements AfterViewInit {
     L.marker([lat, lng]).addTo(this.map);
   }
 
-  
 }

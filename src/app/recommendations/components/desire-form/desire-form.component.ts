@@ -98,4 +98,8 @@ export class DesireFormComponent {
       this.interestsSelectedChange.emit(this.interestsSelected)
     }
   }
+
+  test(): void {
+    this.alertServ.showLoading()
+  }
 }

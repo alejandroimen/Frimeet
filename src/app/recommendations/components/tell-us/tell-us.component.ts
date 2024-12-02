@@ -38,14 +38,24 @@ export class TellUsComponent {
         this.alertServ.showWarning('Por favor completa todos los campos')
         return
     }
+    let loadingTimeout: any;
 
-    this.recServ.suggest(this.tags, this.type).subscribe(
+    // Inicia un temporizador para mostrar la alerta después de 0.5 segundos
+    loadingTimeout = setTimeout(() => {
+      this.alertServ.showLoading();
+    }, 500);
+
+    this.recServ.suggest({type: this.type, tags: this.tags}).subscribe(
       response => {
+        clearTimeout(loadingTimeout);//Limpia el temporizador para que la alerta se muestre solamente despues de 0.5s
+        this.alertServ.closeLoading();
         console.log('Exito', response);
-        const id = response.places[0].id
+        const id = response.places[0]._id
         this.router.navigate(['/recommendation', id])
       },
       error => {
+        clearTimeout(loadingTimeout);
+        this.alertServ.closeLoading();
         console.log('Error: ', error);
         if(error.error.message === 'No se encontraron lugares para las etiquetas y tipo proporcionados'){
           this.alertServ.showError('Lo sentimos, no encontramos lugares que coincidan :C')

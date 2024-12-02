@@ -1,10 +1,31 @@
+.card-group-container-review {
+  width: 60vw;
+  height: 70vh;
+  margin: 5vh auto;
+  padding: 20px;
+  margin-left: -25vw;
+  transition: 0.3s ease-in-out;
+}
+
 .reviews-container {
+  display: grid;
   width: 100%;
   max-width: 1000px;
   margin: 60px auto;
   padding: 10px;
-  font-family: Arial, sans-serif;
   text-align: center;
+  box-sizing: border-box;
+  margin-right: 15vw;
+  transform: translateX(5vw);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-group-container-review.collapsed {
+  transform: translateX(-1vw);
+}
+
+.card-group-container-review.expanded {
+  transform: translateX(6vw);
 }
 
 .reviews-container h2 {

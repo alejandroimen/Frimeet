@@ -33,24 +33,25 @@
   </div>
 
   <div class="container-info-right">
-     <!-- Map -->
-     <div class="event-map">
+    <!-- Map -->
+    <div class="event-map">
       <div id="google-map">
         <app-map-display [lat]="event.coordinates.lat" [lng]="event.coordinates.lng"></app-map-display>
       </div>
     </div>
     <!-- Basic Info -->
     <div class="info-corta">
-      <p> Fecha de inicio: {{ event.date | date: 'shortTime' }} <br/> Fecha de finalización: {{ event.endDate | date: 'shortTime' }}</p>
+      <p> Fecha de inicio: {{ event.date | date: 'shortTime' }} <br /> Fecha de finalización: {{ event.endDate | date:
+        'shortTime' }}</p>
       <p>{{ event.willAttend }} asistentes 👤</p>
       <p>Precio de entrada: ${{ event.price }}</p>
       <p>Cupo maximo: {{event.maxPeoples}}</p>
-     <!-- Tags -->
-    <div class="tags">
-     <ng-container *ngFor="let tag of event?.tag">
-      <button>{{ tag }}</button>
-     </ng-container>
-     </div>
+      <!-- Tags -->
+      <div class="tags">
+        <ng-container *ngFor="let tag of event?.tag">
+          <button>{{ tag }}</button>
+        </ng-container>
+      </div>
       <!-- Description -->
       <h6> Descripción: </h6>
       <p class="description"> {{ event.description }}</p>
@@ -62,134 +63,133 @@
       <div class="button-group" *ngIf="!isOwner && !isAttendee">
         <button class="btn btn-primary btn-confirm" (click)="joinEvent()">Confirmar Asistencia</button>
       </div>
-      
+
       <div class="button-group" *ngIf="!isOwner && isAttendee">
         <button class="btn btn-secondary btn-confirm" (click)="leaveEvent()">Salir del Evento</button>
-      </div>      
-  </div>
-  <div class="button-group" *ngIf="isOwner" >
-    <button class="btn btn-primary" (click)="openUpdateModal()">Actualizar Evento</button>
-    <button class="btn btn-danger" (click)="openDeleteModal()">Eliminar Evento</button>
-  </div>
-
-  <!-- Modal para todas las imágenes -->
-  <div id="photosModal" class="custom-modal">
-    <div class="custom-modal-content">
-      <span class="close" (click)="closePhotosModal()">&times;</span>
-      <h5>Fotos de "{{ event.name }}"</h5>
-      <div class="photos-grid">
-        <img *ngFor="let img of event.images" [src]="img" alt="Imagen de {{ event.name }}">
       </div>
     </div>
-  </div>
+    <div class="button-group" *ngIf="isOwner">
+      <button class="btn btn-primary" (click)="openUpdateModal()">Actualizar Evento</button>
+      <button class="btn btn-danger" (click)="openDeleteModal()">Eliminar Evento</button>
+    </div>
 
-  <!-- Modal de Eliminación -->
-  <div id="deleteModal" class="custom-modal">
-    <div class="custom-modal-content">
-      <span class="close" (click)="closeDeleteModal()">&times;</span>
-      <h5>Confirmar Eliminación</h5>
-      <p>¿Estás seguro de que deseas eliminar este evento?</p>
-      <div class="modal-actions">
-        <button class="btn btn-primary" (click)="closeDeleteModal()">Cancelar</button>
-        <button class="btn btn-danger" (click)="deleteEvent()">Eliminar</button>
+    <!-- Modal para todas las imágenes -->
+    <div id="photosModal" class="custom-modal">
+      <div class="custom-modal-content">
+        <span class="close" (click)="closePhotosModal()">&times;</span>
+        <h5>Fotos de "{{ event.name }}"</h5>
+        <div class="photos-grid">
+          <img *ngFor="let img of event.images" [src]="img" alt="Imagen de {{ event.name }}">
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Modal de Actualización -->
-<div id="updateModal" class="custom-modal">
-  <div class="custom-modal-content">
-    <span class="close" (click)="closeUpdateModal()">&times;</span>
-    <h5>Actualizar Evento</h5>
-    <form #eventForm="ngForm" (ngSubmit)="updateEvent(eventForm)" novalidate>
-      <!-- Nombre del Evento -->
-      <div class="mb-3">
-        <label for="eventName" class="form-label">Nombre del Evento</label>
-        <input type="text" class="form-control" id="eventName" [(ngModel)]="event.name" name="name" maxlength="50" required
-        />
-        <div *ngIf="eventForm.submitted && !eventForm.controls['name']?.valid" class="error-text">
-          Nombre es requerido, debe comenzar con una letra y no exceder los 50 caracteres.
+    <!-- Modal de Eliminación -->
+    <div id="deleteModal" class="custom-modal">
+      <div class="custom-modal-content">
+        <span class="close" (click)="closeDeleteModal()">&times;</span>
+        <h5>Confirmar Eliminación</h5>
+        <p>¿Estás seguro de que deseas eliminar este evento?</p>
+        <div class="modal-actions">
+          <button class="btn btn-primary" (click)="closeDeleteModal()">Cancelar</button>
+          <button class="btn btn-danger" (click)="deleteEvent()">Eliminar</button>
         </div>
       </div>
-    
-      <!-- Descripción -->
-      <div class="mb-3">
-        <label for="eventDescription" class="form-label">Descripción</label>
-        <textarea class="form-control" id="eventDescription" [(ngModel)]="event.description" name="description" maxlength="250" required
-        ></textarea>
-        <div *ngIf="eventForm.submitted && !eventForm.controls['description']?.valid" class="error-text">
-          Descripción es requerida y no debe exceder los 250 caracteres.
-        </div>
-      </div>
-    
-      <!-- Dirección -->
-      <div class="mb-3">
-        <label for="eventAddress" class="form-label">Dirección</label>
-        <input type="text" class="form-control" id="eventAddress" [(ngModel)]="event.address" name="address" required
-        />
-        <div *ngIf="eventForm.submitted && !eventForm.controls['address']?.valid" class="error-text">
-          Dirección es requerida.
-        </div>
-      </div>
-    
-      <!-- Capacidad Máxima -->
-      <div class="mb-3">
-        <label for="eventMaxPeoples" class="form-label">Capacidad Máxima</label>
-        <input type="number" class="form-control" id="eventMaxPeoples" [(ngModel)]="event.maxPeoples" name="maxPeoples" required
-        />
-        <div *ngIf="eventForm.submitted && !eventForm.controls['maxPeoples']?.valid" class="error-text">
-          Capacidad Máxima es requerida.
-        </div>
-      </div>
-    
-      <!-- Fecha de Inicio -->
-      <div class="mb-3">
-        <label for="eventDate" class="form-label">Fecha de Inicio</label>
-        <input type="datetime-local" class="form-control" id="eventDate" [(ngModel)]="event.date" name="date" required
-        />
-        <div *ngIf="eventForm.submitted && !eventForm.controls['date']?.valid" class="error-text">
-          Fecha de Inicio es requerida.
-        </div>
-      </div>    
-      <!-- Fecha de Finalización -->
-      <div class="mb-3">
-        <label for="eventEndDate" class="form-label">Fecha de Finalización</label>
-        <input type="datetime-local" class="form-control" id="eventEndDate" [(ngModel)]="event.endDate" name="endDate" required
-        />
-        <div *ngIf="eventForm.submitted && !eventForm.controls['endDate']?.valid" class="error-text">
-          Fecha de Finalización es requerida.
-        </div>
-      </div>
-    
-      <!-- Precio -->
-      <div class="mb-3">
-        <label for="eventPrice" class="form-label">Precio del Evento</label>
-        <input type="number" class="form-control" id="eventPrice" [(ngModel)]="event.price" name="price"
-        />
-      </div>
-    
-      <!-- Subir Nuevas Imágenes -->
-      <div class="mb-3">
-        <label for="file-input" class="form-label">Subir Nuevas Imágenes</label>
-        <input type="file" class="form-control" id="file-input" (change)="onFileSelected($event)" multiple />
-        <div class="image-container" *ngIf="event?.images?.length">
-          <div *ngFor="let img of event.images">
-            <img [src]="img" alt="Imagen existente" class="existing-image-preview" />
-          </div>      
-        </div>
-        <div *ngIf="eventForm.submitted && !imageSelected" class="error-text">
-          Por favor, selecciona al menos una imagen.
-        </div>
-      </div>
-      
-      <!-- Botones -->
-      <div class="modal-actions">
-        <button class="btn btn-secondary" type="button" (click)="closeUpdateModal()">Cancelar</button>
-        <button class="btn btn-primary" type="submit">Actualizar</button>
-      </div>
-    </form>
-    
-  </div>
-</div>
+    </div>
 
-</div>
+    <!-- Modal de Actualización -->
+    <div id="updateModal" class="custom-modal">
+      <div class="custom-modal-content">
+        <span class="close" (click)="closeUpdateModal()">&times;</span>
+        <h5>Actualizar Evento</h5>
+        <form #eventForm="ngForm" (ngSubmit)="updateEvent(eventForm)" novalidate>
+          <!-- Nombre del Evento -->
+          <div class="mb-3">
+            <label for="eventName" class="form-label">Nombre del Evento</label>
+            <input type="text" class="form-control" id="eventName" [(ngModel)]="event.name" name="name" maxlength="50"
+              required />
+            <div *ngIf="eventForm.submitted && !eventForm.controls['name']?.valid" class="error-text">
+              Nombre es requerido, debe comenzar con una letra y no exceder los 50 caracteres.
+            </div>
+          </div>
+
+          <!-- Descripción -->
+          <div class="mb-3">
+            <label for="eventDescription" class="form-label">Descripción</label>
+            <textarea class="form-control" id="eventDescription" [(ngModel)]="event.description" name="description"
+              maxlength="250" required></textarea>
+            <div *ngIf="eventForm.submitted && !eventForm.controls['description']?.valid" class="error-text">
+              Descripción es requerida y no debe exceder los 250 caracteres.
+            </div>
+          </div>
+
+          <!-- Dirección -->
+          <div class="mb-3">
+            <label for="eventAddress" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="eventAddress" [(ngModel)]="event.address" name="address"
+              required />
+            <div *ngIf="eventForm.submitted && !eventForm.controls['address']?.valid" class="error-text">
+              Dirección es requerida.
+            </div>
+          </div>
+
+          <!-- Capacidad Máxima -->
+          <div class="mb-3">
+            <label for="eventMaxPeoples" class="form-label">Capacidad Máxima</label>
+            <input type="number" class="form-control" id="eventMaxPeoples" [(ngModel)]="event.maxPeoples"
+              name="maxPeoples" required />
+            <div *ngIf="eventForm.submitted && !eventForm.controls['maxPeoples']?.valid" class="error-text">
+              Capacidad Máxima es requerida.
+            </div>
+          </div>
+
+          <!-- Fecha de Inicio -->
+          <div class="mb-3">
+            <label for="eventDate" class="form-label">Fecha de Inicio</label>
+            <input type="datetime-local" class="form-control" id="eventDate" [(ngModel)]="event.date" name="date"
+              required />
+            <div *ngIf="eventForm.submitted && !eventForm.controls['date']?.valid" class="error-text">
+              Fecha de Inicio es requerida.
+            </div>
+          </div>
+          <!-- Fecha de Finalización -->
+          <div class="mb-3">
+            <label for="eventEndDate" class="form-label">Fecha de Finalización</label>
+            <input type="datetime-local" class="form-control" id="eventEndDate" [(ngModel)]="event.endDate"
+              name="endDate" required />
+            <div *ngIf="eventForm.submitted && !eventForm.controls['endDate']?.valid" class="error-text">
+              Fecha de Finalización es requerida.
+            </div>
+          </div>
+
+          <!-- Precio -->
+          <div class="mb-3">
+            <label for="eventPrice" class="form-label">Precio del Evento</label>
+            <input type="number" class="form-control" id="eventPrice" [(ngModel)]="event.price" name="price" />
+          </div>
+
+          <!-- Subir Nuevas Imágenes -->
+          <div class="mb-3">
+            <label for="file-input" class="form-label">Subir Nuevas Imágenes</label>
+            <input type="file" class="form-control" id="file-input" (change)="onFileSelected($event)" multiple />
+            <div class="image-container" *ngIf="event?.images?.length">
+              <div *ngFor="let img of event.images">
+                <img [src]="img" alt="Imagen existente" class="existing-image-preview" />
+              </div>
+            </div>
+            <div *ngIf="eventForm.submitted && !imageSelected" class="error-text">
+              Por favor, selecciona al menos una imagen.
+            </div>
+          </div>
+
+          <!-- Botones -->
+          <div class="modal-actions">
+            <button class="btn btn-secondary" type="button" (click)="closeUpdateModal()">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Actualizar</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+  </div>

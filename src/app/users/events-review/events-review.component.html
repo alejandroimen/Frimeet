@@ -1,17 +1,22 @@
-<div class="card-group-review-container">
-  <h1 id="title">Eventos Asistidos</h1>
-  <div class="card-group-review">
-    <section *ngFor="let ev of events" class="info-event-container" (click)="goToDetails(ev._id)">
-      <div class="banner-event">
-        <img [src]="ev.images[0]" alt="Imagen de {{ ev.name }}">
+<div [ngClass]="{ 'expanded': !isNavbarCollapsed, 'collapsed': isNavbarCollapsed }" class="form-wrapper-review">
+  <div class="card-group-container-review"
+    [ngClass]="{ 'collapsed': isNavbarCollapsed, 'expanded': !isNavbarCollapsed }">
+    <h1 id="title">Eventos Asistidos</h1>
+    <div class="card-group-review-container">
+      <div class="card-group-review">
+        <section *ngFor="let ev of events" class="info-event-container" (click)="goToDetails(ev._id)">
+          <div class="banner-event">
+            <img [src]="ev.images[0]" alt="Imagen de {{ ev.name }}">
+          </div>
+          <div class="card-body">
+            <h1 class="card-title">{{ ev.name }}</h1>
+            <p class="card-text">{{ ev.description }}</p>
+          </div>
+          <div class="info-corta">
+            <span>{{ ev.address }}</span>
+          </div>
+        </section>
       </div>
-      <div class="card-body">
-        <h1 class="card-title">{{ ev.name }}</h1>
-        <p class="card-text">{{ ev.description }}</p>
-      </div>
-      <div class="info-corta">
-        <span>{{ ev.address }}</span>
-      </div>
-    </section>
+    </div>
   </div>
 </div>

@@ -3,13 +3,26 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    width: 70%;
+    width: 100%;
     height: auto;
     padding: 40px;
     box-sizing: border-box;
     gap: 20px;
     background-color: #ffffff;
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+/* Form Wrapper */
+.form-wrapper {
+    transition: transform 0.3s ease-in-out;
+}
+
+.form-wrapper.collapsed {
+    transform: translateX(-5vw);
+}
+
+.form-wrapper.expanded {
+    transform: translateX(10vw);
 }
 
 .add-place-form div {
@@ -127,82 +140,92 @@
     border: 2px solid var(--gray);
     border-radius: 5px;
     margin-top: 10px;
-  }
-  
-  /* Contenedor principal de tags */
-.tags-container {
-    display: flex ! important;
-    align-items: center ! important;
-    justify-content: center ! important;
-    gap: 10px ;
-    margin: 10px 0; 
-    position: relative ! important;
 
   }
   
-  /* Contenedor para scroll horizontal */
-  .tags-wrapper {
-    overflow-x: auto ! important;
-    overflow-y: hidden ! important; /* Evitar scroll vertical */
-    white-space: nowrap ! important; /* Impedir que las etiquetas se rompan en filas */
-    display: flex ! important;
-    justify-content: flex-start ! important; /* Alineación hacia la izquierda */
-    gap: 10px;
+  
+/* Contenedor principal de tags */
+.tags-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0; 
+  position: relative;
+
 }
-  
-  /* Contenedor interno de tags */
-  .tags {
-    display: flex ! important;
-    flex-wrap: wrap ! important; 
-    gap: 10%;
-    justify-content: space-around ! important; /* Asegura que las etiquetas estén alineadas horizontalmente */
-    align-items: center ! important;
-    Flex-direction: row ! important;
-    padding: 0px 30px;
+
+/* Contenedor para scroll horizontal */
+.tags-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden; /* Evitar scroll vertical */
+  white-space: nowrap; /* Impedir que las etiquetas se rompan en filas */
+  display: flex;
+  justify-content: flex-start; /* Alineación hacia la izquierda */
+  gap: 10px;
 }
-  
-  /* Botones de etiquetas */
-  .button-tags {
-    background-color: var(--yellow);
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 45%;
-    position: relative;
-  }
-  
-  .button-tags.selected {
-    background-color: var(--orange);
-  }
-  
-  /* Flechas */
-  .arrow {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 5px 10px;
-    color: black;
-    transition: color 0.3s ease;
-    position: absolute;
-    left: 0px;
-  }
-  .arrow2 {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 5px 10px;
-    color: black;
-    transition: color 0.3s ease;
-    position: absolute;
-    right: 0px;
-  }
-  
-  .arrow:hover {
-    color: var(--orange);
-  }
+
+/* Contenedor interno de tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap; /* No permitir múltiples filas */
+  gap: 10%;
+  justify-content: space-around; /* Asegura que las etiquetas estén alineadas horizontalmente */
+  align-items: center;
+  Flex-direction: row ! important;
+  padding: 0px 30px;
+}
+
+/* Botones de etiquetas */
+.button-tags {
+  overflow: hidden;
+  white-space: wrap;
+  text-overflow: ellipsis !important;
+  background-color: var(--yellow);
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 45% !important;
+  position: relative;
+}
+
+.button-tags.selected {
+  background-color: var(--orange);
+}
+
+/* Flechas */
+.arrow {
+  width: 32px !important;
+  background: none !important;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px 10px;
+  color: black;
+  transition: color 0.3s ease;
+  position: absolute;
+  left: 0px !important;
+  z-index: 100 !important;
+}
+.arrow2 {
+  width: 32px !important;
+  background: none !important;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px 10px;
+  color: black;
+  transition: color 0.3s ease;
+  position: absolute;
+  right: 0px !important;
+  z-index: 100 !important;
+}
+
+.arrow:hover,
+.arrow2:hover {
+  color: var(--orange);
+}
