@@ -2,7 +2,7 @@
   width: 60vw;
   height: 70vh;
   margin: 5vh auto;
-  margin-left: 5vw;
+  margin-left: -30vw;
   transition: 0.3s ease-in-out;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .card-group-container-review.collapsed {
-  transform: translateX(-2vw);
+  transform: translateX(-7vw);
 }
 
 .card-group-container-review.expanded {
