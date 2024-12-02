@@ -94,8 +94,34 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
   }
 
   onFileSelected(event: any): void {
-    this.selectedFiles = event.target.files;
+    this.selectedFiles = Array.from(event.target.files); // Actualizar la lista de archivos seleccionados
     this.imageSelected = this.selectedFiles.length > 0;
+
+    if (this.imageSelected) {
+      console.log('Archivos seleccionados:', this.selectedFiles);
+
+      // Limpiar las imágenes previas de la vista previa local
+      if (this.place) {
+        this.place.images = [];
+      }
+
+      // Generar vistas previas locales de las nuevas imágenes seleccionadas
+      this.selectedFiles.forEach((file) => {
+        const previewUrl = URL.createObjectURL(file);
+        if (this.place) {
+          this.place.images.push(previewUrl);
+        }
+        console.log('Vista previa generada:', previewUrl);
+      });
+    } else {
+      console.log('No se seleccionaron archivos.');
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.place?.images) {
+      this.place.images.forEach((url) => URL.revokeObjectURL(url));
+    }
   }
 
   updatePlace(): void {
@@ -105,6 +131,16 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
       formData.append('types', this.place.types);
       formData.append('description', this.place.description);
       formData.append('address', this.place.address);
+
+      // Añadir etiquetas (tags)
+      if (this.place.tag) {
+        this.place.tag.forEach((tag, index) => formData.append(`tag[${index}]`, tag));
+      }
+  
+      // Añadir coordenadas
+      if (this.place.coordinates) {
+        formData.append('coordinates', JSON.stringify(this.place.coordinates));
+      }
 
       if (this.selectedFiles.length > 0) {
         for (let i = 0; i < this.selectedFiles.length; i++) {

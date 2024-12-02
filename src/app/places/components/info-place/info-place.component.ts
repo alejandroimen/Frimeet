@@ -24,7 +24,7 @@ export class InfoPlaceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.placeService.getPlaces().subscribe(
+    this.placeService.getApprovedPlaces().subscribe(
       (data: Iplace[]) => {
         this.places = data;
         console.log('Lugares obtenidos:', this.places);
