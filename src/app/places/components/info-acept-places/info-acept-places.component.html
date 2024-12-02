@@ -59,7 +59,9 @@
   </div>
 
   <div class="button-group" *ngIf="userRol >= 1">
-    <button class="btn btn-primary" (click)="approvePlace(true)">Aceptar Lugar</button>
-    <button class="btn btn-danger" (click)="approvePlace(false)">Rechazar Lugar</button>
+    <button class="btn btn-primary" (click)="approvePlace(true)">
+      <i class="fa-solid fa-check"></i>Aceptar Lugar</button>
+    <button class="btn btn-danger" (click)="approvePlace(false)">
+      <i class="fa-solid fa-xmark"></i> Rechazar Lugar</button>
   </div>
 </div>

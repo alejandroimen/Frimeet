@@ -10,8 +10,12 @@
     <div class="input">
       <label for="types">Tipo</label>
       <select id="types" name="types" [(ngModel)]="place.types" required>
-        <option value="para_parejas">Para Parejas</option>
-        <option value="para_amigos">Para Amigos</option>
+        <option value="para_amigos">Con amigos</option>
+            <option value="para_parejas">Cita romántica</option>
+            <option value="para_familia">Salida familiar</option>
+            <option value="para_trabajo">Salida de trabajo</option>
+            <option value="para_descansar">Relajacion</option>
+            <option value="para_educacion">Educación</option>
       </select>
     </div>
     <div class="input" [ngClass]="{ 'invalid': !descriptionValid && place.description !== '' }">

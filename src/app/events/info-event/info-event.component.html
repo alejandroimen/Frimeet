@@ -10,5 +10,8 @@
     <div class="info-corta">
       <span>{{ ev.address }}</span>
     </div>
+  <div *ngIf="event.tag" class="tags-container">
+    <span *ngFor="let tag of ev.tag">{{ tag }}</span>
+  </div>
   </section>
 </div>

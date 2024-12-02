@@ -388,7 +388,7 @@
 
 .modal-footer .btn-primary-edit {
     background-color: #e0b600;
-    color: #ffffff;
+    color: var(--black);
     width: 30vh;
 }
 

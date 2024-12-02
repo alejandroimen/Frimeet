@@ -69,8 +69,10 @@
       </div>
     </div>
     <div class="button-group" *ngIf="isOwner">
-      <button class="btn btn-primary" (click)="openUpdateModal()">Actualizar Evento</button>
-      <button class="btn btn-danger" (click)="openDeleteModal()">Eliminar Evento</button>
+      <button class="btn btn-primary" (click)="openUpdateModal()">
+        <i class="fa-solid fa-pen"></i> Actualizar Evento</button>
+      <button class="btn btn-danger" (click)="openDeleteModal()">
+        <i class="fa-solid fa-trash"></i> Eliminar Evento</button>
     </div>
 
     <!-- Modal para todas las imágenes -->
@@ -91,8 +93,8 @@
         <h5>Confirmar Eliminación</h5>
         <p>¿Estás seguro de que deseas eliminar este evento?</p>
         <div class="modal-actions">
-          <button class="btn btn-primary" (click)="closeDeleteModal()">Cancelar</button>
-          <button class="btn btn-danger" (click)="deleteEvent()">Eliminar</button>
+          <button class="btn btn-primary" (click)="closeDeleteModal()"><i class="fa-solid fa-reply"></i> Cancelar</button>
+          <button class="btn btn-danger" (click)="deleteEvent()"><i class="fa-solid fa-trash"></i> Eliminar</button>
         </div>
       </div>
     </div>
@@ -184,8 +186,8 @@
 
           <!-- Botones -->
           <div class="modal-actions">
-            <button class="btn btn-secondary" type="button" (click)="closeUpdateModal()">Cancelar</button>
-            <button class="btn btn-primary" type="submit">Actualizar</button>
+            <button class="btn btn-secondary" type="button" (click)="closeUpdateModal()"> <i class="fa-solid fa-reply"></i> Cancelar</button>
+            <button class="btn btn-primary"  type="submit"><i class="fa-solid fa-check"></i> Actualizar</button>
           </div>
         </form>
 

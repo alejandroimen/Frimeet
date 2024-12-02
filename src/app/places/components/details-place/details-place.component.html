@@ -91,7 +91,8 @@
   
   <div class="button-group" *ngIf="isOwner">
     <!-- Botón para abrir la modal de actualización -->
-    <button (click)="openUpdateModal()" class="btn btn-primary">Actualizar Lugar</button>
+    <button (click)="openUpdateModal()" class="btn btn-primary">
+      <i class="fa-solid fa-pen"></i> Actualizar Lugar</button>
 
     <!-- Botón para eliminar el lugar -->
     <button (click)="openDeleteModal()" class="btn btn-danger">Eliminar Lugar</button>
@@ -102,7 +103,8 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h5>
+          <h5 class="modal-title" id="deleteModalLabel">
+            <i class="fa-solid fa-trash"></i>Confirmar Eliminación</h5>
           <button type="button" class="btn-close btn-delete" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -159,8 +161,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary-edit" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary-edit" (click)="updatePlace()">Actualizar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa-solid fa-reply"></i> Cancelar</button>
+        <button type="button" class="btn btn-primary-edit" (click)="updatePlace()"><i class="fa-solid fa-check"></i> Actualizar</button>
       </div>
     </div>
   </div>
