@@ -3,11 +3,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
-
+import { NavbarService } from '../../services/navbar.service';
 
 @Component({
-  selector: 'app-navbar',   
+  selector: 'app-navbar',
   standalone: true,
   imports: [
     RouterModule,
@@ -18,9 +17,16 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
   isCollapsed: boolean = true;
+  show: boolean = false;
   isPremium!: boolean;
 
-  constructor(private router: Router, private userServ: UserService) {}
+
+  constructor(
+    private router: Router,
+    private userServ: UserService,
+    private navbarService: NavbarService
+  ) {}
+
 
   ngOnInit(): void {
     this.isPremium = localStorage.getItem('userRol') == '2'
@@ -28,15 +34,15 @@ export class NavbarComponent {
 
   toggleMenu(): void {
     this.isCollapsed = !this.isCollapsed;
+    this.navbarService.setCollapsedState(this.isCollapsed);
   }
-
-  show: boolean = false;
 
   toggleNavbar(): void {
     this.show = !this.show;
   }
 
-  logout():void {
-    this.userServ.logout()
+  logout(): void {
+    this.userServ.logout();
+    this.router.navigate(['/login']);
   }
 }

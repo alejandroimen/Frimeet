@@ -1,4 +1,4 @@
-<div class="card-group-container">
+<div class="card-group-container" [ngClass]="{ 'collapsed': isCollapsed, 'expanded': !isCollapsed }">
   <section *ngFor="let ev of events" class="info-event-container" (click)="goToDetails(ev._id)">
     <div class="banner-event">
       <img [src]="ev.images[0]" alt="Imagen de {{ ev.name }}">
@@ -10,6 +10,5 @@
     <div class="info-corta">
       <span>{{ ev.address }}</span>
     </div>
-
   </section>
 </div>

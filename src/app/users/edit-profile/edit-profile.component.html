@@ -1,45 +1,42 @@
-<div class="edit-profile-container">
-  <h1 class="form-title">Editar Perfil</h1>
-  <div class="profile-section">
-    <img src="https://via.placeholder.com/80" alt="Avatar" class="avatar" />
-    <h2 class="username">{{ user.name }}</h2>
-  </div>
+<div [ngClass]="{ 'expanded': !isNavbarCollapsed, 'collapsed': isNavbarCollapsed }" class="form-wrapper-edit">
+  <div class="card-group-container-edit" [ngClass]="{ 'collapsed': isNavbarCollapsed, 'expanded': !isNavbarCollapsed }">
+    <div class="edit-profile-container">
+      <h1 class="form-title">Editar Perfil</h1>
+      <div class="profile-section">
+        <img src="https://via.placeholder.com/80" alt="Avatar" class="avatar" />
+        <h2 class="username">{{ user.name }}</h2>
+      </div>
 
-  <div class="account-info">
-    <p><strong>Información de la Cuenta</strong></p>
-    <p>
-      <strong>Nombre:</strong>
-      <span *ngIf="!isEditingName">{{ user.name }}</span>
-      <input *ngIf="isEditingName" [(ngModel)]="updatedName" />
-      <i
-        class="fa fa-edit"
-        *ngIf="!isEditingName"
-        (click)="toggleEdit('name')"
-      ></i>
-      <button *ngIf="isEditingName" (click)="saveChanges('name')">✔</button>
-      <button *ngIf="isEditingName" (click)="cancelChanges('name')">✖</button>
-    </p>
-    <p>
-      <strong>Correo Electrónico:</strong>
-      <span *ngIf="!isEditingEmail">{{ user.email }}</span>
-      <input *ngIf="isEditingEmail" [(ngModel)]="updatedEmail" />
-      <i
-        class="fa fa-edit"
-        *ngIf="!isEditingEmail"
-        (click)="toggleEdit('email')"
-      ></i>
-      <button *ngIf="isEditingEmail" (click)="saveChanges('email')">✔</button>
-      <button *ngIf="isEditingEmail" (click)="cancelChanges('email')">✖</button>
-    </p>
+      <div class="account-info">
+        <p><strong>Información de la Cuenta</strong></p>
+        <p>
+          <strong>Nombre:</strong>
+          <span *ngIf="!isEditingName">{{ user.name }}</span>
+          <input *ngIf="isEditingName" [(ngModel)]="updatedName" />
+          <i class="fa fa-edit" *ngIf="!isEditingName" (click)="toggleEdit('name')"></i>
+          <button *ngIf="isEditingName" (click)="saveChanges('name')">✔</button>
+          <button *ngIf="isEditingName" (click)="cancelChanges('name')">✖</button>
+        </p>
+        <p>
+          <strong>Correo Electrónico:</strong>
+          <span *ngIf="!isEditingEmail">{{ user.email }}</span>
+          <input *ngIf="isEditingEmail" [(ngModel)]="updatedEmail" />
+          <i class="fa fa-edit" *ngIf="!isEditingEmail" (click)="toggleEdit('email')"></i>
+          <button *ngIf="isEditingEmail" (click)="saveChanges('email')">✔</button>
+          <button *ngIf="isEditingEmail" (click)="cancelChanges('email')">✖</button>
+        </p>
+      </div>
+      <p class="forgot-password">¿Olvidaste la contraseña?</p>
+      <div class="input-group">
+        <label for="password" class="form-label">Password:</label>
+        <input id="password" [(ngModel)]="user.password" type="password" class="form-control" name="password" />
+      </div>
+      <div class="input-group">
+        <label for="confirm-password" class="form-label">Confirm Password:</label>
+        <input id="confirm-password" [(ngModel)]="confirmPassword" type="password" class="form-control"
+          name="confirmPassword" />
+      </div>
+      <button (click)="updateProfile()" class="btn-update" [disabled]="isSubmitting">Actualizar datos</button>
+    </div>
   </div>
-  <p class="forgot-password">¿Olvidaste la contraseña?</p>
-  <div class="input-group">
-    <label for="password" class="form-label">Password:</label>
-    <input id="password" [(ngModel)]="user.password" type="password" class="form-control" name="password" />
-  </div>
-  <div class="input-group">
-    <label for="confirm-password" class="form-label">Confirm Password:</label>
-    <input id="confirm-password" [(ngModel)]="confirmPassword" type="password" class="form-control" name="confirmPassword" />
-  </div>
-  <button (click)="updateProfile()" class="btn-update" [disabled]="isSubmitting">Actualizar datos</button>
 </div>

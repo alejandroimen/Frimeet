@@ -1,18 +1,23 @@
-<div class="card-group-review-container">
-  <h1 id="title">Mis Favoritos</h1>
-  <div class="card-group-review">
-    <section *ngFor="let place of places" class="info-place-container" (click)="goToDetails(place._id)">
-      <div class="banner-place">
-        <img [src]="place.images[0]" alt="Imagen de {{ place.name }}">
+<div [ngClass]="{ 'expanded': !isNavbarCollapsed, 'collapsed': isNavbarCollapsed }" class="form-wrapper-review">
+  <div class="card-group-container-review" [ngClass]="{ 'collapsed': isNavbarCollapsed, 'expanded': !isNavbarCollapsed }">
+    <div class="title-page">
+      <h1 id="title">Mis Favoritos</h1>
+    </div>
+    <div class="card-group-review-container">
+      <div class="card-group-review">
+        <section *ngFor="let place of places" class="info-place-container" (click)="goToDetails(place._id)">
+          <div class="banner-place">
+            <img [src]="place.images[0]" alt="Imagen de {{ place.name }}">
+          </div>
+          <div class="card-body">
+            <h1 class="card-title">{{ place.name }}</h1>
+            <p class="card-text">{{ place.description }}</p>
+          </div>
+          <div class="info-corta">
+            <span>{{ place.address }}</span>
+          </div>
+        </section>
       </div>
-      <div class="card-body">
-        <h1 class="card-title">{{ place.name }}</h1>
-        <p class="card-text">{{ place.description }}</p>
-      </div>
-      <div class="info-corta">
-        <span>{{ place.address }}</span>
-      </div>
-    </section>
+    </div>
   </div>
-  </div>
-  
+</div>

@@ -2,6 +2,7 @@ import { Component, DoCheck, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Iuser } from '../interfaces/iuser';
 import { UserService } from '../services/user.service';
+import { NavbarService } from '../../services/navbar.service';
 import { AlertService } from '../../services/alert.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { AlertService } from '../../services/alert.service';
   styleUrls: ['./edit-profile.component.css'],
 })
 export class EditProfileComponent implements OnInit, DoCheck {
+  isNavbarCollapsed: boolean = true;
   user: Iuser = {
     name: '',
     email: '',
@@ -31,11 +33,16 @@ export class EditProfileComponent implements OnInit, DoCheck {
   constructor(
     private router: Router,
     private userService: UserService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private navbarService: NavbarService
   ) {}
 
   ngOnInit(): void {
     this.loadUserData();
+
+    this.navbarService.isCollapsed$.subscribe((isCollapsed) => {
+      this.isNavbarCollapsed = isCollapsed;
+    });
   }
 
   ngDoCheck(): void {
