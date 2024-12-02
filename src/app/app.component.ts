@@ -12,7 +12,7 @@ export class AppComponent {
   constructor(private router: Router){
     this.router.events.subscribe(event => {
       if(event instanceof NavigationEnd){
-        this.show = !(event.url === '/login' || event.url === '/register' || event.url === '/welcome-start')
+        this.show = !(event.url === '/login' || event.url === '/register' || event.url === '/')
       }
     })
   }
