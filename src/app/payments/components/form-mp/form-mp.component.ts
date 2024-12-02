@@ -11,7 +11,7 @@ import { AlertService } from '../../../services/alert.service';
   styleUrl: './form-mp.component.css'
 })
 export class FormMpComponent implements OnInit {
-  isSubmiting: boolean = false
+  isSubmiting: boolean =false
   ultimos: string = ''
   cardholderValid:boolean = true
   mp: any
@@ -105,16 +105,42 @@ export class FormMpComponent implements OnInit {
       email: email,
       type: identificationType,
       number: identificationNumber
-    }
+    }    
+    
+    let loadingTimeout: any;
+
+    // Inicia un temporizador para mostrar la alerta después de 0.5 segundos
+    loadingTimeout = setTimeout(() => {
+      this.alertServ.showLoading();
+    }, 500);
+
     console.log('Esto se esta enviando', this.data);
+    const idUser = localStorage.getItem('userRol') || ''
     this.payMpServ.pay(this.data).subscribe(
       response => {
         console.log('Ta bien: ', response)
-        this.alertServ.showSuccess('Pago realizado con éxito')
+        this.payMpServ.updateRolUser(parseInt(idUser)).subscribe(
+          response => {
+            clearTimeout(loadingTimeout);//Limpia el temporizador para que la alerta se muestre solamente despues de 0.5s
+            this.alertServ.closeLoading();
+
+            this.alertServ.showSuccess('Pago realizado con éxito')
+            console.log('Ya eres premium', response);
+          },
+          error => {
+            clearTimeout(loadingTimeout);//Limpia el temporizador para que la alerta se muestre solamente despues de 0.5s
+            this.alertServ.closeLoading();
+            console.log('Algo salio mal al volverte premium', error);
+            this.alertServ.showError('Lo sentimos, algo salió mal :c')
+          }
+        )
         this.isSubmiting = false
       },
       error => {
+        clearTimeout(loadingTimeout);//Limpia el temporizador para que la alerta se muestre solamente despues de 0.5s
+        this.alertServ.closeLoading();
         console.log('errorsito: ', error)
+        this.alertServ.showError('Algo salió mal al realizar el pago')
         this.isSubmiting = false
       }
     )

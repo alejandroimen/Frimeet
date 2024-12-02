@@ -59,6 +59,6 @@ export class AceptPlacesComponent implements OnInit{
 
   goToDetails(placeId: string): void {
     console.log('Id del lugar obtenido', placeId);
-    this.router.navigate(['/acept-place', placeId]);
+    this.router.navigate(['/accept-place', placeId]);
   }
 }
