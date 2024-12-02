@@ -132,7 +132,7 @@ export class DetailsEventComponent implements OnInit, DoCheck {
       this.alertService.showWarning('Por favor, corrige los errores antes de enviar.');
       return;
     }
-
+    
     if (this.event) {
       const formData = new FormData();
       formData.append('name', this.event.name.trim());
@@ -142,19 +142,45 @@ export class DetailsEventComponent implements OnInit, DoCheck {
       formData.append('date', new Date(this.event.date).toISOString());
       formData.append('endDate', new Date(this.event.endDate).toISOString());
       formData.append('price', this.event.price ? this.event.price.toString() : '0');
-
+  
       // Añadir etiquetas (tags)
       if (this.event.tag) {
         this.event.tag.forEach((tag, index) => formData.append(`tag[${index}]`, tag));
       }
-
+  
+      // Añadir coordenadas
+      if (this.event.coordinates) {
+        formData.append('coordinates', JSON.stringify(this.event.coordinates));
+      }
+  
       // Subir solo nuevas imágenes
       if (this.selectedFiles.length > 0) {
         this.selectedFiles.forEach((file) => {
           formData.append('images', file); // Usa exactamente el mismo nombre que en multer
         });
+      } else {
+        // Mantener las imágenes existentes si no se suben nuevas imágenes
+        if (this.event.images) {
+          this.event.images.forEach((image, index) => {
+            formData.append(`existingImages[${index}]`, image);
+          });
+        }
       }
-
+  
+      // Registro de datos para depuración
+      console.log('Datos enviados al backend:', {
+        name: this.event.name.trim(),
+        description: this.event.description.trim(),
+        address: this.event.address.trim(),
+        maxPeoples: this.event.maxPeoples.toString(),
+        date: new Date(this.event.date).toISOString(),
+        endDate: new Date(this.event.endDate).toISOString(),
+        price: this.event.price ? this.event.price.toString() : '0',
+        tag: this.event.tag,
+        coordinates: this.event.coordinates,
+        images: this.selectedFiles.length > 0 ? this.selectedFiles.map(file => file.name) : this.event.images
+      });
+  
       // Llamar al servicio para actualizar el evento
       this.eventService.updateEvent(this.event._id, formData).subscribe(
         (response) => {
@@ -170,6 +196,7 @@ export class DetailsEventComponent implements OnInit, DoCheck {
       );
     }
   }
+  
 
   joinEvent(): void {
     if (this.event && this.event._id) {
