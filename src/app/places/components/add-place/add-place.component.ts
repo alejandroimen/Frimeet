@@ -5,7 +5,6 @@ import { NavbarService } from '../../../services/navbar.service';
 import { Iplace } from '../../interfaces/iplace';
 import { PlaceService } from '../../services/place.service';
 import { AlertService } from '../../../services/alert.service';
-import { Router } from '@angular/router';
 import { TagsService } from '../../../services/tags.service';
 
 @Component({
@@ -37,17 +36,13 @@ export class AddPlaceComponent implements DoCheck, OnInit {
   addressValid: boolean = true;
   imageSelected: boolean = false;
   isCollapsed: boolean = true;
-
-
-
   allTags: string[] = []; 
   selectedTags: string[] = [];
   itemsPerPage: number = 8; // Número de etiquetas por página
   currentPage: number = 0; // Página actual
   visibleTags: string[] = []; // Etiquetas visibles en la página actual
 
-  constructor(private placeService: PlaceService, private alertService: AlertService, private router: Router, private tagsService: TagsService,private navbarService: NavbarService
-) {}
+  constructor(private placeService: PlaceService, private alertService: AlertService, private router: Router, private tagsService: TagsService,private navbarService: NavbarService) {}
 
   ngOnInit(): void {
     this.navbarService.isCollapsed$.subscribe((state) => {
@@ -66,6 +61,8 @@ export class AddPlaceComponent implements DoCheck, OnInit {
         console.error('Error al cargar las etiquetas:', error);
       }
     );
+  }
+)
   }
 
   updateVisibleTags(): void {

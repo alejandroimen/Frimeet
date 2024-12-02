@@ -64,6 +64,35 @@
         >La dirección no puede tener más de 70 caracteres y no puede estar vacía.</small
       >
     </div>
+    <div class="tags-container">
+      <button 
+        class="arrow" 
+        [disabled]="currentPage === 0" 
+        (click)="scrollLeft($event)">
+        &#9664;
+      </button>
+    
+      <div class="tags-wrapper">
+        <label for="name">Tags</label>
+        <div class="tags">
+          <ng-container *ngFor="let tag of visibleTags">
+            <button 
+              [ngClass]="{'selected': selectedTags.includes(tag)}" 
+              (click)="toggleTag($event, tag)" 
+              class="button-tags">
+              {{ tag }}
+            </button>
+          </ng-container>
+        </div>
+      </div>
+    
+      <button 
+        class="arrow2" 
+        [disabled]="(currentPage + 1) * itemsPerPage >= allTags.length" 
+        (click)="scrollRight($event)">
+        &#9654;
+      </button>
+    </div> 
     <div class="file-upload-container">
       <input
         type="file"
