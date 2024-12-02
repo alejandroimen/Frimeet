@@ -101,14 +101,14 @@ export class AddEventComponent implements OnInit, DoCheck {
   }
 
   toggleTag(event: Event, tag: string): void {
-    event.preventDefault(); // Evita la validación del formulario
+    event.preventDefault();
     const index = this.selectedTags.indexOf(tag);
     if (index > -1) {
       this.selectedTags.splice(index, 1);
     } else {
       this.selectedTags.push(tag);
     }
-    console.log('Tags seleccionados:', this.selectedTags); // Validar
+    console.log('Tags seleccionados:', this.selectedTags);
   }
   
 
@@ -137,7 +137,7 @@ export class AddEventComponent implements OnInit, DoCheck {
   }
 
   onFileSelected(event: any): void {
-    this.selectedFiles = event.target.files;
+    this.selectedFiles = Array.from(event.target.files); // Convertir a un arreglo
     const file = event.target.files[0];
     this.imageSelected = file !== undefined;
     if (file) {
@@ -198,41 +198,64 @@ export class AddEventComponent implements OnInit, DoCheck {
       this.isSubmitting = false;
       return;
     }
-
+  
     this.event.tag = this.selectedTags;
-
+  
+    // Convertir las cadenas de fecha a objetos Date
+    const eventDate = new Date(this.event.date);
+    const eventEndDate = new Date(this.event.endDate);
+  
     const formData = new FormData();
     formData.append('name', this.event.name);
     formData.append('maxPeoples', this.event.maxPeoples.toString());
-    formData.append('date', this.event.date.toISOString());
-    formData.append('endDate', this.event.endDate.toISOString());
+    formData.append('date', eventDate.toISOString());
+    formData.append('endDate', eventEndDate.toISOString());
     formData.append('description', this.event.description);
     formData.append('address', this.event.address);
     formData.append('price', this.event.price.toString());
     formData.append('coordinates[lat]', this.event.coordinates.lat.toString());
     formData.append('coordinates[lng]', this.event.coordinates.lng.toString());
-
+  
     if (this.event.idPlace) {
       formData.append('idPlace', this.event.idPlace);
     }
-
+  
     for (let i = 0; i < this.selectedFiles.length; i++) {
       formData.append('images', this.selectedFiles[i], this.selectedFiles[i].name);
     }
-
+  
     // Añadir etiquetas seleccionadas como múltiples entradas
-     this.selectedTags.forEach(tag => {
+    this.selectedTags.forEach(tag => {
       formData.append('tag[]', tag); // Clave compatible con el backend
-      });
-
+    });
+  
+    // Registro de datos para depuración
+    console.log('Datos enviados al backend:', {
+      name: this.event.name,
+      maxPeoples: this.event.maxPeoples.toString(),
+      date: eventDate.toISOString(),
+      endDate: eventEndDate.toISOString(),
+      description: this.event.description,
+      address: this.event.address,
+      price: this.event.price.toString(),
+      coordinates: this.event.coordinates,
+      tag: this.selectedTags,
+      images: this.selectedFiles.map ? this.selectedFiles.map(file => file.name) : []
+    });
+  
     this.eventService.addEvent(formData).subscribe(response => {
       this.isSubmitting = false;
+      this.alertService.showSuccess('Evento agregado exitosamente.'); // Mostrar alerta de éxito
       form.resetForm();
       this.router.navigate(['/info-event']);
     }, error => {
+      console.error('Error al crear evento:', error);
       this.isSubmitting = false;
+      this.alertService.showError('Hubo un error al agregar el evento.'); // Mostrar alerta de error
     });
   }
+  
+  
 
   onAddNewPlace(): void {
     this.router.navigate(['/check-availability']);

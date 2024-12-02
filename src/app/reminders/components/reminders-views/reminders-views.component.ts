@@ -9,9 +9,9 @@ import { Ireminder } from '../../interfaces/ireminder';
 })
 export class RemindersViewsComponent {
   remProof: Ireminder = {
-    nameReminder: 'Holaaaaaaaa',
-    eventReminder: 'oliwi event',
-    contentReminder: 'noshe unuuuuuuuuuuuuuuuuuuuuuuuuu ola q tal chalal shalala haciendo bulto nomas jsjs'
+    nameReminder: '¡¡Bienvenido a frimeet!!',
+    eventReminder: 'Frimeet',
+    contentReminder: 'Te damos una cordial bienvenida a nuestra plataforma de recomendaciones, que te ayudara a tomar una decisión rapida de a donde ir, y planificar tú salida perfecta.'
   }
   reminders: Ireminder[] = []
 
