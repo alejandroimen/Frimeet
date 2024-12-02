@@ -3,7 +3,8 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    width: 100%;
+    width: 90%;
+    min-width: 50vw;
     height: auto;
     padding: 40px;
     box-sizing: border-box;
@@ -14,6 +15,10 @@
 
 /* Form Wrapper */
 .form-wrapper {
+    margin-top: 5vh;
+    width: 100%;
+    max-width: 30vw;
+    margin-left: -30vw;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -22,7 +27,7 @@
 }
 
 .form-wrapper.expanded {
-    transform: translateX(10vw);
+    transform: translateX(3vw);
 }
 
 .add-place-form div {
