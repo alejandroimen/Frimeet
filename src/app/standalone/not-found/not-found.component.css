@@ -1,0 +1,96 @@
+section {
+    display: flex;
+    justify-content: center;
+}
+
+section img {
+    height: 65vh;
+}
+
+.container-not-found {
+    position: relative;
+    width: 40vw;
+    height: 65vh;
+    background-color: var(--yellow);
+    border-radius: 20px;
+    display: flex;
+    padding: 40px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 20px var(--orange);
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.container-not-found i {
+    color: var(--yellow);
+    font-size: 72px;
+    padding: 4px;
+    margin: 4px;
+    background-color: var(--black);
+    width: calc(72px + 8px);
+    aspect-ratio: 1/1 !important;
+    border-radius: 50%;  
+    box-sizing: border-box;
+    transform: rotateY(15deg);                                                                                   
+}
+
+.container-not-found div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-404 {
+    display: flex;
+}
+
+.container-not-found h1 {
+    font-family: "Bangers", system-ui;
+    font-weight: 400;
+    font-size: 96px;
+    letter-spacing: 2px;
+    margin: 0px 0px 20px 0px;
+}
+
+.container-not-found p {
+    margin: 0%;
+    font-size: 24px;
+    height: 24px;
+    text-transform: uppercase;
+}
+
+.container-not-found span {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.container-not-found button {
+    background-color: var(--white);
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.container-not-found button i {
+    font-size: 32px !important;
+    width: 40px !important;
+    aspect-ratio: 1/1 !important;
+    display: grid !important;
+    place-items: center !important;
+}
+
+.container-not-found button:hover {
+    background-color: var(--yellow);
+    transition: 0.3s;
+}

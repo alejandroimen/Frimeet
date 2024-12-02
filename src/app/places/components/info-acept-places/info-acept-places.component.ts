@@ -66,7 +66,7 @@ export class InfoAceptPlacesComponent implements OnInit, DoCheck {
 
   ngDoCheck(): void {
     if (this.place) {
-      this.tagsValid = this.place.tag ? this.place.tag.trim().length > 0 : false;
+      this.tagsValid = this.place.tag.length > 0; // Verificar si hay tags
       this.addressValid = this.place.address ? this.place.address.trim().length > 0 : false;
     }
   }
@@ -103,5 +103,4 @@ export class InfoAceptPlacesComponent implements OnInit, DoCheck {
       );
     }
   }
-
 }

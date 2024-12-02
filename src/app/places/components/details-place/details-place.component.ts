@@ -64,7 +64,6 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
     if (this.place) {
       this.nameValid = this.validateName(this.place.name);
       this.descriptionValid = this.validateDescription(this.place.description);
-      this.tagsValid = this.place.tag ? this.place.tag.trim().length > 0 : false;
       this.addressValid = this.place.address ? this.place.address.trim().length > 0 : false;
     }
   }
@@ -106,7 +105,6 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
       formData.append('types', this.place.types);
       formData.append('description', this.place.description);
       formData.append('address', this.place.address);
-      formData.append('tag', this.place.tag);
 
       if (this.selectedFiles.length > 0) {
         for (let i = 0; i < this.selectedFiles.length; i++) {

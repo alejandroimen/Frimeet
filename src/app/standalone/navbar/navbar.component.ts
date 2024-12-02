@@ -18,12 +18,19 @@ import { NavbarService } from '../../services/navbar.service';
 export class NavbarComponent {
   isCollapsed: boolean = true;
   show: boolean = false;
+  isPremium!: boolean;
+
 
   constructor(
     private router: Router,
     private userServ: UserService,
     private navbarService: NavbarService
   ) {}
+
+
+  ngOnInit(): void {
+    this.isPremium = localStorage.getItem('userRol') == '2'
+  }
 
   toggleMenu(): void {
     this.isCollapsed = !this.isCollapsed;
