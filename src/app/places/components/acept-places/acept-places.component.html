@@ -1,13 +1,14 @@
 <div [ngClass]="{ 'expanded': !isCollapsed, 'collapsed': isCollapsed }" class="cards-wrapper">
-  <div
-    class="card-group-container-acept"
-    [ngClass]="{ 'collapsed': isCollapsed, 'expanded': !isCollapsed }"
-  >
-    <section
-      *ngFor="let place of places"
-      class="acept-place-container"
-      (click)="goToDetails(place._id)"
-    >
+  
+  <div class="card-group-container-acept" [ngClass]="{ 'collapsed': isCollapsed, 'expanded': !isCollapsed }">
+    
+    <!-- Mostrar mensaje si no hay lugares por aprobar -->
+    <div *ngIf="noPendingPlaces" class="no-places-message">
+      No hay lugares por aprobar, vuelve más tarde ❤️
+    </div>
+
+    <!-- Mostrar lista de lugares si hay lugares por aprobar -->
+    <section *ngFor="let place of places" class="acept-place-container" (click)="goToDetails(place._id)">
       <div *ngIf="place.images.length > 1" class="carousel-container">
         <div *ngFor="let img of place.images; let i = index" class="carousel-item" [ngClass]="{ active: i === 0 }">
           <img [src]="img" class="banner-place" alt="Imagen de {{ place.name }}" />
@@ -27,7 +28,6 @@
       </div>
 
       <div *ngIf="place.tag" class="tags-container">
-
         <span *ngFor="let tag of place.tag"> {{tag}} </span>
       </div>
     </section>

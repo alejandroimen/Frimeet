@@ -14,6 +14,7 @@ export class AceptPlacesComponent implements OnInit {
   places: Iplace[] = [];
   favorites: Map<string, number> = new Map();
   isCollapsed: boolean = true;
+  noPendingPlaces: boolean = false; // Propiedad para mostrar el mensaje cuando no hay lugares por aprobar
 
   constructor(
     private placeService: PlaceService,
@@ -30,6 +31,11 @@ export class AceptPlacesComponent implements OnInit {
     this.placeService.getPendingPlaces().subscribe(
       (data: Iplace[]) => {
         this.places = data;
+
+        // Mostrar mensaje si no hay lugares por aprobar
+        if (this.places.length === 0) {
+          this.noPendingPlaces = true;
+        }
 
         this.favoriteService.getFavorites().subscribe(
           (favoritesData: any[]) => {

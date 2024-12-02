@@ -17,7 +17,7 @@
 }
 
 .card-group-container-acept.expanded {
-    transform: translateX(10vw);
+    transform: translateX(5vw);
 }
 
 .cards-wrapper {
@@ -160,3 +160,28 @@
         grid-template-columns: 1fr;
     }
 }
+
+.card-group-container-acept .no-places-message {
+    width: 60vw;
+    height: 70vh;
+    margin: 5vh auto;
+    padding: 20px;
+    transition: 0.3s ease-in-out;
+}
+
+.no-places-message {
+    display: grid;
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    margin: 60px auto;
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    margin-right: 15vw;
+    font-size: 1.5rem;
+    color: #333;
+    border-radius: 10px;
+    transform: translateX(10vw);
+}
+

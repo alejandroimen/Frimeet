@@ -94,7 +94,7 @@ export class InfoAceptPlacesComponent implements OnInit, DoCheck {
       this.placeService.approvePlaces(this.place._id, { approve }).subscribe(
         (response: any) => {
           this.alertService.showSuccess(approve ? 'Lugar aprobado correctamente.' : 'Lugar rechazado y eliminado.');
-          this.router.navigate(['/acept-place']);
+          this.router.navigate(['/accept-place']);
         },
         (error: any) => {
           this.alertService.showError('Hubo un error al actualizar el estado del lugar.');

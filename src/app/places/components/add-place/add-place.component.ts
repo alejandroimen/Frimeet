@@ -160,13 +160,18 @@ export class AddPlaceComponent implements DoCheck, OnInit {
     formData.append('types', this.place.types);
     formData.append('description', this.place.description);
     formData.append('address', this.place.address);
-    this.selectedTags.forEach(tag => formData.append('tag', tag));
+    //this.selectedTags.forEach(tag => formData.append('tag', tag));
     formData.append('coordinates[lat]', this.place.coordinates.lat.toString());
     formData.append('coordinates[lng]', this.place.coordinates.lng.toString());
 
     for (let i = 0; i < this.selectedFiles.length; i++) {
       formData.append('images', this.selectedFiles[i], this.selectedFiles[i].name);
     }
+
+    // Añadir etiquetas seleccionadas como múltiples entradas
+    this.selectedTags.forEach(tag => {
+      formData.append('tag[]', tag); // Clave compatible con el backend
+      });
 
     this.placeService.addPlace(formData).subscribe(
       (response) => {
