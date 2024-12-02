@@ -17,4 +17,8 @@ export class AuthService {
     
     return this.http.post(`${this.apiUrl}/verificar-token`, {token: token})
   }
+
+  verifyUserPremium(): boolean {
+    return localStorage.getItem('userRol') == '2'
+  }
 }

@@ -24,6 +24,7 @@ import { AceptPlacesComponent } from './places/components/acept-places/acept-pla
 import { InfoAceptPlacesComponent } from './places/components/info-acept-places/info-acept-places.component';
 import { SorpresePlaceComponent } from './places/components/sorprese-place/sorprese-place.component';
 import { canActivateGuard } from './services/guards/can-activate.guard';
+import { isPremiumGuard } from './services/guards/is-premium.guard';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent },
@@ -46,8 +47,8 @@ const routes: Routes = [
   {path: 'payment', component: PaymentViewComponent, canActivate: [canActivateGuard]},
   {path: 'reminders/:id', component: RemindersViewsComponent, canActivate: [canActivateGuard]},
   { path: 'map', component: MapComponent, canActivate: [canActivateGuard]},
-  {path: 'acept-place', component: AceptPlacesComponent, canActivate: [canActivateGuard]},
-  {path: 'acept-place/:id', component: InfoAceptPlacesComponent, canActivate: [canActivateGuard]},
+  {path: 'accept-place', component: AceptPlacesComponent, canActivate: [canActivateGuard, isPremiumGuard]},
+  {path: 'accept-place/:id', component: InfoAceptPlacesComponent, canActivate: [canActivateGuard, isPremiumGuard]},
   {path: 'random/:id', component: SorpresePlaceComponent, canActivate: [canActivateGuard]}
 ];
 

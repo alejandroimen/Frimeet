@@ -18,7 +18,13 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
   isCollapsed: boolean = true;
+  isPremium!: boolean;
+
   constructor(private router: Router, private userServ: UserService) {}
+
+  ngOnInit(): void {
+    this.isPremium = localStorage.getItem('userRol') == '2'
+  }
 
   toggleMenu(): void {
     this.isCollapsed = !this.isCollapsed;
