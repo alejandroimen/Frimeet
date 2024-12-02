@@ -95,14 +95,16 @@ export class AddEventComponent implements OnInit, DoCheck {
   }
 
   toggleTag(event: Event, tag: string): void {
-    event.preventDefault();  // Evita la validación del formulario
+    event.preventDefault(); // Evita la validación del formulario
     const index = this.selectedTags.indexOf(tag);
     if (index > -1) {
       this.selectedTags.splice(index, 1);
     } else {
       this.selectedTags.push(tag);
     }
-  }  
+    console.log('Tags seleccionados:', this.selectedTags); // Validar
+  }
+  
 
   scrollLeft(event: Event): void {
     event.preventDefault(); // Evita la validación del formulario
@@ -232,6 +234,11 @@ export class AddEventComponent implements OnInit, DoCheck {
     for (let i = 0; i < this.selectedFiles.length; i++) {
       formData.append('images', this.selectedFiles[i], this.selectedFiles[i].name);
     }
+
+    // Añadir etiquetas seleccionadas como múltiples entradas
+     this.selectedTags.forEach(tag => {
+      formData.append('tag[]', tag); // Clave compatible con el backend
+      });
 
     this.eventService.addEvent(formData).subscribe(response => {
       this.alertService.showSuccess('Evento agregado exitosamente.');

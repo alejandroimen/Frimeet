@@ -24,11 +24,13 @@ export class EventService {
   }
 
   getEvents(): Observable<any> {
-    return this.http.get(`${this.apiUrl}api/events`);
+    const headers = this.createAuthorizationHeader();
+    return this.http.get(`${this.apiUrl}api/events`, {headers});
   }
 
   getEventById(id: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}api/events/${id}`);
+    const headers = this.createAuthorizationHeader();
+    return this.http.get(`${this.apiUrl}api/events/${id}`, {headers});
   }
 
   updateEvent(id: string, eventData: any): Observable<any> {
