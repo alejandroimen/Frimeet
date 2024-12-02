@@ -1,18 +1,32 @@
+.card-group-review-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  margin-top: 10vh;
+}
+
+#title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .card-group-review {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 20px;
   padding: 10px;
   box-sizing: border-box;
-  width: 90vw;
+  width: 60vw;
   height: auto;
-  margin-left: 8vw;
-  margin-top: 10vh;
+
 }
 
 .info-event-container {
   position: relative;
-  width: 80%;
+  width: 15vw;
   height: 380px;
   display: flex;
   flex-direction: column;
@@ -22,7 +36,7 @@
   border-radius: 12px;
   background-color: #ffffff;
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
-  color: black;
+  color: var(--black);
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;

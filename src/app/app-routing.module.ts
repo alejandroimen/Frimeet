@@ -12,8 +12,6 @@ import { ReviewComponent } from './users/review/review.component';
 import { PlacesReviewComponent } from './users/places-review/places-review.component';
 import { EventsReviewComponent } from './users/events-review/events-review.component';
 import { DesireViewComponent } from './recommendations/components/desire-view/desire-view.component';
-import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navbar.component';
-import { DesireFormComponent } from './recommendations/desire-form/desire-form.component';
 import { WelcomeStartComponent } from './standalone/welcome-start/welcome-start.component';
 import { PaymentViewComponent } from './payments/components/payment-view/payment-view.component';
 import { RegisterViewComponent } from './users/components/register-view/register-view.component';
@@ -21,28 +19,39 @@ import { LoginComponent } from './users/components/login/login.component';
 import { RemindersViewsComponent } from './reminders/components/reminders-views/reminders-views.component';
 import { MapComponent } from './map/map.component';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
+import { ResultViewComponent } from './recommendations/components/result-view/result-view.component';
+import { AceptPlacesComponent } from './places/components/acept-places/acept-places.component';
+import { InfoAceptPlacesComponent } from './places/components/info-acept-places/info-acept-places.component';
+import { SorpresePlaceComponent } from './places/components/sorprese-place/sorprese-place.component';
+import { canActivateGuard } from './services/guards/can-activate.guard';
+import { isPremiumGuard } from './services/guards/is-premium.guard';
+import { NotFoundComponent } from './standalone/not-found/not-found.component';
 
 const routes: Routes = [
-  {path: '', component: WelcomeComponent},
-  {path: 'welcome', component: WelcomeComponent},
-  {path: 'register', component: RegisterViewComponent},
   {path: 'login', component: LoginComponent },
-  {path: 'add-place', component: AddPlaceComponent},
-  {path: 'add-event', component: AddEventComponent },
-  {path: 'info-place', component: InfoPlaceComponent},
-  {path: 'info-event', component: InfoEventComponent},
-  {path: 'check-availability', component: CheckAvailabilityComponent },
-  {path: 'review', component: ReviewComponent},
-  {path: 'places-review', component: PlacesReviewComponent},
-  {path: 'events-review', component: EventsReviewComponent},
-  {path: 'desire-form', component: DesireViewComponent},
-  {path: 'welcome-start', component: WelcomeStartComponent},
-  {path: 'edit-profile', component: EditProfileComponent},
-  {path: 'events/:id', component: DetailsEventComponent},
-  {path: 'places/:id', component: DetailsPlaceComponent},
-  {path: 'payment', component: PaymentViewComponent},
-  {path: 'reminders/:id', component: RemindersViewsComponent},
-  { path: 'map', component: MapComponent}
+  {path: 'register', component: RegisterViewComponent},
+  {path: '', component: WelcomeStartComponent},
+  {path: 'home', component: WelcomeComponent},
+  {path: 'add-place', component: AddPlaceComponent, canActivate: [canActivateGuard]},
+  {path: 'add-event', component: AddEventComponent, canActivate: [canActivateGuard] },
+  {path: 'info-place', component: InfoPlaceComponent, canActivate: [canActivateGuard]},
+  {path: 'info-event', component: InfoEventComponent, canActivate: [canActivateGuard]},
+  {path: 'check-availability', component: CheckAvailabilityComponent, canActivate: [canActivateGuard]},
+  {path: 'review', component: ReviewComponent, canActivate: [canActivateGuard]},
+  {path: 'places-review', component: PlacesReviewComponent, canActivate: [canActivateGuard]},
+  {path: 'events-review', component: EventsReviewComponent, canActivate: [canActivateGuard]},
+  {path: 'desire', component: DesireViewComponent, canActivate: [canActivateGuard]},
+  {path: 'recommendation/:id', component: ResultViewComponent, canActivate: [canActivateGuard]},
+  {path: 'edit-profile', component: EditProfileComponent, canActivate: [canActivateGuard]},
+  {path: 'events/:id', component: DetailsEventComponent, canActivate: [canActivateGuard]},
+  {path: 'places/:id', component: DetailsPlaceComponent, canActivate: [canActivateGuard]},
+  {path: 'payment', component: PaymentViewComponent, canActivate: [canActivateGuard]},
+  {path: 'reminders/:id', component: RemindersViewsComponent, canActivate: [canActivateGuard]},
+  { path: 'map', component: MapComponent, canActivate: [canActivateGuard]},
+  {path: 'accept-place', component: AceptPlacesComponent, canActivate: [canActivateGuard, isPremiumGuard]},
+  {path: 'accept-place/:id', component: InfoAceptPlacesComponent, canActivate: [canActivateGuard, isPremiumGuard]},
+  {path: 'random/:id', component: SorpresePlaceComponent, canActivate: [canActivateGuard]},
+  {path: '**', component: NotFoundComponent},
 ];
 
 @NgModule({

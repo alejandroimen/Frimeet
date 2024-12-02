@@ -16,21 +16,22 @@
     </div>
     <div class="dropdown-menu" [class.active]="isMenuOpen">
         <ul class="list-unstyled profile-menu">
-            <li routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <li routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
                 <a routerLink="/welcome"><i class="bi bi-house-door"></i> Home</a>
             </li>
-            <li routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <li routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
                 <a routerLink="/edit-profile"><i class="bi bi-pencil-square"></i> Editar Perfil</a>
             </li>
-            <li routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-                <a routerLink="/places-review"><i class="bi bi-geo-alt"></i> Lugares Visitados</a>
+            <li routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
+                <a routerLink="/places-review"><i class="bi bi-geo-alt"></i> Mis Favoritos</a>
             </li>
-            <li routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <li routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
                 <a routerLink="/events-review"><i class="bi bi-calendar-event"></i> Eventos asistidos</a>
             </li>
-            <li routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <li routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
                 <a routerLink="/review"><i class="bi bi-clipboard2-check"></i> Reseñas</a>
             </li>
         </ul>
     </div>
+
 </header>

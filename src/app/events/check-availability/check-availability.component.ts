@@ -20,7 +20,9 @@ export class CheckAvailabilityComponent {
     address: '',
     price: 0,
     willAttend: 0,
+    attendees: [],
     images: [],
+    tag: [],
     userOwner: 0,
     coordinates: {
       lat: 0,
@@ -39,6 +41,7 @@ export class CheckAvailabilityComponent {
   }
 
   onNext(): void {
+    this.sharedDataService.setDisablePlaceSelect(true);
     console.log('Redireccionando con coordenadas:', this.sharedDataService.getCoordinates());
     this.router.navigate(['/add-event']); // Actualizar la ruta según sea necesario
   }

@@ -14,13 +14,13 @@ import { FormsModule } from '@angular/forms';
 import { RecommendationsModule } from './recommendations/recommendations.module';
 import { WelcomeStartComponent } from './standalone/welcome-start/welcome-start.component';
 import { RemindersModule } from './reminders/reminders.module';
-import { ProfileNavbarComponent } from './standalone/profile-navbar/profile-navbar.component';
-
+import { NotFoundComponent } from './standalone/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeStartComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

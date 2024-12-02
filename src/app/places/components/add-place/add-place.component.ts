@@ -1,24 +1,27 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Iplace } from '../../interfaces/iplace';
 import { PlaceService } from '../../services/place.service';
 import { AlertService } from '../../../services/alert.service';
 import { Router } from '@angular/router';
+import { TagsService } from '../../../services/tags.service';
 
 @Component({
   selector: 'app-add-place',
   templateUrl: './add-place.component.html',
   styleUrls: ['./add-place.component.css']
 })
-export class AddPlaceComponent implements DoCheck {
+export class AddPlaceComponent implements DoCheck, OnInit {
   place: Iplace = {
     _id: "",
     name: '',
     types: '',
     images: [],
     description: '',
-    tags: '',
+    tag: [],
+    totalStarts: 0,
     address: '',
+    userOwner: 0,
     coordinates: {
       lat: 0,
       lng: 0,
@@ -31,8 +34,36 @@ export class AddPlaceComponent implements DoCheck {
   descriptionValid: boolean = true;
   addressValid: boolean = true;
   imageSelected: boolean = false;
+  allTags: string[] = []; 
+  selectedTags: string[] = [];
+  itemsPerPage: number = 8; // Número de etiquetas por página
+  currentPage: number = 0; // Página actual
+  visibleTags: string[] = []; // Etiquetas visibles en la página actual
 
-  constructor(private placeService: PlaceService, private alertService: AlertService, private router: Router) {}
+  constructor(private placeService: PlaceService, private alertService: AlertService, private router: Router, private tagsService: TagsService) {}
+
+  ngOnInit(): void {
+    this.tagsService.getTagsPlace().subscribe(
+      (tagsData: any) => {
+        if (tagsData && tagsData.tagsPlace) {
+          this.allTags = tagsData.tagsPlace.map((tag: any) => tag.tagsPlace);
+          this.updateVisibleTags(); // Actualiza las etiquetas visibles
+        } else {
+          this.alertService.showWarning('No se pudieron cargar las etiquetas.');
+        }
+      },
+      (error: any) => {
+        this.alertService.showError('Error al cargar las etiquetas.');
+        console.error('Error al cargar las etiquetas:', error);
+      }
+    );
+  }
+
+  updateVisibleTags(): void {
+    const start = this.currentPage * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.visibleTags = this.allTags.slice(start, end); // Subconjunto de etiquetas
+  }
 
   onFileSelected(event: any): void {
     this.selectedFiles = event.target.files;
@@ -66,6 +97,36 @@ export class AddPlaceComponent implements DoCheck {
     this.place.coordinates = coords;
   }
 
+  toggleTag(event: Event, tag: string): void {
+    event.preventDefault();  // Evita la validación del formulario
+    const index = this.selectedTags.indexOf(tag);
+    if (index > -1) {
+      this.selectedTags.splice(index, 1);
+      console.log(`Deseleccionado: ${tag}`);
+    } else {
+      this.selectedTags.push(tag);
+      console.log(`Seleccionado: ${tag}`);
+    }
+    console.log('Tags seleccionados:', this.selectedTags);
+  }  
+
+  scrollLeft(event: Event): void {
+    event.preventDefault(); // Evita la validación del formulario
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.updateVisibleTags(); // Actualiza las etiquetas visibles
+    }
+  }
+
+  scrollRight(event: Event): void {
+    event.preventDefault(); // Evita la validación del formulario
+    const maxPage = Math.ceil(this.allTags.length / this.itemsPerPage) - 1;
+    if (this.currentPage < maxPage) {
+      this.currentPage++;
+      this.updateVisibleTags(); // Actualiza las etiquetas visibles
+    }
+  }
+
   onSubmit(form: NgForm): void {
     this.isSubmitting = true;
     if (form.invalid || !this.nameValid || !this.descriptionValid || !this.addressValid || !this.imageSelected) {
@@ -84,12 +145,14 @@ export class AddPlaceComponent implements DoCheck {
       return;
     }
 
+    this.place.tag = this.selectedTags; // Añadir las etiquetas seleccionadas al lugar
+
     const formData = new FormData();
     formData.append('name', this.place.name);
     formData.append('types', this.place.types);
     formData.append('description', this.place.description);
     formData.append('address', this.place.address);
-    formData.append('tag', this.place.tags);
+    this.selectedTags.forEach(tag => formData.append('tag', tag));
     formData.append('coordinates[lat]', this.place.coordinates.lat.toString());
     formData.append('coordinates[lng]', this.place.coordinates.lng.toString());
 

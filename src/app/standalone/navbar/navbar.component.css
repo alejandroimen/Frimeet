@@ -1,5 +1,5 @@
 nav {
-    width: 15vw;
+    width: 16vw;
     height: 92vh;
     position: fixed;
     left: 0;
@@ -20,6 +20,11 @@ nav {
     color: var(--orange) !important;
     font-weight: bold;
 }
+
+.active-link:hover a {
+    color: var(--black) !important;
+}
+
 
 .input {
     display: flex;
@@ -47,9 +52,10 @@ nav {
 }
 
 .value a {
-    color: rgb(0, 0, 0);
+    color: var(--black);
     text-decoration: none;
     display: flex;
+    align-items: center;
     gap: 0.625rem;
     width: 100%;
     font-size: 1rem;
@@ -57,7 +63,8 @@ nav {
 
 .value:not(:active):hover,
 .value:focus {
-    background-color: #ffc800a4;
+    background-color: var(--yellow);
+    color: var(--black);
 }
 
 .value:focus,
@@ -84,22 +91,22 @@ nav {
     opacity: 1;
 }
 
-.input:hover > :not(.value:hover) {
+.input:hover> :not(.value:hover) {
     transition: 300ms;
-    filter: blur(0.0625rem);
+
     transform: scale(0.95, 0.95);
 }
 
 .logout-button {
     margin-top: auto;
+    background: none;
     width: 100%;
-    background-color: #ffc800a4;
     border: none;
     padding: 0.625rem;
-    color: #000;
+    color: var(--black);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     gap: 0.5rem;
     font-size: 1rem;
     cursor: pointer;
@@ -109,7 +116,6 @@ nav {
 }
 
 .logout-button:hover {
-    background-color: #ffc800;
     transform: scale(1.05);
 }
 

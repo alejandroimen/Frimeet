@@ -4,26 +4,55 @@
     </button>
     <ul class="input">
         <li class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-            <a routerLink="/welcome">Inicio</a>
+            <a routerLink="/home"> 
+                <i class="fa-solid fa-house"></i>
+                Inicio
+            </a>
         </li>
         <li class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-            <a routerLink="/add-place">Agregar lugar</a>
+            <a routerLink="/add-place">
+                <i class="fa-solid fa-circle-plus"></i>
+                Agregar lugar
+            </a>
         </li>
         <li class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-            <a routerLink="/add-event">Agregar evento</a>
+            <a routerLink="/add-event">
+                <i class="fa-solid fa-calendar-plus"></i>
+                Agregar evento
+            </a>
         </li>
         <li class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-            <a routerLink="/info-place">Info lugar</a>
+            <a routerLink="/info-place">
+                <i class="fa-solid fa-location-dot"></i>    
+                Info lugar
+            </a>
         </li>
         <li class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-            <a routerLink="/info-event">Info Evento</a>
+            <a routerLink="/info-event">
+                <i class="fa-solid fa-calendar-week"></i>
+                Info Evento
+            </a>
         </li>
         <li class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-            <a routerLink="/desire-form">Recomendaciones</a>
+            <a routerLink="/desire">
+                <i class="fa-solid fa-lightbulb"></i>
+                Recomendaciones
+            </a>
+        </li>
+        <li class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <a routerLink="/payment">
+                <i class="fa-solid fa-star"></i>
+                Asciende a premium</a>
+        </li>
+        <li *ngIf="isPremium" class="value" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+            <a routerLink="/accept-place">
+                <i class="fa-solid fa-star"></i>
+                Aprobar lugares</a>
         </li>
     </ul>
 
     <button class="logout-button" (click)="logout()">
-        <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        Cerrar sesión
     </button>
 </nav>

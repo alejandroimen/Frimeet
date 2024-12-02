@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../services/event.service';
 import { Ievent } from '../interfaces/ievent';
@@ -10,16 +10,17 @@ import { jwtDecode } from 'jwt-decode';
   templateUrl: './details-event.component.html',
   styleUrls: ['./details-event.component.css']
 })
-export class DetailsEventComponent implements OnInit {
+export class DetailsEventComponent implements OnInit, DoCheck {
   event: Ievent | undefined;
-  deleteModal: any;
-  updateModal: any;
+
   imageSelected: boolean = true;
   selectedFiles: File[] = [];
   nameValid: boolean = true;
   descriptionValid: boolean = true;
   addressValid: boolean = true;
   isOwner: boolean = false;
+  isAttendee: boolean = false;
+  userId: number | null = null;
 
   constructor(private eventService: EventService, private route: ActivatedRoute, private router: Router, private alertService: AlertService) {}
 
@@ -30,58 +31,91 @@ export class DetailsEventComponent implements OnInit {
         this.event = data;
         this.imageSelected = this.event.images.length > 0;
 
+        if (!this.event.tag) {
+          this.event.tag = [];
+        }
+
         const token = localStorage.getItem('jwtToken');
-        if (token) { 
-        const decodedToken: any = jwtDecode(token);
-        const userId = parseInt(decodedToken.sub, 10); 
-        const userOwner = this.event?.userOwner;
-        console.log('User ID:', userId);
-        console.log('User Owner:', userOwner); 
-        this.isOwner = userId === userOwner;
-        console.log('Is Owner:', this.isOwner); 
+        if (token) {
+          const decodedToken: any = jwtDecode(token);
+          this.userId = parseInt(decodedToken.sub, 10);
+          const userOwner = this.event?.userOwner;
+          this.isOwner = this.userId === userOwner;
+          this.isAttendee = this.event?.attendees.includes(this.userId);
         }
       }, error => {
+        this.alertService.showError('Error al obtener los detalles del evento.');
+
         console.error('Error al obtener los detalles del evento:', error);
       });
+    }
+  }
+
+  ngDoCheck(): void {
+    if (this.event) {
+      this.nameValid = this.validateName(this.event.name);
+      this.descriptionValid = this.validateDescription(this.event.description);
+      this.addressValid = !!this.event.address?.trim();
+    }
+  }
+
+  openUpdateModal(): void {
+    const modalElement = document.getElementById('updateModal');
+    if (modalElement) {
+      modalElement.style.display = 'block';
+    }
+  }
+
+  closeUpdateModal(): void {
+    const modalElement = document.getElementById('updateModal');
+    if (modalElement) {
+      modalElement.style.display = 'none';
     }
   }
 
   openDeleteModal(): void {
     const modalElement = document.getElementById('deleteModal');
     if (modalElement) {
-      this.deleteModal = new (window as any).bootstrap.Modal(modalElement);
-      this.deleteModal.show();
+      modalElement.style.display = 'block';
     }
   }
 
-  showUpdateModal = false;
-  
-  openUpdateModal(): void {
-      this.showUpdateModal = true;
-      
-
-      setTimeout(() => {
-          const modalElement = document.getElementById('updateModal');
-          if (modalElement) {
-           
-              this.updateModal = new (window as any).bootstrap.Modal(modalElement);
-               console.log(this.updateModal)
-              this.updateModal.show();
-          }
-      }, 0); // Permitir que el DOM actualice antes de mostrar la modal
+  closeDeleteModal(): void {
+    const modalElement = document.getElementById('deleteModal');
+    if (modalElement) {
+      modalElement.style.display = 'none';
+    }
   }
-  
-  closeUpdateModal(): void {
-      if (this.updateModal) {
-          this.updateModal.hide();
-          this.showUpdateModal = false;
-      }
-  }
-  
 
   onFileSelected(event: any): void {
-    this.selectedFiles = event.target.files;
+    this.selectedFiles = Array.from(event.target.files); // Actualizar la lista de archivos seleccionados
     this.imageSelected = this.selectedFiles.length > 0;
+
+    if (this.imageSelected) {
+      console.log('Archivos seleccionados:', this.selectedFiles);
+
+      // Limpiar las imágenes previas de la vista previa local
+      if (this.event) {
+        this.event.images = [];
+      }
+
+      // Generar vistas previas locales de las nuevas imágenes seleccionadas
+      this.selectedFiles.forEach((file) => {
+        const previewUrl = URL.createObjectURL(file);
+        if (this.event) {
+          this.event.images.push(previewUrl);
+        }
+        console.log('Vista previa generada:', previewUrl);
+      });
+    } else {
+      console.log('No se seleccionaron archivos.');
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.event?.images) {
+      this.event.images.forEach((url) => URL.revokeObjectURL(url));
+    }
   }
 
   validateName(name: string): boolean {
@@ -93,49 +127,96 @@ export class DetailsEventComponent implements OnInit {
     return description.length <= 250;
   }
 
-  updateEvent(): void {
-    if (this.event && this.nameValid && this.descriptionValid && this.addressValid) {
-      const formData = new FormData();
-      formData.append('name', this.event.name);
-      formData.append('description', this.event.description);
-      formData.append('address', this.event.address);
+  updateEvent(eventForm: any): void {
+    if (!eventForm.valid || !this.nameValid || !this.descriptionValid || !this.addressValid) {
+      this.alertService.showWarning('Por favor, corrige los errores antes de enviar.');
+      return;
+    }
 
+    if (this.event) {
+      const formData = new FormData();
+      formData.append('name', this.event.name.trim());
+      formData.append('description', this.event.description.trim());
+      formData.append('address', this.event.address.trim());
+      formData.append('maxPeoples', this.event.maxPeoples.toString());
+      formData.append('date', new Date(this.event.date).toISOString());
+      formData.append('endDate', new Date(this.event.endDate).toISOString());
+      formData.append('price', this.event.price ? this.event.price.toString() : '0');
+
+      // Añadir etiquetas (tags)
+      if (this.event.tag) {
+        this.event.tag.forEach((tag, index) => formData.append(`tag[${index}]`, tag));
+      }
+
+      // Subir solo nuevas imágenes
       if (this.selectedFiles.length > 0) {
-        for (let i = 0; i < this.selectedFiles.length; i++) {
-          formData.append('images', this.selectedFiles[i], this.selectedFiles[i].name);
-        }
-      } else {
-        this.event.images.forEach((image) => {
-          formData.append('images', image);
+        this.selectedFiles.forEach((file) => {
+          formData.append('images', file); // Usa exactamente el mismo nombre que en multer
         });
       }
 
-      this.eventService.updateEvent(this.event._id, formData).subscribe(response => {
-        this.alertService.showSuccess('Lugar actualizado exitosamente.');
-        if (this.updateModal) {
-          this.updateModal.hide();
+      // Llamar al servicio para actualizar el evento
+      this.eventService.updateEvent(this.event._id, formData).subscribe(
+        (response) => {
+          console.log('Respuesta del backend:', response);
+          this.alertService.showSuccess('Evento actualizado exitosamente.');
+          this.closeUpdateModal();
+          this.router.navigate(['/info-event']);
+        },
+        (error) => {
+          this.alertService.showError('Hubo un error al actualizar el evento.');
+          console.error('Error al actualizar el evento:', error);
         }
-        this.router.navigate(['/info-event']);
-      }, error => {
-        this.alertService.showError('Hubo un error al actualizar el lugar.');
-        console.error('Error al actualizar el lugar:', error);
-      });
-    } else {
-      this.alertService.showWarning('Por favor, corrige los errores antes de enviar.');
+      );
+    }
+  }
+
+  joinEvent(): void {
+    if (this.event && this.event._id) {
+      this.eventService.joinEvent(this.event._id).subscribe(
+        (response) => {
+          this.alertService.showSuccess('Te has unido al evento exitosamente.');
+          this.isAttendee = true;
+          if (this.userId !== null) {
+            this.event?.attendees.push(this.userId); // Actualiza la lista de asistentes localmente
+          }
+        },
+        (error) => {
+          this.alertService.showError('Hubo un error al unirse al evento.');
+          console.error('Error al unirse al evento:', error);
+        }
+      );
+    }
+  }
+
+  leaveEvent(): void {
+    if (this.event && this.event._id) {
+      this.eventService.leaveEvent(this.event._id).subscribe(
+        (response) => {
+          this.alertService.showSuccess('Te has salido del evento exitosamente.');
+          this.isAttendee = false;
+          if (this.userId !== null && this.event?.attendees) {
+            this.event.attendees = this.event.attendees.filter(attendee => attendee !== this.userId); // Actualiza la lista de asistentes localmente
+          }
+        },
+        (error) => {
+          this.alertService.showError('Hubo un error al salir del evento.');
+          console.error('Error al salir del evento:', error);
+        }
+      );
     }
   }
 
   deleteEvent(): void {
     if (this.event && this.event._id) {
       this.eventService.deleteEvent(this.event._id).subscribe(response => {
-        this.alertService.showSuccess('Lugar eliminado exitosamente.');
-        if (this.deleteModal) {
-          this.deleteModal.hide();
-        }
+        this.alertService.showSuccess('Evento eliminado exitosamente.');
+        this.closeDeleteModal();
         this.router.navigate(['/info-event']);
       }, error => {
-        this.alertService.showError('Hubo un error al eliminar el lugar.');
-        console.error('Error al eliminar el lugar:', error);
+        this.alertService.showError('Hubo un error al eliminar el evento.');
+        console.error('Error al eliminar el evento:', error);
+
       });
     }
   }

@@ -10,10 +10,12 @@ export interface Ievent {
     address: string
     price: number
     willAttend: number
+    attendees: number[]
     images: string[]
     userOwner: number
     coordinates: {
         lat: number,
         lng: number,
       }
+    tag: string[]
 }

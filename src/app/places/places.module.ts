@@ -7,6 +7,9 @@ import { DetailsPlaceComponent } from './components/details-place/details-place.
 import { InfoCardComponent } from "../standalone/info-card/info-card.component";
 import { MapComponent } from '../map/map.component';
 import { MapDisplayComponent } from '../map-display/map-display.component';
+import { AceptPlacesComponent } from './components/acept-places/acept-places.component';
+import { InfoAceptPlacesComponent } from './components/info-acept-places/info-acept-places.component';
+import { SorpresePlaceComponent } from './components/sorprese-place/sorprese-place.component';
 
 @NgModule({
   declarations: [
@@ -14,12 +17,15 @@ import { MapDisplayComponent } from '../map-display/map-display.component';
     InfoPlaceComponent,
     DetailsPlaceComponent,
     MapComponent,
-    MapDisplayComponent
+    AceptPlacesComponent,
+    InfoAceptPlacesComponent,
+    SorpresePlaceComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    InfoCardComponent
+    InfoCardComponent,
+    MapDisplayComponent
 ]
 })
 export class PlacesModule { }

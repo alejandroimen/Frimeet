@@ -12,9 +12,9 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
-}
-
-.welcome-container::before {
+  }
+  
+  .welcome-container::before {
     content: '';
     position: absolute;
     top: 0;
@@ -22,10 +22,11 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    transform: rotateZ(8deg);
     z-index: -1;
-}
-
-.welcome-container h1 {
+  }
+  
+  .welcome-container h1 {
     transform: rotate(-8deg);
     font-family: "Bangers", system-ui;
     font-weight: 400;
@@ -34,14 +35,76 @@
     letter-spacing: 7px;
     color: var(--white);
     text-shadow: 0px 0px 5px var(--red);
-    /* -webkit-text-stroke: 2px black; */
-}
-
-.welcome-container img {
+  }
+  
+  .welcome-container img {
     height: 45px;
     filter: drop-shadow(0 2px 3px var(--red));
-}
-
-.welcome-container span {
+  }
+  
+  .welcome-container span {
     color: var(--white);
-}
+  }
+  
+  /* Contenedor de la ruleta */
+  .roulette-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .roulette-container p {
+    color: var(--black);
+    text-align: center;
+    margin: 0 0 10px 0; /* Ajusta el margen según sea necesario */
+  }
+  
+  /* Wrapper para la imagen y el botón */
+  .roulette-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Imagen de la ruleta */
+  .roulette-image {
+    width: 100px;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  /* Botón "Sorpréndeme" */
+  .surprise-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--yellow);
+    color: var(--black);
+    font-family: "Arial", sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 45px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .surprise-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Icono del dado */
+  .dice-icon {
+    font-size: 20px;
+  }
+  

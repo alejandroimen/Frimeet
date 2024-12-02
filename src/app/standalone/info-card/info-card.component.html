@@ -26,7 +26,7 @@
     <p>
         {{ place.description }}
     </p>
-    <div *ngIf="place.tags" class="tags-container">
-        <span *ngFor="let tag of place.tags.split(',')"> {{ tag }} </span>
+    <div *ngIf="place.tag" class="tags-container">
+        <span *ngFor="let tag of place.tag"> {{ tag }} </span>
     </div>
 </div>

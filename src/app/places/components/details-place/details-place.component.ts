@@ -4,6 +4,7 @@ import { PlaceService } from '../../services/place.service';
 import { Iplace } from '../../interfaces/iplace';
 import { AlertService } from '../../../services/alert.service';
 import { ReviewService } from '../../services/review.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-details-place',
@@ -12,6 +13,9 @@ import { ReviewService } from '../../services/review.service';
 })
 export class DetailsPlaceComponent implements OnInit, DoCheck {
   place: Iplace | undefined;
+  reviews: any[] = [];
+  newReview: string = '';
+  newReviewStars: number = 0;
   deleteModal: any;
   updateModal: any;
   selectedFiles: File[] = [];
@@ -20,12 +24,14 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
   tagsValid: boolean = true;
   addressValid: boolean = true;
   imageSelected: boolean = true;
+  isOwner: boolean = false;
 
   constructor(
     private placeService: PlaceService,
     private route: ActivatedRoute,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private reviewService: ReviewService
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +40,19 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
       this.placeService.getPlaceById(placeId).subscribe((data: Iplace) => {
         this.place = data;
         this.imageSelected = this.place.images.length > 0;
+
+        const token = localStorage.getItem('jwtToken');
+        if (token) { 
+        const decodedToken: any = jwtDecode(token);
+        const userId = parseInt(decodedToken.sub, 10); 
+        const userOwner = this.place?.userOwner;
+        console.log('User ID:', userId); // Log del ID del usuario 
+        console.log('User Owner:', userOwner); // Log del propietario del lugar 
+        this.isOwner = userId === userOwner; // Verifica si el usuario es el propietario 
+        console.log('Is Owner:', this.isOwner); // Log del resultado de la verificación 
+        }
+
+        this.loadReviews(placeId);
       }, error => {
         this.alertService.showError('Error al obtener los detalles del lugar.');
         console.error('Error al obtener los detalles del lugar:', error);
@@ -45,7 +64,6 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
     if (this.place) {
       this.nameValid = this.validateName(this.place.name);
       this.descriptionValid = this.validateDescription(this.place.description);
-      this.tagsValid = this.place.tags ? this.place.tags.trim().length > 0 : false;
       this.addressValid = this.place.address ? this.place.address.trim().length > 0 : false;
     }
   }
@@ -87,7 +105,6 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
       formData.append('types', this.place.types);
       formData.append('description', this.place.description);
       formData.append('address', this.place.address);
-      formData.append('tag', this.place.tags);
 
       if (this.selectedFiles.length > 0) {
         for (let i = 0; i < this.selectedFiles.length; i++) {
@@ -145,5 +162,40 @@ export class DetailsPlaceComponent implements OnInit, DoCheck {
     if (modal) {
       modal.style.display = 'none';
     }
+  }
+
+  loadReviews(placeId: string): void {
+    this.reviewService.getReviewByPlace(placeId).subscribe((reviews: any[]) => {
+      this.reviews = reviews;
+      console.log('Reseñas cargadas:', this.reviews);
+    }, error => {
+      //this.alertService.showError('Error al cargar las reseñas.');
+      console.error('Error al cargar las reseñas:', error);
+    });
+  }
+
+  submitReview(): void {
+    if (!this.newReview || this.newReviewStars === 0) {
+      this.alertService.showWarning('Por favor, completa la reseña y selecciona una calificación.');
+      return;
+    }
+
+    const reviewData = {
+      content: this.newReview,
+      starts: this.newReviewStars,
+      idPlace: this.place?._id
+    };
+
+    this.reviewService.addReview(reviewData).subscribe(response => {
+      this.alertService.showSuccess('Reseña agregada exitosamente.');
+      this.newReview = '';
+      this.newReviewStars = 0;
+      if (this.place) {
+        this.loadReviews(this.place._id);
+      }
+    }, error => {
+      this.alertService.showError('Hubo un error al agregar la reseña.');
+      console.error('Error al agregar la reseña:', error);
+    });
   }
 }

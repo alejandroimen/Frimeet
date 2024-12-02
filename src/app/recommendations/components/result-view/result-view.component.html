@@ -1,0 +1,63 @@
+<div *ngIf="place" class="details-place-container">
+  <div class="details-header">
+    <i class="fas fa-arrow-left icon-style" (click)="goBack()"></i>
+    <h1>deberías ir a...</h1>
+  </div>
+
+  <div class="image-and-title">
+    <div *ngIf="place.images.length > 1" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="image-group">
+            <img *ngIf="place.images[0]" [src]="place.images[0]" class="d-block" alt="Imagen 1">
+            <img *ngIf="place.images[1]" [src]="place.images[1]" class="d-block" alt="Imagen 2">
+            <img *ngIf="place.images[2]" [src]="place.images[2]" class="d-block" alt="Imagen 3">
+          </div>
+
+          <div class="see-all-photos" (click)="openPhotosModal()">
+            Ver {{ place.images.length }} fotos
+          </div>
+
+          <div class="photos-modal" id="photosModal">
+            <div class="modal-content">
+              <header class="modal-header">
+                <h2>Fotos de {{ place.name }}</h2>
+                <button class="close-modal" (click)="closePhotosModal()">✖</button>
+              </header>
+              <div class="photos-grid">
+                <img *ngFor="let img of place.images" [src]="img" alt="Image of {{ place.name }}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="place.images.length === 1" class="banner-place">
+      <img [src]="place.images[0]" alt="Imagen de {{ place.name }}">
+    </div>
+    <div class="title-and-stars">
+      <h1>{{ place.name }}</h1>
+      <div class="star-rating">
+        <div *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.filled]="star <= place.totalStarts"></div>
+        <span class="rating-number">({{ place.totalStarts | number:'1.1-1' }})</span>
+      </div>
+    </div>
+  </div>
+  <div class="info-corta">
+    <div class="types-stars">
+      <span class="types">{{ place.types }}</span>
+    </div>
+    <p class="description">{{ place.description }}</p>
+    <div *ngIf="place.tag" class="tags-container">
+      <span *ngFor="let tag of place.tag">{{ tag }}</span>
+    </div>
+    <div class="address">
+      <h5>Lo encuentras en:</h5>
+      <p>{{ place.address }}</p>
+    </div>
+    <div *ngIf="place.coordinates" class="location">
+      <app-map-display [lat]="place.coordinates.lat" [lng]="place.coordinates.lng"></app-map-display>
+    </div>
+  </div>
+
+</div>

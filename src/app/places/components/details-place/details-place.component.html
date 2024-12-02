@@ -5,8 +5,7 @@
     <h1>{{ place.name }}</h1>
   </div>
 
-  <div *ngIf="place.images.length > 1" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"
-    data-bs-interval="3000">
+  <div *ngIf="place.images.length > 1" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <div class="image-group">
@@ -19,7 +18,6 @@
           Ver {{ place.images.length }} fotos
         </div>
 
-        <!-- Modal para ver todas las fotos -->
         <div class="photos-modal" id="photosModal">
           <div class="modal-content">
             <header class="modal-header">
@@ -31,7 +29,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -44,68 +41,55 @@
     <div class="types-stars">
       <span class="types">{{ place.types }}</span>
       <div class="star-rating">
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
+        <div *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.filled]="star <= place.totalStarts"></div>
+        <span class="rating-number">({{ place.totalStarts | number:'1.1-1' }})</span>
       </div>
     </div>
-    <p class="description">
-      {{ place.description }}
-    </p>
-    <div *ngIf="place.tags" class="tags-container">
-      <span *ngFor="let tag of place.tags.split(',')">{{ tag }}</span>
+    <p class="description">{{ place.description }}</p>
+    <div *ngIf="place.tag" class="tags-container">
+      <span *ngFor="let tag of place.tag">{{ tag }}</span>
     </div>
     <div class="address">
       <h5>Direccion:</h5>
       <p>{{ place.address }}</p>
     </div>
-    <div *ngIf="place.coordinates" class="location"> 
-      <h5>Ubicación:</h5> 
-      <app-map-display [lat]="place.coordinates.lat" [lng]="place.coordinates.lng"></app-map-display> 
-      </div>
+    <div *ngIf="place.coordinates" class="location">
+      <h5>Ubicación:</h5>
+      <app-map-display [lat]="place.coordinates.lat" [lng]="place.coordinates.lng"></app-map-display>
+    </div>
   </div>
-  
+
+
   <div class="reviews-container">
     <h2>Reseñas y opiniones</h2>
-    <div class="review">
-      <div class="review-header">
-        <span class="username">👤 Username</span>
-        <div class="star-rating">
-          <div class="star"></div>
-          <div class="star"></div>
-          <div class="star"></div>
-          <div class="star"></div>
-          <div class="star"></div>
-        </div>
+
+    <div class="add-review">
+      <textarea [(ngModel)]="newReview" placeholder="Escribe tu reseña aquí..."></textarea>
+      <div class="star-rating">
+        <div *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.filled]="star <= newReviewStars" (click)="newReviewStars = star"></div>
       </div>
-      <div class="description">
-        <hr>
-        <hr>
-        <hr>
-      </div>
+      <button class="btn btn-primary" (click)="submitReview()">Agregar Reseña</button>
     </div>
-    <div class="review">
+    <div *ngIf="reviews.length === 0" id="no-review"> 
+      <p>No hay reseñas para este lugar.</p> 
+    </div>
+    <div *ngFor="let review of reviews" class="review">
       <div class="review-header">
-        <span class="username">👤 Username</span>
+        <span class="username">👤 {{ review.nameUser }}</span>
         <div class="star-rating">
-          <div class="star"></div>
-          <div class="star"></div>
-          <div class="star"></div>
-          <div class="star"></div>
-          <div class="star empty"></div>
+          <div *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.filled]="star <= review.starts"></div>
         </div>
       </div>
       <div class="description">
-        <hr>
-        <hr>
-        <hr>
+        <p>{{ review.content }}</p>
       </div>
     </div>
   </div>
+
+
+
   
-  <div class="button-group">
+  <div class="button-group" *ngIf="isOwner">
     <!-- Botón para abrir la modal de actualización -->
     <button (click)="openUpdateModal()" class="btn btn-primary">Actualizar Lugar</button>
 
@@ -131,7 +115,6 @@
       </div>
     </div>
   </div>
-
   <!-- Modal de actualización de lugar -->
 <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -160,11 +143,6 @@
             <label for="placeAddress" class="form-label">Dirección</label>
             <input type="text" class="form-control" id="placeAddress" [(ngModel)]="place.address" name="address" required>
             <small *ngIf="!addressValid && place.address !== ''" class="error-text">La dirección no puede estar vacía.</small>
-          </div>
-          <div class="mb-3" [ngClass]="{'invalid': !tagsValid && place.tags !== ''}">
-            <label for="placeTags" class="form-label">Etiquetas</label>
-            <input type="text" class="form-control" id="placeTags" [(ngModel)]="place.tags" name="tags" required>
-            <small *ngIf="!tagsValid && place.tags !== ''" class="error-text">Las etiquetas no pueden estar vacías.</small>
           </div>
           <div class="mb-3">
             <label for="file-input" class="form-label">Subir Nuevas Imágenes</label>

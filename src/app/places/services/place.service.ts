@@ -28,6 +28,11 @@ export class PlaceService {
     return this.http.get(`${this.apiUrl}api/places`);
   }
 
+  getPendingPlaces(): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get(`${this.apiUrl}api/places/pending/places`, {headers})
+  }
+
   getPlaceById(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}api/places/${id}`);
   }
@@ -40,6 +45,21 @@ export class PlaceService {
   deletePlace(id: string): Observable<any> {
     const headers = this.createAuthorizationHeader();
     return this.http.delete(`${this.apiUrl}api/places/delete/${id}`, { headers });
+  }
+
+  approvePlaces(id: string, placeData: any): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.put(`${this.apiUrl}api/places/approve/${id}`, placeData, {headers})
+  }
+
+  getApprovedPlaces(): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get(`${this.apiUrl}api/places/approved`, {headers})
+  }
+
+  getRandomPlace(): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get(`${this.apiUrl}api/places/random/place`, {headers})
   }
 
 }
