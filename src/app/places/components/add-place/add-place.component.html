@@ -24,14 +24,6 @@
         <option value="para_amigos">Para Amigos</option>
       </select>
     </div>
-    <div class="input">
-      <label for="tag">Categoría</label>
-      <select id="tag" name="tag" [(ngModel)]="place.tag" required>
-        <option value="restaurante">Restaurante</option>
-        <option value="sala_de_juegos">Sala de Juegos</option>
-        <option value="parques">Parques</option>
-      </select>
-    </div>
     <div class="input" [ngClass]="{ 'invalid': !descriptionValid && place.description !== '' }">
       <label for="description">Descripción</label>
       <textarea
