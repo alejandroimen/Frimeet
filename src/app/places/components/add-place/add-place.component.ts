@@ -1,18 +1,19 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NavbarService } from '../../../services/navbar.service';
 import { Iplace } from '../../interfaces/iplace';
 import { PlaceService } from '../../services/place.service';
 import { AlertService } from '../../../services/alert.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-place',
   templateUrl: './add-place.component.html',
-  styleUrls: ['./add-place.component.css']
+  styleUrls: ['./add-place.component.css'],
 })
-export class AddPlaceComponent implements DoCheck {
+export class AddPlaceComponent implements DoCheck, OnInit {
   place: Iplace = {
-    _id: "",
+    _id: '',
     name: '',
     types: '',
     images: [],
@@ -24,7 +25,7 @@ export class AddPlaceComponent implements DoCheck {
     coordinates: {
       lat: 0,
       lng: 0,
-    }
+    },
   };
   selectedFiles: File[] = [];
   selectedImagePreview: string | null = null;
@@ -33,8 +34,20 @@ export class AddPlaceComponent implements DoCheck {
   descriptionValid: boolean = true;
   addressValid: boolean = true;
   imageSelected: boolean = false;
+  isCollapsed: boolean = true;
 
-  constructor(private placeService: PlaceService, private alertService: AlertService, private router: Router) {}
+  constructor(
+    private placeService: PlaceService,
+    private alertService: AlertService,
+    private router: Router,
+    private navbarService: NavbarService
+  ) {}
+
+  ngOnInit(): void {
+    this.navbarService.isCollapsed$.subscribe((state) => {
+      this.isCollapsed = state;
+    });
+  }
 
   onFileSelected(event: any): void {
     this.selectedFiles = event.target.files;
@@ -64,7 +77,7 @@ export class AddPlaceComponent implements DoCheck {
     this.addressValid = this.validateAddress(this.place.address);
   }
 
-  onCoordinatesSelected(coords: { lat: number, lng: number }): void {
+  onCoordinatesSelected(coords: { lat: number; lng: number }): void {
     this.place.coordinates = coords;
   }
 
@@ -74,7 +87,9 @@ export class AddPlaceComponent implements DoCheck {
       if (form.invalid) {
         this.alertService.showWarning('Por favor, completa todos los campos.');
       } else if (!this.nameValid) {
-        this.alertService.showWarning('El nombre debe comenzar con una letra, contener al menos una letra y no más de 50 caracteres.');
+        this.alertService.showWarning(
+          'El nombre debe comenzar con una letra, contener al menos una letra y no más de 50 caracteres.'
+        );
       } else if (!this.descriptionValid) {
         this.alertService.showWarning('La descripción no puede tener más de 250 caracteres.');
       } else if (!this.addressValid) {
@@ -99,14 +114,17 @@ export class AddPlaceComponent implements DoCheck {
       formData.append('images', this.selectedFiles[i], this.selectedFiles[i].name);
     }
 
-    this.placeService.addPlace(formData).subscribe(response => {
-      this.alertService.showSuccess('Lugar agregado exitosamente.');
-      form.resetForm();
-      this.isSubmitting = false;
-      this.router.navigate(['/info-place']);
-    }, error => {
-      this.alertService.showError('Hubo un error al agregar el lugar.');
-      this.isSubmitting = false;
-    });
+    this.placeService.addPlace(formData).subscribe(
+      (response) => {
+        this.alertService.showSuccess('Lugar agregado exitosamente.');
+        form.resetForm();
+        this.isSubmitting = false;
+        this.router.navigate(['/info-place']);
+      },
+      (error) => {
+        this.alertService.showError('Hubo un error al agregar el lugar.');
+        this.isSubmitting = false;
+      }
+    );
   }
 }

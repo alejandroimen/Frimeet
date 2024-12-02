@@ -291,6 +291,12 @@
   margin-left: 30px;
 }
 
+.custom-modal.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .custom-modal-content {
   background-color: #f5f5f5;
   color: #333333;

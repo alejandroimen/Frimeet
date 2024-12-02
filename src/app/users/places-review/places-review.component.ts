@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PlaceService } from '../../places/services/place.service';
 import { Iplace } from '../../places/interfaces/iplace';
 import { FavoriteService } from '../../services/favorite.service';
+import { NavbarService } from '../../services/navbar.service';
 
 @Component({
   selector: 'app-places-review',
@@ -10,6 +11,7 @@ import { FavoriteService } from '../../services/favorite.service';
   styleUrls: ['./places-review.component.css']
 })
 export class PlacesReviewComponent {
+  isNavbarCollapsed: boolean = true;
   places: Iplace[] = [];
   place: Iplace = {
     _id: "",
@@ -27,7 +29,7 @@ export class PlacesReviewComponent {
     }
   };
 
-  constructor(private placeService: PlaceService, private router: Router, private favoriteService: FavoriteService) {}
+  constructor(private placeService: PlaceService, private router: Router, private favoriteService: FavoriteService,  private navbarService: NavbarService) {}
 
   ngOnInit(): void {
     this.favoriteService.getFavorites().subscribe(
@@ -40,6 +42,10 @@ export class PlacesReviewComponent {
         console.error('Error al obtener lugares:', error);
       }
     );
+
+    this.navbarService.isCollapsed$.subscribe((isCollapsed) => {
+      this.isNavbarCollapsed = isCollapsed;
+    });
   }
 
   goToDetails(placeId: string): void {

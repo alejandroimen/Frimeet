@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { SharedDataService } from '../../services/shared-data.service';
 import { AlertService } from '../../services/alert.service';
 import { TagsService } from '../../services/tags.service';
+import { NavbarService } from '../../services/navbar.service';
 
 @Component({
   selector: 'app-add-event',
@@ -53,9 +54,11 @@ export class AddEventComponent implements OnInit, DoCheck {
 
   allTags: string[] = []; 
   selectedTags: string[] = [];
-  itemsPerPage: number = 8; // Número de etiquetas por página
-  currentPage: number = 0; // Página actual
-  visibleTags: string[] = []; // Etiquetas visibles en la página actual
+  itemsPerPage: number = 8;
+  currentPage: number = 0;
+  visibleTags: string[] = [];
+
+  isCollapsed: boolean = true;
 
   constructor(
     private eventService: EventService,
@@ -63,7 +66,8 @@ export class AddEventComponent implements OnInit, DoCheck {
     private router: Router,
     private sharedDataService: SharedDataService,
     private alertService: AlertService,
-    private tagsService: TagsService
+    private tagsService: TagsService,
+    private navbarService: NavbarService
   ) {}
 
   ngOnInit(): void {
@@ -74,28 +78,30 @@ export class AddEventComponent implements OnInit, DoCheck {
       this.places = data;
     });
 
-    // Recuperar coordenadas si existen
     const coords = this.sharedDataService.getCoordinates();
     if (coords.lat !== 0 && coords.lng !== 0) {
       this.event.coordinates = coords;
-      console.log('Coordenadas recuperadas del servicio:', coords);
     }
     this.disablePlaceSelect = this.sharedDataService.getDisablePlaceSelect();
 
     this.tagsService.getTagsEvent().subscribe(tagsData => {
       this.allTags = tagsData.tagsEvent.map((tag: any) => tag.tagsEvent);
-      this.updateVisibleTags(); // Actualiza las etiquetas visibles
+      this.updateVisibleTags();
+    });
+
+    this.navbarService.isCollapsed$.subscribe(state => {
+      this.isCollapsed = state;
     });
   }
 
   updateVisibleTags(): void {
     const start = this.currentPage * this.itemsPerPage;
     const end = start + this.itemsPerPage;
-    this.visibleTags = this.allTags.slice(start, end); // Subconjunto de etiquetas
+    this.visibleTags = this.allTags.slice(start, end);
   }
 
   toggleTag(event: Event, tag: string): void {
-    event.preventDefault();  // Evita la validación del formulario
+    event.preventDefault();
     const index = this.selectedTags.indexOf(tag);
     if (index > -1) {
       this.selectedTags.splice(index, 1);
@@ -105,28 +111,26 @@ export class AddEventComponent implements OnInit, DoCheck {
   }  
 
   scrollLeft(event: Event): void {
-    event.preventDefault(); // Evita la validación del formulario
+    event.preventDefault();
     if (this.currentPage > 0) {
       this.currentPage--;
-      this.updateVisibleTags(); // Actualiza las etiquetas visibles
+      this.updateVisibleTags();
     }
   }
 
   scrollRight(event: Event): void {
-    event.preventDefault(); // Evita la validación del formulario
+    event.preventDefault();
     const maxPage = Math.ceil(this.allTags.length / this.itemsPerPage) - 1;
     if (this.currentPage < maxPage) {
       this.currentPage++;
-      this.updateVisibleTags(); // Actualiza las etiquetas visibles
+      this.updateVisibleTags();
     }
   }
-
 
   onPlaceChange(): void {
     const selectedPlace = this.places.find(place => place._id === this.event.idPlace);
     if (selectedPlace) {
       this.event.coordinates = selectedPlace.coordinates;
-      console.log('Coordenadas del lugar seleccionado:', this.event.coordinates);
     }
   }
 
@@ -189,36 +193,17 @@ export class AddEventComponent implements OnInit, DoCheck {
       !this.maxPeoplesValid ||
       !this.coordinatesValid
     ) {
-      if (form.invalid) {
-        this.alertService.showWarning('Por favor, completa todos los campos.');
-      } else if (!this.nameValid) {
-        this.alertService.showWarning('El nombre debe comenzar con una letra, contener al menos una letra y no más de 50 caracteres.');
-      } else if (!this.descriptionValid) {
-        this.alertService.showWarning('La descripción no puede tener más de 250 caracteres.');
-      } else if (!this.addressValid) {
-        this.alertService.showWarning('La dirección no puede tener más de 200 caracteres.');
-      } else if (!this.imageSelected) {
-        this.alertService.showWarning('Por favor, selecciona al menos una imagen.');
-      } else if (!this.dateValid) {
-        this.alertService.showWarning('La fecha del evento debe ser anterior a la fecha de finalización.');
-      } else if (!this.endDateValid) {
-        this.alertService.showWarning('La fecha de finalización debe ser posterior a la fecha del evento.');
-      } else if (!this.maxPeoplesValid) {
-        this.alertService.showWarning('La capacidad máxima debe ser al menos 1.');
-      } else if (!this.coordinatesValid) {
-        this.alertService.showWarning('Las coordenadas del evento no pueden ser 0. Por favor, selecciona una ubicación válida en el mapa.');
-      }
       this.isSubmitting = false;
       return;
     }
 
-    this.event.tag = this.selectedTags; // Añadir las etiquetas seleccionadas al evento
+    this.event.tag = this.selectedTags;
 
     const formData = new FormData();
     formData.append('name', this.event.name);
     formData.append('maxPeoples', this.event.maxPeoples.toString());
-    formData.append('date', this.event.date.toString());
-    formData.append('endDate', this.event.endDate.toString());
+    formData.append('date', this.event.date.toISOString());
+    formData.append('endDate', this.event.endDate.toISOString());
     formData.append('description', this.event.description);
     formData.append('address', this.event.address);
     formData.append('price', this.event.price.toString());
@@ -234,12 +219,10 @@ export class AddEventComponent implements OnInit, DoCheck {
     }
 
     this.eventService.addEvent(formData).subscribe(response => {
-      this.alertService.showSuccess('Evento agregado exitosamente.');
-      form.resetForm();
       this.isSubmitting = false;
+      form.resetForm();
       this.router.navigate(['/info-event']);
     }, error => {
-      this.alertService.showError('Hubo un error al agregar el evento.');
       this.isSubmitting = false;
     });
   }

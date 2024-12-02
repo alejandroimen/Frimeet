@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventService } from '../../services/event.service';
 import { Ievent } from '../../events/interfaces/ievent';
+import { NavbarService } from '../../services/navbar.service';
 
 @Component({
   selector: 'app-events-review',
@@ -9,6 +10,7 @@ import { Ievent } from '../../events/interfaces/ievent';
   styleUrls: ['./events-review.component.css']
 })
 export class EventsReviewComponent {
+  isNavbarCollapsed: boolean = true;
   events: Ievent[] = [];
   event: Ievent = {
     _id: "",
@@ -32,7 +34,7 @@ export class EventsReviewComponent {
   };
 
 
-  constructor(private eventService: EventService, private router: Router) {}
+  constructor(private eventService: EventService, private router: Router, private navbarService: NavbarService) {}
 
   ngOnInit(): void {
     this.eventService.getAttendingEvents().subscribe(
@@ -44,6 +46,10 @@ export class EventsReviewComponent {
         console.error('Error al obtener eventos:', error);
       }
     );
+
+    this.navbarService.isCollapsed$.subscribe((isCollapsed) => {
+      this.isNavbarCollapsed = isCollapsed;
+    });
   }
 
   goToDetails(eventId: string): void {
