@@ -110,8 +110,8 @@
 }
 
 .file-label {
-  width: 60vw;
-  height: 60vw;
+  width: 35vw;
+  height: 35vw;
   border: 2px dashed var(--gray);
   border-radius: 7px;
   display: flex;
@@ -187,7 +187,7 @@ select[disabled] {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin: 10px 0;
+  margin: 10px 0; 
   position: relative;
 
 }
@@ -215,15 +215,18 @@ select[disabled] {
 
 /* Botones de etiquetas */
 .button-tags {
+  overflow: hidden;
+  white-space: wrap;
+  text-overflow: ellipsis !important;
   background-color: var(--yellow);
   color: black;
   border: none;
   padding: 10px 20px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 90%;
+  width: 45% !important;
   position: relative;
 }
 
