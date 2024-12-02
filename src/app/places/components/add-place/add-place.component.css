@@ -20,7 +20,7 @@
 }
 
 .form-wrapper.collapsed {
-    transform: translateX(-7vw);
+    transform: translateX(-3vw);
 }
 
 .form-wrapper.expanded {

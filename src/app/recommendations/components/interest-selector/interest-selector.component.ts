@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Iinterest } from '../../interfaces/iinterest';
 
 @Component({
@@ -8,30 +8,29 @@ import { Iinterest } from '../../interfaces/iinterest';
 })
 export class InterestSelectorComponent {
   buttonActivate: boolean = false
-  @Input() allSelected: number[] = []
+  @Input() allSelected: string[] = []
   @Input() id: number = 0
-  @Input() interest: string= ''
+  @Input() interest: string = ''
   @Input() content: Iinterest[] = []
 
-  @Input() selected: number = -1
-  @Output() selectedChange:EventEmitter<number> = new EventEmitter()
+  @Input() selected: string = ''
+  @Output() selectedChange: EventEmitter<string> = new EventEmitter()
 
   @Input() idGroup: number = -1
-  @Output() idGroupChange:EventEmitter<number> = new EventEmitter()
+  @Output() idGroupChange: EventEmitter<number> = new EventEmitter()
 
-  changeVisibility (): void {
+  changeVisibility(): void {
     this.buttonActivate = !this.buttonActivate
   }
 
-  clickCard(id: number): void {
+  clickCard(id: string): void {
     console.log(id, this.id);
     
     this.selectedChange.emit(id)
     this.idGroupChange.emit(this.id)
   }
 
-  ngDoCheck():void {
+  ngDoCheck(): void {
     console.log('Todos en interest: ', this.allSelected);
-    
   }
 }

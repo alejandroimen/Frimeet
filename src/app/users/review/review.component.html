@@ -1,8 +1,10 @@
 <div [ngClass]="{ 'expanded': !isNavbarCollapsed, 'collapsed': isNavbarCollapsed }" class="form-wrapper-review">
   <div class="card-group-container-review"
     [ngClass]="{ 'collapsed': isNavbarCollapsed, 'expanded': !isNavbarCollapsed }">
+    <div class="title-page">
+      <h1>Mis Reseñas</h1>
+    </div> 
     <div class="reviews-container">
-      <h2>Mis Reseñas</h2>
       <div *ngIf="reviews.length === 0" class="no-reviews">
         😢 No has hecho ninguna reseña aún.
       </div>

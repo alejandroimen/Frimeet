@@ -1,3 +1,7 @@
+.form-wrapper-review {
+  margin-left: 8vw;
+}
+
 .card-group-container-review {
   width: 60vw;
   height: 70vh;
@@ -27,14 +31,14 @@
 }
 
 .card-group-container-review.expanded {
-  transform: translateX(10vw);
+  transform: translateX(11vw);
 }
 
 .title-page {
   justify-content: center;
   align-items: center;
   text-align: center;
-  transform: translateX(10vw);
+  transform: translateX(2vw);
   margin-top: -5vh;
 }
 

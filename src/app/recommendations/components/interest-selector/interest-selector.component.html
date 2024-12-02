@@ -9,9 +9,9 @@
 <div class="container-cards-image-interest" 
     *ngIf="buttonActivate">
     <div *ngFor="let int of content" 
-        [ngClass]="{'card-image-selected': (allSelected.indexOf(int.id) !== -1), 
-                    'card-image-interest': !(allSelected.indexOf(int.id) !== -1)}" 
-        (click)="clickCard(int.id)">
+        [ngClass]="{'card-image-selected': (allSelected.indexOf(int.id.toString()) !== -1), 
+                    'card-image-interest': (allSelected.indexOf(int.id.toString()) === -1)}" 
+        (click)="clickCard(int.id.toString())">
             <img [src]="int.image" alt="">
             <p>{{int.name}}</p>
     </div>

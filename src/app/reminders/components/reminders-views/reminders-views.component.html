@@ -1,6 +1,12 @@
-<section class="container-reminders">
-    <div class="reminder-div"[reminder]="remProof"></div>
-    <div class="reminder-div"
-    *ngFor="let rem of reminders"
-    [reminder]="rem"></div>
-</section>
+<div [ngClass]="{ 'expanded': !isNavbarCollapsed, 'collapsed': isNavbarCollapsed }" class="form-wrapper-reminder">
+    <div class="card-group-container-reminder"
+        [ngClass]="{ 'collapsed': isNavbarCollapsed, 'expanded': !isNavbarCollapsed }">
+        <section class="container-reminders">
+            <div class="title-page">
+                <h1 id="title">Eventos Asistidos</h1>
+            </div>
+            <div class="reminder-div" [reminder]="remProof"></div>
+            <div class="reminder-div" *ngFor="let rem of reminders" [reminder]="rem"></div>
+        </section>
+    </div>
+</div>

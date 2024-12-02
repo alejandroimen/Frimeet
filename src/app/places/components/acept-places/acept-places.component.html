@@ -17,14 +17,15 @@
       <div *ngIf="place.images.length === 1" class="banner-place">
         <img [src]="place.images[0]" alt="Imagen de {{ place.name }}" />
       </div>
-
+      <h1 class="card-title">{{ place.name }}</h1>
       <div class="card-body">
-        <h1 class="card-title">{{ place.name }}</h1>
-        <p class="card-text">{{ place.description }}</p>
+        <span>{{ place.types }}</span>
       </div>
 
       <div class="info-corta-acept">
-        <span>{{ place.types }}</span>
+        <span>
+          <p class="card-text">{{ place.description }}</p>
+        </span>
       </div>
 
       <div *ngIf="place.tag" class="tags-container">

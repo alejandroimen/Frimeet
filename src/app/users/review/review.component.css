@@ -28,10 +28,12 @@
   transform: translateX(6vw);
 }
 
-.reviews-container h2 {
-  font-size: 24px;
-  color: #000;
-  margin-bottom: 20px;
+.title-page {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transform: translateX(2vw);
+  margin-top: -5vh;
 }
 
 .no-reviews {

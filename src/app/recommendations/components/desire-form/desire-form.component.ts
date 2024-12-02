@@ -65,41 +65,40 @@ export class DesireFormComponent {
     }
   ]
   indexSelected: number = -1
-  @Input() interestsSelected: number[] = []
-  @Output() interestsSelectedChange:EventEmitter<number[]> = new EventEmitter()
-  interestBidirectional: number[] = new Array(this.interestsList.length).fill(-1)
-  
-  constructor(private alertServ: AlertService){}
+  @Input() interestsSelected: string[] = []
+  @Output() interestsSelectedChange: EventEmitter<string[]> = new EventEmitter()
+  interestBidirectional: string[] = new Array(this.interestsList.length).fill('-1')
+
+  constructor(private alertServ: AlertService) {}
 
   next(): void {
-    if(this.interestsSelected.length>0){
-      this.isHereChange.emit(false)
+    if (this.interestsSelected.length > 0) {
+      this.isHereChange.emit(false);
     } else {
-      this.alertServ.showWarning('Selecciona al menos un interes')
-    }  
+      this.alertServ.showWarning('Selecciona al menos un interes');
+    }
   }
 
-  ngDoCheck():void {
-    console.log('EL pinshi numero: ', this.interestBidirectional[this.indexSelected]);
-    if(this.interestBidirectional[this.indexSelected]  !== -1 &&
-      this.interestBidirectional[this.indexSelected]  !== -2 &&
-      this.interestBidirectional[this.indexSelected]  !== undefined
-    ){
+  ngDoCheck(): void {
+    console.log('EL pinshi número: ', this.interestBidirectional[this.indexSelected]);
+    if (this.interestBidirectional[this.indexSelected] !== '-1' &&
+        this.interestBidirectional[this.indexSelected] !== '-2' &&
+        this.interestBidirectional[this.indexSelected] !== undefined) {
       const index = this.interestsSelected.indexOf(this.interestBidirectional[this.indexSelected]);
       console.log('El index es ', index);
-      
+
       if (index !== -1) {
         this.interestsSelected.splice(index, 1);
       } else {
         this.interestsSelected.push(this.interestBidirectional[this.indexSelected]);
       }
-      this.interestBidirectional[this.indexSelected] = -2     
-      console.log('Etos son', this.interestsSelected);
-      this.interestsSelectedChange.emit(this.interestsSelected)
+      this.interestBidirectional[this.indexSelected] = '-2';
+      console.log('Estos son', this.interestsSelected);
+      this.interestsSelectedChange.emit(this.interestsSelected);
     }
   }
 
   test(): void {
-    this.alertServ.showLoading()
+    this.alertServ.showLoading();
   }
 }

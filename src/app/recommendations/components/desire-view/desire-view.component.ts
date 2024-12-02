@@ -1,24 +1,34 @@
-import { Component } from '@angular/core';
-import { RecommendationsService } from '../../services/recommendations.service';
-import { RecommendationsModule } from "../../recommendations.module";
-import { TellUsComponent } from "../tell-us/tell-us.component";
+import { Component, OnInit } from '@angular/core';
+import { NavbarService } from '../../../services/navbar.service';
 
 @Component({
   selector: 'app-desire-view',
   templateUrl: './desire-view.component.html',
   styleUrl: './desire-view.component.css'
 })
-export class DesireViewComponent {
-  isInInterest: boolean = true
-  selected: number[] = []
+export class DesireViewComponent implements OnInit {
+  isNavbarCollapsed: boolean = true;
+  isInInterest: boolean = true;
+  selected: string[] = [];
+  isCollapsed: boolean = true;
 
-  constructor(private recServ: RecommendationsService) {  }
+  constructor(private navbarService: NavbarService) {}
 
-  ngDoCheck():void {
+  ngOnInit(): void {
+    this.navbarService.isCollapsed$.subscribe((isCollapsed) => {
+      this.isNavbarCollapsed = isCollapsed;
+    });
+
+    this.navbarService.isCollapsed$.subscribe((state) => {
+      this.isCollapsed = state;
+    });
+  }
+
+  ngDoCheck(): void {
     console.log(this.isInInterest);
   }
 
   back(): void {
-    this.isInInterest = true
+    this.isInInterest = true;
   }
 }

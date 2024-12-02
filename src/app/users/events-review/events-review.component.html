@@ -1,7 +1,9 @@
 <div [ngClass]="{ 'expanded': !isNavbarCollapsed, 'collapsed': isNavbarCollapsed }" class="form-wrapper-review">
   <div class="card-group-container-review"
     [ngClass]="{ 'collapsed': isNavbarCollapsed, 'expanded': !isNavbarCollapsed }">
-    <h1 id="title">Eventos Asistidos</h1>
+    <div class="title-page">
+      <h1 id="title">Eventos Asistidos</h1>
+    </div>
     <div class="card-group-review-container">
       <div class="card-group-review">
         <section *ngFor="let ev of events" class="info-event-container" (click)="goToDetails(ev._id)">
