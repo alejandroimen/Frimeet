@@ -20,7 +20,7 @@ export class AppComponent {
         const currentPath = urlTree.root.children['primary']?.segments.map(segment => segment.path).join('/') || '';
 
         // Verifica si el path actual coincide con una ruta definida
-        this.show = this.availableRoutes.includes(currentPath);
+        this.show = this.availableRoutes.includes(currentPath) &&  !(event.url === '/login' || event.url === '/register' || event.url === '/welcome-start');
       }
     });
   }

@@ -65,7 +65,7 @@ export class LoginFormComponent implements DoCheck {
         localStorage.setItem('userRol', decodedToken.id_Rol);
         localStorage.setItem('username', decodedToken.nombre);
  
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       },
       error => {
         this.alertService.showError('Hubo un error al iniciar sesión.');
