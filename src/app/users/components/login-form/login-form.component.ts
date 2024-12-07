@@ -1,6 +1,6 @@
 import { Component, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
-import { Iuser } from '../../interfaces/iuser';
+import { Iuser } from '../interfaces/iuser';
 import { UserService } from '../../services/user.service';
 import { AlertService } from '../../../services/alert.service';
 import { jwtDecode } from 'jwt-decode';

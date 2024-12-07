@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ReviewService } from '../../places/services/review.service';
-import { NavbarService } from '../../services/navbar.service';
+import { ReviewService } from '../../../places/services/review.service';
+import { NavbarService } from '../../../services/navbar.service';
 @Component({
   selector: 'app-review',
   templateUrl: './review.component.html',

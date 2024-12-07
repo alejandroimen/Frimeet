@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { SharedDataService } from '../../services/shared-data.service';
-import { Ievent } from '../interfaces/ievent';
+import { SharedDataService } from '../../../services/shared-data.service';
+import { Ievent } from '../../interfaces/ievent';
 
 @Component({
   selector: 'app-check-availability',

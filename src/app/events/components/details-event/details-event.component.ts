@@ -1,8 +1,8 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EventService } from '../../services/event.service';
-import { Ievent } from '../interfaces/ievent';
-import { AlertService } from '../../services/alert.service';
+import { EventService } from '../../../services/event.service';
+import { Ievent } from '../../interfaces/ievent';
+import { AlertService } from '../../../services/alert.service';
 import { jwtDecode } from 'jwt-decode';
 
 @Component({
