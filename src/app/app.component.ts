@@ -7,6 +7,7 @@ import { Router, NavigationEnd, UrlTree } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title = 'Frimeet'
   show = true; // Controla la visibilidad del navbar y header
   private availableRoutes: string[] = [];
 
@@ -19,8 +20,8 @@ export class AppComponent {
         const urlTree: UrlTree = this.router.parseUrl(event.urlAfterRedirects || event.url);
         const currentPath = urlTree.root.children['primary']?.segments.map(segment => segment.path).join('/') || '';
 
-        // Verifica si el path actual coincide con una ruta definida
-        this.show = this.availableRoutes.includes(currentPath);
+        // Verifica si el path actual coincide con una ruta definida, incluyendo rutas con parámetros
+        this.show = this.isRouteAvailable(currentPath) &&  !(event.url === '/login' || event.url === '/register' || event.url === '/welcome-start');
       }
     });
   }
@@ -37,5 +38,16 @@ export class AppComponent {
       }
     });
     return paths;
+  }
+
+  private isRouteAvailable(currentPath: string): boolean {
+    return this.availableRoutes.some(route => {
+      const routeParts = route.split('/');
+      const pathParts = currentPath.split('/');
+      if (routeParts.length !== pathParts.length) {
+        return false;
+      }
+      return routeParts.every((part, index) => part === pathParts[index] || part.startsWith(':'));
+    });
   }
 }

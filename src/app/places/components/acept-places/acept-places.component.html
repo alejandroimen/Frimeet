@@ -1,25 +1,35 @@
-<div class="card-group-container-acept">
-    <section *ngFor="let place of places" class="acept-place-container" (click)="goToDetails(place._id)" >
-      <h1>{{ place.name }}</h1>
-      <div *ngIf="place.images.length > 1" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div *ngFor="let img of place.images; let i = index" class="carousel-item" [ngClass]="{'active': i === 0}">
-            <img [src]="img" class="d-block w-100" alt="Imagen de {{ place.name }}">
-          </div>
+<div [ngClass]="{ 'expanded': !isCollapsed, 'collapsed': isCollapsed }" class="cards-wrapper">
+  
+  <div class="card-group-container-acept" [ngClass]="{ 'collapsed': isCollapsed, 'expanded': !isCollapsed }">
+    
+    <!-- Mostrar mensaje si no hay lugares por aprobar -->
+    <div *ngIf="noPendingPlaces" class="no-places-message">
+      No hay lugares por aprobar, vuelve más tarde ❤️
+    </div>
+
+    <!-- Mostrar lista de lugares si hay lugares por aprobar -->
+    <section *ngFor="let place of places" class="acept-place-container" (click)="goToDetails(place._id)">
+      <div *ngIf="place.images.length > 1" class="carousel-container">
+        <div *ngFor="let img of place.images; let i = index" class="carousel-item" [ngClass]="{ active: i === 0 }">
+          <img [src]="img" class="banner-place" alt="Imagen de {{ place.name }}" />
         </div>
       </div>
       <div *ngIf="place.images.length === 1" class="banner-place">
-        <img [src]="place.images[0]" alt="Imagen de {{ place.name }}">
+        <img [src]="place.images[0]" alt="Imagen de {{ place.name }}" />
       </div>
+
+      <div class="card-body">
+        <h1 class="card-title">{{ place.name }}</h1>
+        <p class="card-text">{{ place.description }}</p>
+      </div>
+
       <div class="info-corta-acept">
         <span>{{ place.types }}</span>
       </div>
-      <p>
-        {{ place.description }}
-      </p>
+
       <div *ngIf="place.tag" class="tags-container">
         <span *ngFor="let tag of place.tag"> {{tag}} </span>
       </div>
-  
     </section>
   </div>
+</div>

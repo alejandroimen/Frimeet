@@ -1,6 +1,6 @@
 import { Component, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
-import { Iuser } from '../../interfaces/iuser';
+import { Iuser } from '../interfaces/iuser';
 import { UserService } from '../../services/user.service';
 import { AlertService } from '../../../services/alert.service';
 import { jwtDecode } from 'jwt-decode';
@@ -65,7 +65,7 @@ export class LoginFormComponent implements DoCheck {
         localStorage.setItem('userRol', decodedToken.id_Rol);
         localStorage.setItem('username', decodedToken.nombre);
  
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       },
       error => {
         this.alertService.showError('Hubo un error al iniciar sesión.');

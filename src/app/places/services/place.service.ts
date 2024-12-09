@@ -25,7 +25,8 @@ export class PlaceService {
   }
   
   getPlaces(): Observable<any> {
-    return this.http.get(`${this.apiUrl}api/places`);
+    const headers = this.createAuthorizationHeader();
+    return this.http.get(`${this.apiUrl}api/places`, {headers});
   }
 
   getPendingPlaces(): Observable<any> {
@@ -34,7 +35,8 @@ export class PlaceService {
   }
 
   getPlaceById(id: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}api/places/${id}`);
+    const headers = this.createAuthorizationHeader();
+    return this.http.get(`${this.apiUrl}api/places/${id}`, {headers});
   }
 
   updatePlace(id: string, placeData: any): Observable<any> {

@@ -1,0 +1,28 @@
+<div [ngClass]="{ 'expanded': !isNavbarCollapsed, 'collapsed': isNavbarCollapsed }" class="form-wrapper-review">
+  <div class="card-group-container-review"
+    [ngClass]="{ 'collapsed': isNavbarCollapsed, 'expanded': !isNavbarCollapsed }">
+    <div class="reviews-container">
+      <h2>Mis Reseñas</h2>
+      <div *ngIf="reviews.length === 0" class="no-reviews">
+        😢 No has hecho ninguna reseña aún.
+      </div>
+      <div *ngFor="let review of reviews" class="review">
+        <div class="review-header">
+          <div class="username">Tú nombre: {{ review.nameUser }}</div>
+          <div class="star-rating">
+            <div *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.filled]="star <= review.starts"></div>
+          </div>
+        </div>
+        <div class="review-content">
+          <div class="place-image">
+           <img [src]="review.placeImages[0]" alt="Imagen de {{ review.placeName }}">
+          </div>
+          <div class="description">
+            <p>{{ review.content }}</p>
+            <p><strong>Lugar:</strong> {{ review.placeName }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

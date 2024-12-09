@@ -1,19 +1,20 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NavbarService } from '../../../services/navbar.service';
 import { Iplace } from '../../interfaces/iplace';
 import { PlaceService } from '../../services/place.service';
 import { AlertService } from '../../../services/alert.service';
-import { Router } from '@angular/router';
 import { TagsService } from '../../../services/tags.service';
 
 @Component({
   selector: 'app-add-place',
   templateUrl: './add-place.component.html',
-  styleUrls: ['./add-place.component.css']
+  styleUrls: ['./add-place.component.css'],
 })
 export class AddPlaceComponent implements DoCheck, OnInit {
   place: Iplace = {
-    _id: "",
+    _id: '',
     name: '',
     types: '',
     images: [],
@@ -25,7 +26,7 @@ export class AddPlaceComponent implements DoCheck, OnInit {
     coordinates: {
       lat: 0,
       lng: 0,
-    }
+    },
   };
   selectedFiles: File[] = [];
   selectedImagePreview: string | null = null;
@@ -34,15 +35,18 @@ export class AddPlaceComponent implements DoCheck, OnInit {
   descriptionValid: boolean = true;
   addressValid: boolean = true;
   imageSelected: boolean = false;
+  isCollapsed: boolean = true;
   allTags: string[] = []; 
   selectedTags: string[] = [];
   itemsPerPage: number = 8; // Número de etiquetas por página
   currentPage: number = 0; // Página actual
   visibleTags: string[] = []; // Etiquetas visibles en la página actual
 
-  constructor(private placeService: PlaceService, private alertService: AlertService, private router: Router, private tagsService: TagsService) {}
+  constructor(private placeService: PlaceService, private alertService: AlertService, private router: Router, private tagsService: TagsService,private navbarService: NavbarService) {}
 
   ngOnInit(): void {
+    this.navbarService.isCollapsed$.subscribe((state) => {
+      this.isCollapsed = state;
     this.tagsService.getTagsPlace().subscribe(
       (tagsData: any) => {
         if (tagsData && tagsData.tagsPlace) {
@@ -57,6 +61,8 @@ export class AddPlaceComponent implements DoCheck, OnInit {
         console.error('Error al cargar las etiquetas:', error);
       }
     );
+  }
+)
   }
 
   updateVisibleTags(): void {
@@ -93,7 +99,7 @@ export class AddPlaceComponent implements DoCheck, OnInit {
     this.addressValid = this.validateAddress(this.place.address);
   }
 
-  onCoordinatesSelected(coords: { lat: number, lng: number }): void {
+  onCoordinatesSelected(coords: { lat: number; lng: number }): void {
     this.place.coordinates = coords;
   }
 
@@ -133,7 +139,9 @@ export class AddPlaceComponent implements DoCheck, OnInit {
       if (form.invalid) {
         this.alertService.showWarning('Por favor, completa todos los campos.');
       } else if (!this.nameValid) {
-        this.alertService.showWarning('El nombre debe comenzar con una letra, contener al menos una letra y no más de 50 caracteres.');
+        this.alertService.showWarning(
+          'El nombre debe comenzar con una letra, contener al menos una letra y no más de 50 caracteres.'
+        );
       } else if (!this.descriptionValid) {
         this.alertService.showWarning('La descripción no puede tener más de 250 caracteres.');
       } else if (!this.addressValid) {
@@ -152,7 +160,7 @@ export class AddPlaceComponent implements DoCheck, OnInit {
     formData.append('types', this.place.types);
     formData.append('description', this.place.description);
     formData.append('address', this.place.address);
-    this.selectedTags.forEach(tag => formData.append('tag', tag));
+    //this.selectedTags.forEach(tag => formData.append('tag', tag));
     formData.append('coordinates[lat]', this.place.coordinates.lat.toString());
     formData.append('coordinates[lng]', this.place.coordinates.lng.toString());
 
@@ -160,14 +168,22 @@ export class AddPlaceComponent implements DoCheck, OnInit {
       formData.append('images', this.selectedFiles[i], this.selectedFiles[i].name);
     }
 
-    this.placeService.addPlace(formData).subscribe(response => {
-      this.alertService.showSuccess('Lugar agregado exitosamente.');
-      form.resetForm();
-      this.isSubmitting = false;
-      this.router.navigate(['/info-place']);
-    }, error => {
-      this.alertService.showError('Hubo un error al agregar el lugar.');
-      this.isSubmitting = false;
-    });
+    // Añadir etiquetas seleccionadas como múltiples entradas
+    this.selectedTags.forEach(tag => {
+      formData.append('tag[]', tag); // Clave compatible con el backend
+      });
+
+    this.placeService.addPlace(formData).subscribe(
+      (response) => {
+        this.alertService.showSuccess('Lugar agregado exitosamente.');
+        form.resetForm();
+        this.isSubmitting = false;
+        this.router.navigate(['/info-place']);
+      },
+      (error) => {
+        this.alertService.showError('Hubo un error al agregar el lugar.');
+        this.isSubmitting = false;
+      }
+    );
   }
 }

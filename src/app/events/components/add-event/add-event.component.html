@@ -1,0 +1,89 @@
+<div [ngClass]="{ 'expanded': !isCollapsed, 'collapsed': isCollapsed }" class="add-event-form-wrapper">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm" class="add-event-form">
+    <h2>Agregar un evento</h2>
+
+    <div class="input-group">
+      <label for="event">Seleccionar lugar:</label>
+      <div class="select-container">
+        <select id="event" name="idPlace" [(ngModel)]="event.idPlace" (change)="onPlaceChange()"
+          [disabled]="disablePlaceSelect">
+          <option *ngFor="let place of places" [value]="place._id">{{ place.name }}</option>
+        </select>
+        <span *ngIf="disablePlaceSelect" class="disabled-message">Lugar ya ha sido seleccionado automáticamente</span>
+      </div>
+    </div>
+
+    <div class="add-event-button">
+      <p>¿El lugar donde será el evento no existe?</p>
+      <button type="button" (click)="onAddNewPlace()" class="add-event-btn">
+        {{ disablePlaceSelect ? 'Volver a registrar la ubicación' : 'Haz click aquí para registrar tu ubicación' }}
+      </button>
+    </div>
+
+    <div class="input" [ngClass]="{'invalid': !nameValid && event.name !== ''}">
+      <label for="name">Nombre del evento</label>
+      <input type="text" id="name" name="name" [(ngModel)]="event.name" maxlength="50" required>
+      <small *ngIf="!nameValid && event.name !== ''" class="error-text">El nombre debe comenzar con una letra, contener
+        al menos una letra y no más de 50 caracteres.</small>
+    </div>
+
+    <div class="input" [ngClass]="{'invalid': !maxPeoplesValid && event.maxPeoples !== 0}">
+      <label for="maxPeoples">Capacidad máxima</label>
+      <input type="number" id="maxPeoples" name="maxPeoples" [(ngModel)]="event.maxPeoples" [min]="1" required>
+      <small *ngIf="!maxPeoplesValid && event.maxPeoples !== 0" class="error-text">La capacidad máxima debe ser al menos
+        1.</small>
+    </div>
+
+    <div class="input">
+      <label for="date">Fecha del evento</label>
+      <input type="datetime-local" id="date" name="date" [(ngModel)]="event.date" [min]="currentDate" required>
+    </div>
+
+    <div class="input">
+      <label for="endDate">Fecha-Hora de fin</label>
+      <input type="datetime-local" id="endDate" name="endDate" [(ngModel)]="event.endDate"
+        [min]="event.date | date: 'yyyy-MM-ddTHH:mm'" required>
+    </div>
+
+    <div class="input" [ngClass]="{'invalid': !descriptionValid && event.description !== ''}">
+      <label for="description">Descripción</label>
+      <textarea id="description" name="description" [(ngModel)]="event.description" maxlength="250" required></textarea>
+    </div>
+
+    <div class="tags-container">
+      <button class="arrow" [disabled]="currentPage === 0" (click)="scrollLeft($event)">
+        &#9664;
+      </button>
+
+      <div class="tags-wrapper">
+        <label for="name">Tags</label>
+        <div class="tags">
+          <ng-container *ngFor="let tag of visibleTags">
+            <button [ngClass]="{'selected': selectedTags.includes(tag)}" (click)="toggleTag($event, tag)"
+              class="button-tags">
+              {{ tag }}
+            </button>
+          </ng-container>
+        </div>
+      </div>
+
+      <button class="arrow2" [disabled]="(currentPage + 1) * itemsPerPage >= allTags.length"
+        (click)="scrollRight($event)">
+        &#9654;
+      </button>
+    </div>
+
+    <div class="file-upload-container">
+      <input type="file" id="file-input" class="file-input" (change)="onFileSelected($event)" multiple>
+      <label for="file-input" class="file-label">
+        <ng-container *ngIf="selectedImagePreview; else plusSign">
+          <img [src]="selectedImagePreview" alt="Imagen seleccionada" class="image-preview">
+        </ng-container>
+        <ng-template #plusSign>+</ng-template>
+      </label>
+    </div>
+
+    <button type="submit" [disabled]="isSubmitting || !imageSelected || event.coordinates.lat === 0"
+      class="button">Agregar</button>
+  </form>
+</div>
