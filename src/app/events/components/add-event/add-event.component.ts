@@ -1,14 +1,14 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Ievent } from '../interfaces/ievent';
-import { EventService } from '../../services/event.service';
-import { PlaceService } from '../../places/services/place.service';
-import { Iplace } from '../../places/interfaces/iplace';
+import { Ievent } from '../../interfaces/ievent';
+import { EventService } from '../../../services/event.service';
+import { PlaceService } from '../../../places/services/place.service';
+import { Iplace } from '../../../places/interfaces/iplace';
 import { Router } from '@angular/router';
-import { SharedDataService } from '../../services/shared-data.service';
-import { AlertService } from '../../services/alert.service';
-import { TagsService } from '../../services/tags.service';
-import { NavbarService } from '../../services/navbar.service';
+import { SharedDataService } from '../../../services/shared-data.service';
+import { AlertService } from '../../../services/alert.service';
+import { TagsService } from '../../../services/tags.service';
+import { NavbarService } from '../../../services/navbar.service';
 
 @Component({
   selector: 'app-add-event',

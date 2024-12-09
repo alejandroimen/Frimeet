@@ -7,7 +7,7 @@ import { DesireViewComponent } from './components/desire-view/desire-view.compon
 import { InterestSelectorComponent } from './components/interest-selector/interest-selector.component';
 import { FormsModule } from '@angular/forms';
 import { ResultViewComponent } from './components/result-view/result-view.component';
-import { MapDisplayComponent } from '../map-display/map-display.component';
+import { MapDisplayComponent } from '../standalone/map-display/map-display.component';
 
 @NgModule({
   declarations: [

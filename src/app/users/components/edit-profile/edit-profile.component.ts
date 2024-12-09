@@ -1,9 +1,9 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Iuser } from '../interfaces/iuser';
-import { UserService } from '../services/user.service';
-import { NavbarService } from '../../services/navbar.service';
-import { AlertService } from '../../services/alert.service';
+import { UserService } from '../../services/user.service';
+import { NavbarService } from '../../../services/navbar.service';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-edit-profile',

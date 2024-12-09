@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PlaceService } from '../../places/services/place.service';
-import { Iplace } from '../../places/interfaces/iplace';
-import { FavoriteService } from '../../services/favorite.service';
-import { NavbarService } from '../../services/navbar.service';
+import { PlaceService } from '../../../places/services/place.service';
+import { Iplace } from '../../../places/interfaces/iplace';
+import { FavoriteService } from '../../../services/favorite.service';
+import { NavbarService } from '../../../services/navbar.service';
 
 @Component({
   selector: 'app-places-review',

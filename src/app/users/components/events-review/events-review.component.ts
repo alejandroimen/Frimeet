@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { EventService } from '../../services/event.service';
-import { Ievent } from '../../events/interfaces/ievent';
-import { NavbarService } from '../../services/navbar.service';
+import { EventService } from '../../../services/event.service';
+import { Ievent } from '../../../events/interfaces/ievent';
+import { NavbarService } from '../../../services/navbar.service';
 
 @Component({
   selector: 'app-events-review',

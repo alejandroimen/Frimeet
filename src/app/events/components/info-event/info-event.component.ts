@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { EventService } from '../../services/event.service';
-import { Ievent } from '../interfaces/ievent';
-import { NavbarService } from '../../services/navbar.service';
+import { EventService } from '../../../services/event.service';
+import { Ievent } from '../../interfaces/ievent';
+import { NavbarService } from '../../../services/navbar.service';
 
 @Component({
   selector: 'app-info-event',
